@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router";
 import "./Dashboard.css";
-import { auth, db, logout } from "../firebaseConfig";
-function Dashboard() {
+import { auth, db, logout } from "../../firebaseConfig";
+function Console() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const navigate = useNavigate();
@@ -38,4 +38,4 @@ function Dashboard() {
         </div>
     );
 }
-export default Dashboard;
+export default Console;
