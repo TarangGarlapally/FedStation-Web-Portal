@@ -1,33 +1,61 @@
 import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
+import { getUserDetails } from "../../ApiCalls"
 import "./Console.css";
-import { auth, db, logout } from "../../firebaseConfig";
+import { useAuth } from '../../contexts/AuthContext';
+import { logout } from "../../firebase";
 function Console() {
-    const [user, loading, error] = useAuthState(auth);
-    const [name, setName] = useState("");
+
+    const location = useLocation();
+
     const navigate = useNavigate();
-    // const fetchUserName = async () => {
-    //     try {
-    //         const query = await db
-    //             .collection("users")
-    //             .where("uid", "==", user?.uid)
-    //             .get();
-    //         const data = await query.docs[0].data();
-    //         setName(data.name);
-    //     } catch (err) {
-    //         console.error(err);
-    //         alert("An error occured while fetching user data");
-    //     }
-    // };
-    // useEffect(() => {
-    //     if (loading) return;
-    //     if (!user) return navigate("/");
-    //     fetchUserName();
-    // }, [user, loading]);
+
+    const { currentUser } = useAuth();
+    const [userDetails, setUserDetails] = useState(currentUser);
+    const userId = currentUser ? currentUser.id : null;
+
+    const Logout = () => {
+        logout()
+            .then(() => {
+                localStorage.removeItem("token");
+                navigate("/home")
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    useEffect(() => {
+        if (userId) {
+            getUserDetails(userId)
+                .then(res => {
+                    setUserDetails(res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+    }, []);
+
+    const newProject = () => {
+        navigate("/newproject", { state: { user: userDetails } })
+    }
+
+
     return (
         <div className="dashboard">
+            <div className="dashboard_nav"><button onClick={Logout}>Logout</button></div>
+            <div className="dashboard_content">
+                <div className="dashboard_new_project">
+                    <button onClick={newProject}>+ New Project</button>
+                </div>
+                <div className="dashboard_project_overview">
 
+                </div>
+                <div className="dashboard_projects">
+
+                </div>
+            </div>
         </div>
     );
 }

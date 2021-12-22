@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, addDoc, getDocs, query, where } from "firebase/firestore"
+import { getAuth, signInWithPopup, setPersistence, GoogleAuthProvider, signInWithEmailAndPassword, browserLocalPersistence, signOut } from "firebase/auth";
+
+// import { getFirestore, collection, addDoc, getDocs, query, where } from "firebase/firestore"
 const firebaseConfig = {
     apiKey: "AIzaSyD1yTCrRY5E44In5zeHZpZYpVY7wZFMYbU",
     authDomain: "fedstation-firebase.firebaseapp.com",
@@ -13,23 +14,36 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-const db = getFirestore();
+
+
+// const db = getFirestore();
 
 const googleProvider = new GoogleAuthProvider();
 
-const signInWithGoogle = async () => {
+const signInWithGoogle = async (option) => {
     try {
-        const res = await signInWithPopup(auth, googleProvider);
-        const user = res.user;
-        const querySnapShot = await getDocs(query(collection(db, "users"), where("uid", "==", user.uid)))
-        if (querySnapShot.docs.length === 0) {
-            await addDoc(collection(db, "users"), {
-                uid: user.uid,
-                name: user.displayName,
-                authProvider: "google",
-                email: user.email,
-            });
+        const result = await signInWithPopup(auth, googleProvider);
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+
+        const token = credential.accessToken;
+
+        const user = result.user;
+
+        localStorage.setItem("token", token);
+
+        const userData = {
+            id: user.email.split("@")[0],
+            fname: user.displayName.split(" ")[0],
+            lname: user.displayName.split(" ")[1],
+            email: user.email,
+            projectsCount: 0,
         }
+
+        return userData;
+
+
+
+
     } catch (err) {
         console.error(err);
         alert(err.message);
@@ -47,14 +61,14 @@ const signInWithEmailAndPass = async (email, password) => {
 
 const registerWithEmailAndPassword = async (name, email, password) => {
     try {
-        const res = await auth.createUserWithEmailAndPassword(email, password);
-        const user = res.user;
-        await db.collection("users").add({
-            uid: user.uid,
-            name,
-            authProvider: "local",
-            email,
-        });
+        // const res = await auth.createUserWithEmailAndPassword(email, password);
+        // const user = res.user;
+        // await db.collection("users").add({
+        //     uid: user.uid,
+        //     name,
+        //     authProvider: "local",
+        //     email,
+        // });
     } catch (err) {
         console.error(err);
         alert(err.message);
@@ -72,12 +86,12 @@ const sendPasswordResetEmail = async (email) => {
 };
 
 const logout = () => {
-    auth.signOut();
+    return signOut(auth)
 };
 
 export {
     auth,
-    db,
+    // db,
     signInWithGoogle,
     signInWithEmailAndPass,
     registerWithEmailAndPassword,
