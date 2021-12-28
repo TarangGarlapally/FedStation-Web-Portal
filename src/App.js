@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Navigate, Route, Routes, useNavigate } from "r
 import Console from './components/Console/Console';
 import Home from './components/Home/Home';
 import NewProject from './components/NewProject/NewProject';
+import ProjectHomePage from './components/ProjectHomePage/ProjectHomePage';
 import { useAuth } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 
@@ -27,6 +28,12 @@ function App() {
           <Route path="/newproject" element={
             <PrivateRoute>
               <NewProject />
+            </PrivateRoute>
+          }
+          />
+          <Route path="/projecthome" element={
+            <PrivateRoute>
+              <ProjectHomePage />
             </PrivateRoute>
           }
           />
