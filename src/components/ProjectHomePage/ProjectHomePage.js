@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Project() {
+export default function ProjectHomePage() {
     return (
         <div>
-            project
+            project home page
         </div>
     )
 }
