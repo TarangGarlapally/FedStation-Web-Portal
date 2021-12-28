@@ -1,0 +1,8 @@
+.ProjectHomePage{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.ProjectSideBar{
+    width: auto ;
+}

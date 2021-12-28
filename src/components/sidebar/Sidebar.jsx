@@ -1,19 +1,35 @@
-import React from 'react'
+import React  from 'react'
+import { useNavigate } from 'react-router-dom'
 import "./sidebar.css"
 
+
 export default function Sidebar() {
+
+    var navigate  = useNavigate() ; 
     return (
         <div className='sidebar'> 
             <div className="sidebarWrapper">
                 <div className="sidebarMenu">
                     <h3 className="sidebarTitle">Analytics</h3>
                     <ul className="sidebarList">
-                        <li className="sidebarListItem">
+                        <li className="sidebarListItem" onClick={
+                            ()=>{
+                                navigate("userAnalytics")
+                            }
+                        }>
                             users
                         </li>
-                        <li className="sidebarListItem">
+                        <li className="sidebarListItem" onClick={
+                            ()=>{
+                                navigate("/GlobalModelAnalytics")
+                            }
+                        }>
                             Global Model statistics 
-                        </li><li className="sidebarListItem">
+                        </li><li className="sidebarListItem" onClick={
+                            ()=>{
+                                navigate("/LocalModelAnalytics")
+                            }
+                        }>
                             Local Model Analytics
                         </li>
                     </ul>

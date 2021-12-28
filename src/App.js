@@ -7,6 +7,7 @@ import NewProject from './components/NewProject/NewProject';
 import ProjectHomePage from './components/ProjectHomePage/ProjectHomePage';
 import { useAuth } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import UserAnalytics from './components/ProjectHomePage/UserAnalytics';
 
 
 
@@ -36,7 +37,15 @@ function App() {
               <ProjectHomePage />
             </PrivateRoute>
           }
-          />
+          >
+            <Route
+                        
+                        path  = "userAnalytics"
+
+                        element = {<UserAnalytics />}
+                    >    
+            </Route>
+          </Route>
         </Routes>
       </Router>
     </div>
