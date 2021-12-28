@@ -1,0 +1,9 @@
+.HomePage{
+    display: flex;
+}
+.projectsidebar{
+    flex:1;
+}
+.home{
+    flex: 4;
+}
