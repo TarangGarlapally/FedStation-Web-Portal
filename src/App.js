@@ -39,11 +39,9 @@ function App() {
           }
           >
             <Route
-                        
                         path  = "userAnalytics"
-
                         element = {<UserAnalytics />}
-                    >    
+            >    
             </Route>
           </Route>
         </Routes>

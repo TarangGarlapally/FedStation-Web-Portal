@@ -5,26 +5,26 @@ export default function FeaturedInfo() {
     return (
         <div className='featured'>
             <div className='featuredItem'>
-                <span className="featuredTitle">Revanue</span>
+                <span className="featuredTitle"> <i class="fas fa-angle-up"></i> <strong>  Current Active Users</strong></span>
                 <div className="featuredMoneyContainer">
                     <span className="featuredMoney">
-                        $2,145
+                        2548
                     </span>
                 </div>
             </div>
             <div className='featuredItem'>
-                <span className="featuredTitle">Revanue</span>
+                <span className="featuredTitle"> <strong>Current Active Users</strong></span>
                 <div className="featuredMoneyContainer">
                     <span className="featuredMoney">
-                        $2,145
+                        2548
                     </span>
                 </div>
             </div>
             <div className='featuredItem'>
-                <span className="featuredTitle">Revanue</span>
+                <span className="featuredTitle"> <strong>Current Active Users</strong></span>
                 <div className="featuredMoneyContainer">
                     <span className="featuredMoney">
-                        $2,145
+                        2548
                     </span>
                 </div>
             </div>

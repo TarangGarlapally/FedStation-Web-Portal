@@ -1,37 +1,51 @@
 export const Userdata = [
     {
-      name: 'Page A',
-      "Active User": 4000,
+      name: 'Jan',
+      MaxUser : 3000,
+      ActiveUser: 4000,
       
     },
     {
-      name: 'Page B',
-      "Active User": 3000,
+      name: 'Feb',
+      MaxUser : 3000,
+      ActiveUser: 2500,
       
     },
     {
-      name: 'Page C',
-      "Active User": 2000,
+      name: 'Mar',
+      MaxUser : 3000,
+      ActiveUser: 2800,
       
     },
     {
-      name: 'Page D',
-      "Active User": 2780,
-     
-    },
-    {
-      name: 'Page E',
-      "Active User": 1890,
+      name: 'Apr',
+      MaxUser : 3000,
+      ActiveUser: 3800,
       
     },
     {
-      name: 'Page F',
-      "Active User": 2390,
+      name: 'May',
+      MaxUser : 3000,
+      ActiveUser: 3200,
       
     },
     {
-      name: 'Page G',
-      "Active User": 3490,
+      name: 'Jun',
+      MaxUser : 3000,
+      ActiveUser: 3000,
       
     },
+    {
+      name: 'Jul',
+      MaxUser : 3000,
+      ActiveUser: 1200,
+      
+    },
+    {
+      name: 'Aug',
+      MaxUser : 3000,
+      ActiveUser: 2750,
+      
+    }
+    
   ];
