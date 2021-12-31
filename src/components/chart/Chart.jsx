@@ -10,7 +10,7 @@ export default function Chart({title,data,dataKey,grid}) {
         const dataMax = Math.max(...data.map((i) => i.ActiveUser));
     
         console.log(usersLimit / dataMax)
-        return 1 - usersLimit / dataMax;
+        return 1 - (usersLimit / dataMax);
       };
       
     const off = gradientOffset();
@@ -21,7 +21,7 @@ export default function Chart({title,data,dataKey,grid}) {
                 <ComposedChart data={data}>
                     <XAxis dataKey="name" stroke='#5550bd'/>
                     <YAxis />
-                    <Line type="monotype" dataKey= "MaxUser" storke="#5550bd" />
+                    <Line type="monotype" dataKey= "MaxUser" storke="#5550bd" strokeDasharray="5 5"  dot  = {false} />
                     <defs>
                         <linearGradient id="splitColor" x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset={off} stopColor="#D93125" stopOpacity="100%"  />
@@ -30,7 +30,7 @@ export default function Chart({title,data,dataKey,grid}) {
                     </defs>
                     <Area type="monotone" dataKey={dataKey}  stroke="#8884d8" fill="url(#splitColor)" />
                     <Tooltip/>
-                    {grid && <CartesianGrid stroke='#e0dfdf' strokeDasharray="5 5"/>}
+                    {grid}
                     <Legend/>
                 </ComposedChart>
             </ResponsiveContainer>

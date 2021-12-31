@@ -1,4 +1,4 @@
-export const Userdata = [
+const Userdata = [
     {
       name: 'Jan',
       MaxUser : 3000,
@@ -49,3 +49,44 @@ export const Userdata = [
     }
     
   ];
+
+
+  const ModelScoredata  = [
+    {
+      month : "Jan" , 
+      score : 1.24 
+    },
+    {
+      month : "Feb" , 
+      score : 2.24 
+    },
+    {
+      month : "Mar" , 
+      score : 1.04 
+    },
+    {
+      month : "Apr" , 
+      score : 1.14 
+    },
+    {
+      month : "May" , 
+      score : 2.04 
+    },
+    {
+      month : "Jun" , 
+      score : 1.22 
+    },
+    {
+      month : "Jul" , 
+      score : 1.23 
+    },
+    {
+      month : "Aug" , 
+      score : 3.24 
+    }
+  ] ; 
+
+
+  export {
+    Userdata , ModelScoredata
+  }; 
