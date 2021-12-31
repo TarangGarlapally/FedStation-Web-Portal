@@ -13,7 +13,7 @@ export default function ProjectSettings() {
                 <div className="projectSettingContainer">
                     <div>
                         <strong style={{display:"block"}}>Delete this project</strong>
-                        <span style={{fontSize:"14px",display:"block"}}>Once you delete a repository, there is no going back. Please be certain.</span>
+                        <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span>
                     </div>
                     
                     <button className='delete'>Delete</button>

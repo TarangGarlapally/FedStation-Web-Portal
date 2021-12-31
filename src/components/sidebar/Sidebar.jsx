@@ -1,6 +1,15 @@
 import React  from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import "./sidebar.css"
+import{
+    PermIdentity,
+    Timeline,
+    Equalizer,
+    SettingsApplications,
+    VpnKey,
+    SettingsApplicationsOutlined
+} from "@material-ui/icons";
+
 
 
 export default function Sidebar() {
@@ -16,20 +25,23 @@ export default function Sidebar() {
                             ()=>{
                                 navigate("userAnalytics")
                             }
-                        }>
+                        }><PermIdentity className="sidebarIcon" />
                             users
                         </li>
+                        
                         <li className="sidebarListItem" onClick={
                             ()=>{
-                                navigate("/GlobalModelAnalytics")
+                                navigate("GlobalStatistics")
                             }
-                        }>
+                        }><Equalizer className="sidebarIcon"/>
                             Global Model statistics 
-                        </li><li className="sidebarListItem" onClick={
+                        </li>
+                        
+                        <li className="sidebarListItem" onClick={
                             ()=>{
-                                navigate("/LocalModelAnalytics")
+                                navigate("LocalModelAnalytics")
                             }
-                        }>
+                        }><Timeline className='sidebarIcon'/>
                             Local Model Analytics
                         </li>
                     </ul>
@@ -37,12 +49,18 @@ export default function Sidebar() {
                 <div className="sidebarMenu">
                 <h3 className="sidebarTitle">Settings</h3>
                     <ul className="sidebarList">
-                        <li className="sidebarListItem">
-                            Project Settings
+                        <li className="sidebarListItem" onClick={
+                            ()=>{navigate("projectSettings")}
+                        }><SettingsApplications className='sidebarIcon'/>
+                                Project Settings
                         </li>
-                        <li className="sidebarListItem">
+                        <li className="sidebarListItem"onClick={
+                            ()=>{navigate("keySettings")}
+                        }><VpnKey className='sidebarIcon'/>
                             Key Settings
-                        </li><li className="sidebarListItem">
+                        </li><li className="sidebarListItem"onClick={
+                            ()=>{navigate("modelSettings")}
+                        }><SettingsApplicationsOutlined className='sidebarIcon'/>
                             Model settings
                         </li>
                     </ul>

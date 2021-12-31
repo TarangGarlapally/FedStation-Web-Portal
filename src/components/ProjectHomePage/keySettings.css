@@ -1,0 +1,12 @@
+.keySettings{
+    width: 100%;
+}
+.keySettingItems{
+    flex: 1;
+    margin: 0px 20px;
+    padding: 30px;
+    border: 1px solid #0A0000;
+    border-radius: 10px;
+    background-color: #52ab98;
+    color: #ffffff;
+}

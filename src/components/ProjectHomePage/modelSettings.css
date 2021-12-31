@@ -1,9 +1,7 @@
-.projectSetting{
+.modelSetting{
     width: 100%;
-    /* display: flex;
-    justify-content: space-around; */
 }
-.projectSettingItems{
+.modelSettingItems{
     flex: 1;
     margin: 0px 20px;
     padding: 30px;
@@ -13,13 +11,14 @@
     color: #ffffff;
     
 }
-.projectSettingContainer{
+.modelSettingContainer{
     display: flex;
     align-items: center;
     justify-content:space-between ;
 
 }
-.delete {
+
+.deleteModel{
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 15px;
@@ -39,7 +38,7 @@
     text-align: center;
  }
  
- .delete:hover {
+ .deleteModel:hover {
     color:#ffffff;
     background: #E7411B;
     border: solid #DD380D 1px;

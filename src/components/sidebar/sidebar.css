@@ -26,8 +26,13 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    border-radius: 10px;
 }
 .sidebarListItem.active,
 .sidebarListItem:hover{
     background-color: rgb(207, 211, 207);
+}
+.sidebarIcon{
+    margin-right: 5px;
+    font-size: 20px !important;
 }

@@ -10,6 +10,8 @@ import PrivateRoute from './components/PrivateRoute';
 import UserAnalytics from './components/ProjectHomePage/UserAnalytics';
 import GlobalStatistics from './components/ProjectHomePage/GlobalStatistics';
 import ProjectSettings from './components/ProjectHomePage/ProjectSettings';
+import KeySettings from './components/ProjectHomePage/KeySettings';
+import ModelSettings from './components/ProjectHomePage/ModelSettings';
 
 
 
@@ -36,14 +38,16 @@ function App() {
           />
           <Route path="/projecthome" element={
             <PrivateRoute>
-              <ProjectHomePage />
-              {/* <UserAnalytics /> */}
+              <ProjectHomePage/>
             </PrivateRoute>
           }
           >
-            <Route path  = "userAnalytics" element = {<UserAnalytics />}></Route>
+            <Route path="/projecthome" element = {<UserAnalytics />}></Route>
+            <Route path="userAnalytics" element = {<UserAnalytics />}></Route>
             <Route path="GlobalStatistics" element={<GlobalStatistics/>}></Route>
             <Route path="projectSettings" element={<ProjectSettings/>}></Route>
+            <Route path="keySettings" element={<KeySettings/>}></Route>
+            <Route path="modelSettings" element={<ModelSettings/>}></Route>
           </Route>
         </Routes>
       </Router>
