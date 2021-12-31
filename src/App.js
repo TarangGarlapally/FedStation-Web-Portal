@@ -8,11 +8,10 @@ import ProjectHomePage from './components/ProjectHomePage/ProjectHomePage';
 import { useAuth } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import NavBar from './components/navbar/NavBar';
-
-
 import UserAnalytics from './components/ProjectHomePage/UserAnalytics';
+
 import GlobalModelAnalytics from './components/ProjectHomePage/GlobalModelAnalytics';
-import LocalModelAnalytics from './components/ProjectHomePage/localModelAnalytics' ; 
+import LocalModelAnalytics from './components/ProjectHomePage/localModelAnalytics';
 
 function App() {
   // const { currentUser } = useAuth();
@@ -43,21 +42,21 @@ function App() {
           }
           >
             <Route
-                        path  = "userAnalytics"
-                        element = {<UserAnalytics />}
-            >    
+              path="userAnalytics"
+              element={<UserAnalytics />}
+            >
             </Route>
             <Route
-                        path  = "localModelAnalytics"
-                        element = {<LocalModelAnalytics />}
-            >    
+              path="localModelAnalytics"
+              element={<LocalModelAnalytics />}
+            >
             </Route>
             <Route
-                        path  = "globalModelAnalytics"
-                        element = {<GlobalModelAnalytics />}
-            >    
+              path="globalModelAnalytics"
+              element={<GlobalModelAnalytics />}
+            >
             </Route>
-            
+
           </Route>
         </Routes>
       </Router>

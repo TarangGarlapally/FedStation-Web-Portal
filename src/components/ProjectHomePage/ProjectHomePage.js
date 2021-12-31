@@ -9,7 +9,11 @@ export default function ProjectHomePage() {
         <div  className='ProjectHomePage'>
             
             <Sidebar  className  = "ProjectSideBar" />
-            <Outlet />
+            <div className='outlet'>
+                <Outlet />
+            </div>
+            
         </div>
+        
     )
 }
