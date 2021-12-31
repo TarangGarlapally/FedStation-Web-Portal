@@ -65,6 +65,18 @@
   margin-top: 20px;
 }
 
+.aggMethod {
+  color: rgb(128, 128, 128);
+}
+
+.smallInput {
+  width: 80px;
+}
+
+.project-type h4 {
+  margin-bottom: 10px;
+}
+
 .new-project-box-progress {
   position: relative;
   background-color: aqua;
