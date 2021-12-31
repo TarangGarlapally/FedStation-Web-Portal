@@ -44,7 +44,6 @@ function Console() {
 
     return (
         <div className="dashboard">
-            <div className="dashboard_nav"><button onClick={Logout}>Logout</button></div>
             <div className="dashboard_content">
                 <div className="dashboard_new_project">
                     <button onClick={newProject}>+ New Project</button>

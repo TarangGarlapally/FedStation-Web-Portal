@@ -7,15 +7,17 @@ import NewProject from './components/NewProject/NewProject';
 import ProjectHomePage from './components/ProjectHomePage/ProjectHomePage';
 import { useAuth } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import NavBar from './components/navbar/NavBar';
 
 
 
 function App() {
-  const { currentUser } = useAuth();
+  // const { currentUser } = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
   return (
     <div className="app">
       <Router>
+        <NavBar />
         <Routes>
           <Route path="*" element={localStorage.getItem("token") ? (<Navigate to={"/console"} />) : (<Navigate to={"/home"} />)} />
           <Route exact path="/home" element={<Home />} />
