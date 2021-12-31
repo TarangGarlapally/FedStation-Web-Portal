@@ -1,9 +1,18 @@
-.HomePage{
+.ProjectHomePage{
     display: flex;
+    justify-content: space-between;
+    position: absolute;
 }
-.projectsidebar{
-    flex:1;
+
+.ProjectSideBar{
+    width: 20vw;
 }
-.home{
-    flex: 4;
-}
+.outlet{
+    /* width: calc(100vw - 20vw); */
+    width: 80vw;
+    height: 100vh;
+    padding: 0px 30px;
+    margin-top: 50px;
+    margin-left: 225px;
+    background-color: #f2f2f2;
+} 
