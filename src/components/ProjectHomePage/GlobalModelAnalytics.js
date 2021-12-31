@@ -24,6 +24,17 @@ export default function GlobalModelAnalytics() {
                 <GlobalModelScoreGraph title  = "Score Graph (Monthly)"  data  = {ModelScoredata} dataKey  = "score" grid  />
                 <ModelStorageChart title  = "Model Storage (Monthly)" data = {ModelScoredata}  dataKey  = "score" />
             </div>
+
+            <div className='shadow' style = {{
+                padding : "2em", 
+                margin : "1em", 
+                borderRadius : "1em"
+            }}>
+                <h1 className='GlobalModeltitle'>OVERALL PERFORMANCE <h3 style={{color : "green"}}>(63.54%)</h3> </h1>
+                <hr/>
+
+                
+            </div>
             
         </div>
     )
