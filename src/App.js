@@ -10,6 +10,10 @@ import PrivateRoute from './components/PrivateRoute';
 import NavBar from './components/navbar/NavBar';
 import UserAnalytics from './components/ProjectHomePage/UserAnalytics';
 
+import ProjectSettings from './components/ProjectHomePage/ProjectSettings';
+import KeySettings from './components/ProjectHomePage/KeySettings';
+import ModelSettings from './components/ProjectHomePage/ModelSettings';
+
 import GlobalModelAnalytics from './components/ProjectHomePage/GlobalModelAnalytics';
 import LocalModelAnalytics from './components/ProjectHomePage/localModelAnalytics';
 
@@ -57,6 +61,9 @@ function App() {
             >
             </Route>
 
+            <Route path="projectSettings" element={<ProjectSettings />}></Route>
+            <Route path="keySettings" element={<KeySettings />}></Route>
+            <Route path="modelSettings" element={<ModelSettings />}></Route>
           </Route>
         </Routes>
       </Router>
