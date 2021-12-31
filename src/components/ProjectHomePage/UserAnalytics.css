@@ -1,0 +1,15 @@
+.Usertitle{
+    margin : 1em ; 
+}
+.UserAnalytics
+{
+    background-color : "red" ; 
+    width: 80%;
+    
+}
+
+.UserCountCharts{
+    display: flex; 
+    justify-content: space-around;
+    height: auto ;
+}

@@ -1,0 +1,11 @@
+.GlobalModeltitle{ 
+    margin : 1em ; 
+} 
+.GlobalModelAnalytics , .localModelAnalytics{
+    width:  80%;
+}
+.ScoreCharts{
+    display: flex;
+
+    width:  auto ; 
+}

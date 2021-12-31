@@ -1,37 +1,92 @@
-export const Userdata = [
+const Userdata = [
     {
-      name: 'Page A',
-      "Active User": 4000,
+      name: 'Jan',
+      MaxUser : 3000,
+      ActiveUser: 4000,
       
     },
     {
-      name: 'Page B',
-      "Active User": 3000,
+      name: 'Feb',
+      MaxUser : 3000,
+      ActiveUser: 2500,
       
     },
     {
-      name: 'Page C',
-      "Active User": 2000,
+      name: 'Mar',
+      MaxUser : 3000,
+      ActiveUser: 2800,
       
     },
     {
-      name: 'Page D',
-      "Active User": 2780,
-     
-    },
-    {
-      name: 'Page E',
-      "Active User": 1890,
+      name: 'Apr',
+      MaxUser : 3000,
+      ActiveUser: 3800,
       
     },
     {
-      name: 'Page F',
-      "Active User": 2390,
+      name: 'May',
+      MaxUser : 3000,
+      ActiveUser: 3200,
       
     },
     {
-      name: 'Page G',
-      "Active User": 3490,
+      name: 'Jun',
+      MaxUser : 3000,
+      ActiveUser: 3000,
       
     },
+    {
+      name: 'Jul',
+      MaxUser : 3000,
+      ActiveUser: 1200,
+      
+    },
+    {
+      name: 'Aug',
+      MaxUser : 3000,
+      ActiveUser: 2750,
+      
+    }
+    
   ];
+
+
+  const ModelScoredata  = [
+    {
+      month : "Jan" , 
+      score : 1.24 
+    },
+    {
+      month : "Feb" , 
+      score : 2.24 
+    },
+    {
+      month : "Mar" , 
+      score : 1.04 
+    },
+    {
+      month : "Apr" , 
+      score : 1.14 
+    },
+    {
+      month : "May" , 
+      score : 2.04 
+    },
+    {
+      month : "Jun" , 
+      score : 1.22 
+    },
+    {
+      month : "Jul" , 
+      score : 1.23 
+    },
+    {
+      month : "Aug" , 
+      score : 3.24 
+    }
+  ] ; 
+
+
+  export {
+    Userdata , ModelScoredata
+  }; 

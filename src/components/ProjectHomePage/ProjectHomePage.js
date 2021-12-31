@@ -1,16 +1,15 @@
 import React from 'react'
-import Chart from '../../components/chart/Chart'
-import FeaturedInfo from '../../components/featuredInfo/FeaturedInfo'
-import { Userdata } from "../../assets/dummydata"
 import Sidebar from "../sidebar/Sidebar";
+import { Outlet, Route } from 'react-router-dom';
+
+import './ProjectHomePage.css' ;
 
 export default function ProjectHomePage() {
     return (
-        <div className='home'>
-
-            <Sidebar />
-            <FeaturedInfo />
-            <Chart data={Userdata} title="Global Model Statystics" grid dataKey="Active User" />
+        <div  className='ProjectHomePage'>
+            
+            <Sidebar  className  = "ProjectSideBar" />
+            <Outlet />
         </div>
     )
 }
