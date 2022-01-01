@@ -3,7 +3,6 @@ import './ModelAnalytics.css'
 
 import FeaturedInfo from '../../components/featuredInfo/FeaturedInfo' ; 
 import {ModelScoredata } from '../../assets/dummydata' ; 
-import Chart from '../../components/chart/GlobalModelScoreGraph'; 
 import GlobalModelScoreGraph from '../../components/chart/GlobalModelScoreGraph';
 import ModelStorageChart from '../chart/ModelStorageChart';
 

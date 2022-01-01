@@ -1,18 +1,18 @@
-.ProjectHomePage{
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
+.ProjectHomePage {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  margin-top: 4.7%;
 }
 
-.ProjectSideBar{
-    width: 20vw;
+.ProjectSideBar {
+  width: 20vw;
 }
-.outlet{
-    /* width: calc(100vw - 20vw); */
-    width: 80vw;
-    height: 100vh;
-    padding: 0px 30px;
-    margin-top: 50px;
-    margin-left: 225px;
-    background-color: #f2f2f2;
-} 
+.outlet {
+  /* width: calc(100vw - 20vw); */
+  width: 80vw;
+  height: 100vh;
+  padding: 0px 30px;
+  margin-left: 225px;
+  background-color: #f2f2f2;
+}

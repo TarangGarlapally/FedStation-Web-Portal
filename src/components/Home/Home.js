@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import "./Home.css"
-
-import { useNavigate, Link } from "react-router-dom"
 
 import Logo from "../../assets/Get_Started.png"
 import { BsLinkedin } from "react-icons/bs"
@@ -9,19 +7,13 @@ import { FaFacebookSquare, FaGithubSquare } from "react-icons/fa"
 
 import useCaseLogo from "../../assets/dummy_usecase.jpg"
 
-import { useAuth } from '../../contexts/AuthContext'
-
 
 
 
 
 export default function Home() {
-    const navigate = useNavigate()
     // const { currentUser } = useAuth()
 
-    const [modalIsOpen, setIsOpen] = useState(false);
-    const [user, setUser] = useState({})
-    const [orgName, setOrgName] = useState("")
 
 
 

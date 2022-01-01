@@ -1,37 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getUserDetails } from "../../ApiCalls"
 import "./Console.css";
 import { useAuth } from '../../contexts/AuthContext';
-import { logout } from "../../firebase";
 function Console() {
-
-    const location = useLocation();
 
     const navigate = useNavigate();
 
     const { currentUser } = useAuth();
     const [userDetails, setUserDetails] = useState();
 
-    const Logout = () => {
-        logout()
-            .then(() => {
-                localStorage.removeItem("token");
-                navigate("/home")
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    }
-
     useEffect(() => {
         const userId = currentUser ? currentUser.email.split("@")[0] : null;
-        console.log(currentUser)
         if (userId) {
             getUserDetails(userId)
                 .then(res => {
                     setUserDetails(res.data)
-                    console.log(res.data)
                 })
                 .catch(err => {
                     console.log(err)
@@ -54,7 +38,7 @@ function Console() {
                     <div className="dashboard_project_overview">
 
                     </div>
-                    <div className="dashboard_projects">
+                    {userDetails.projectsList.length > 0 ? (<div className="dashboard_projects">
                         <Link to="/projecthome/userAnalytics">
 
                             <div className="dashboard_project">
@@ -63,7 +47,7 @@ function Console() {
                                 </div>
                             </div>
                         </Link>
-                    </div>
+                    </div>) : (null)}
                 </div>) : (<div>Loading</div>)
             }
         </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import "./chart.css"
-import { ComposedChart, Line, XAxis,YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer , Area } from 'recharts';
+import { ComposedChart, Line, XAxis,YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer  } from 'recharts';
 
 export default function ExtraUsersChart({title,data,dataKey,grid}) {
       

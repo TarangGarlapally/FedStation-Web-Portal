@@ -1,6 +1,6 @@
 import React from 'react'
 import "./chart.css"
-import { ComposedChart, Line, XAxis,YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer , Area } from 'recharts';
+import { ComposedChart, Line, XAxis,YAxis, Tooltip, Legend, ResponsiveContainer , Area } from 'recharts';
 
 export default function Chart({title,data,dataKey,grid}) {
 

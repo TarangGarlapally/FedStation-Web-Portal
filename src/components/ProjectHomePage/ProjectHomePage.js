@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from "../sidebar/Sidebar";
-import { Outlet, Route } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import './ProjectHomePage.css' ;
 

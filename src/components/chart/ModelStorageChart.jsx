@@ -1,6 +1,6 @@
 import React from 'react'
 import "./chart.css"
-import { ComposedChart, Line, XAxis,YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer , Area, Bar } from 'recharts';
+import { ComposedChart, XAxis,YAxis, Tooltip, Legend, ResponsiveContainer , Bar } from 'recharts';
 
 export default function ModelStorageChart  ({title,data,dataKey,grid}) {
       
