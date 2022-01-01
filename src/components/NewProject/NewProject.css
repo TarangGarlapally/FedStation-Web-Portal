@@ -73,6 +73,12 @@
   width: 80px;
 }
 
+.errMsg {
+  margin-top: -5px;
+  color: red;
+  font-size: small;
+}
+
 .project-type h4 {
   margin-bottom: 10px;
 }
