@@ -18,7 +18,7 @@ export default function Chart({title,data,dataKey,grid}) {
         <div className='chart'>
             <h3 className="chartTitle">{title}</h3>
             <ResponsiveContainer width="100%" aspect={4 / 1}>
-                <ComposedChart data={data}>
+                <ComposedChart data={data} syncId={1}>
                     <XAxis dataKey="name" stroke='#5550bd'/>
                     <YAxis />
                     <Line type="monotype" dataKey= "MaxUser" storke="#5550bd" strokeDasharray="5 5"  dot  = {false} />
