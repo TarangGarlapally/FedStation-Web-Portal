@@ -1,12 +1,74 @@
 .keySettings{
-    width: 100%;
+    width: 80%;
 }
+
+.keyvalue{
+    margin-left: 20px;
+    width: 300px;
+    height:30px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+.copy{
+    position:relative;
+    color: dimgray;
+    border: 1px solid #0000;
+    right: 33px;
+    top: 7px;
+    cursor: pointer;
+    background: transparent;
+    border: none transparent;
+}
+.copy:hover{
+    color: rgb(70, 70, 196);
+}
+.cpybtn{
+    border: none transparent;
+    outline: 0;
+}
+
 .keySettingItems{
     flex: 1;
     margin: 0px 20px;
     padding: 30px;
     border: 1px solid #0A0000;
     border-radius: 10px;
-    background-color: #52ab98;
+    background-color: #2b6777;
     color: #ffffff;
+    
 }
+.keySettingContainer{
+    display: flex;
+    align-items: center;
+    justify-content:space-between ;
+
+}
+.regenerate {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 15px;
+    /* height: 15px; */
+    line-height: 15px;
+    color: black;
+    /* font-family: Open Sans; */
+    width: 150px;
+    font-size: 20px;
+    font-weight: 100;
+    padding: 20px;
+    background-color: #F2F2F2;
+    border: solid #0000 2px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+ }
+ 
+ .regenerate:hover {
+    color:#ffffff;
+    background: #06745c;
+    border: solid #06745c 1px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    text-decoration: none;
+ }
