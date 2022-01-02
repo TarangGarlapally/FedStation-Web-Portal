@@ -1,37 +1,37 @@
 export const Userdata = [
     {
-      name: 'Page A',
-      "Active User": 4000,
+      month: 'Jan',
+      "Active Users": 4000,
       
     },
     {
-      name: 'Page B',
-      "Active User": 3000,
+      month: 'Jan',
+      "Active Users": 4000,
       
     },
     {
-      name: 'Page C',
-      "Active User": 2000,
+      month: 'Feb',
+      "Active Users": 3000,
       
     },
     {
-      name: 'Page D',
-      "Active User": 2780,
-     
-    },
-    {
-      name: 'Page E',
-      "Active User": 1890,
+      month: 'Mar',
+      "Active Users": 2000,
       
     },
     {
-      name: 'Page F',
-      "Active User": 2390,
+      month: 'Apr',
+      "Active Users": 2500,
       
     },
     {
-      name: 'Page G',
-      "Active User": 3490,
+      month: 'May',
+      "Active Users": 2300,
       
     },
+    {
+      month: 'Jun',
+      "Active Users": 4000,
+      
+    }
   ];

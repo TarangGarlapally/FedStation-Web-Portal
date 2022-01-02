@@ -8,7 +8,7 @@ export default function UserAnalytics() {
     return (
         <div  className='UserAnalytics'>
             <FeaturedInfo /> 
-            <Chart data = {Userdata}  title = "User Analytics" grid dataKey="Active User" />
+            <Chart data = {Userdata}  title = "User Analytics" grid dataKey="Active Users" />
         </div>
     )
 }
