@@ -11,7 +11,7 @@ Modal.setAppElement('#root');
 
 export default function NavBar() {
     const navigate = useNavigate()
-    const [modalIsOpen, setIsOpen] = useState(true);
+    const [modalIsOpen, setIsOpen] = useState(false);
     const [user, setUser] = useState({})
     const [orgName, setOrgName] = useState("")
 
@@ -68,7 +68,7 @@ export default function NavBar() {
                 </div>
                 <button className="nav-button-normal">Fed Station</button>
                 <Link to="/home" className='nav-button'>Home</Link>
-                <a href="#usecases" className='nav-button'>Use Cases</a>
+                <a href="/home#usecases" className='nav-button'>Use Cases</a>
                 <Link to="/docs" className='nav-button'>Docs</Link>
             </div>
             <div className="home-nav-right">
