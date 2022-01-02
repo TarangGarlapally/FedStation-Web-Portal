@@ -24,6 +24,7 @@ function Console() {
     }, [currentUser]);
 
     const newProject = () => {
+        // console.log(userDetails)
         navigate("/newproject", { state: { user: userDetails } })
     }
 

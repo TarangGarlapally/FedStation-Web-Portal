@@ -28,7 +28,7 @@ export default function Home() {
             <div className='home-body'>
                 <div className='get-started'>
                     <div className='get-started-left'>
-                        <div className='get-started-head1'>Fed Station</div>
+                        <div className='get-started-head1'>FedStation</div>
                         <div className='get-started-head2'>A New way for Secure Machine Learning</div>
                         <div className='get-started-tag'>Built to support all your Machine Learning needs <br /> in mobile or web applications</div>
                         <div className='get-started-buttons'>
