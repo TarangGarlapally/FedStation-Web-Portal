@@ -21,13 +21,13 @@ export default function Sidebar() {
                         </li>
                         <li className="sidebarListItem" onClick={
                             ()=>{
-                                navigate("/GlobalModelAnalytics")
+                                navigate("globalModelAnalytics")
                             }
                         }>
                             Global Model statistics 
                         </li><li className="sidebarListItem" onClick={
                             ()=>{
-                                navigate("/LocalModelAnalytics")
+                                navigate("localModelAnalytics")
                             }
                         }>
                             Local Model Analytics
