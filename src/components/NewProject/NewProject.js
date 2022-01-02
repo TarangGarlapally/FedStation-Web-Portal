@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom' 
+import { useNavigate, useLocation } from 'react-router-dom' 
+import { Steps } from 'rsuite';
 import { checkProjectIdExists, createProject } from '../../ApiCalls';
 import "./NewProject.css"
+import 'rsuite/dist/rsuite.min.css';
 
-
-function processAndCreateProject(projectObj) {
+function processAndCreateProject(projectObj, userId) {
     const project = {
         id: projectObj.projectId,
         maxUsersSize: projectObj.userSize,
@@ -14,14 +15,14 @@ function processAndCreateProject(projectObj) {
         startAtTime: projectObj.startAtTime,
         triggerEvery: projectObj.triggerEvery,
         noOfCols: projectObj.noOfCols,
-        userId: "test"
+        userId: userId
     }
     console.log(project.startAtTime, project.triggerEvery)
     createProject(project);
 }
 
 
-export default function NewProject() {
+export default function NewProject(props) {
 
     const [startTime, setStartTime] = useState("");
     const [stage, setStage] = useState(0);
@@ -29,6 +30,7 @@ export default function NewProject() {
     const [projectId, setProjectId] = useState("");
     const [projectObj, setProjectObj] = useState({});
     const navigate = useNavigate();
+    const {state} = useLocation();
 
     const hourDropdown = () => {
         var comp = "";
@@ -46,12 +48,13 @@ export default function NewProject() {
         return comp;
     }
 
+    // console.log(state);
     const handleNext = () => {
         if(stage<3) {
             setStage(stage+1);
             return;
         }
-        processAndCreateProject(projectObj);
+        processAndCreateProject(projectObj, "test");
         navigate("/projecthome", { state: { projectId: projectId } });
     }
 
@@ -193,8 +196,15 @@ export default function NewProject() {
     const stages = [stage1, stage2, stage3, stage4]
 
 
+    const stepsStyle = {
+        width: '200px',
+        display: 'inline-table',
+        verticalAlign: 'top',
+      };
 
-
+    const eachStepStyle = {
+        height: "100px"
+    }
 
     return (
             <div className = "new-project-box">
@@ -202,7 +212,16 @@ export default function NewProject() {
                     {stages[stage]}
                 </div>
 
-                <div className = "new-project-box-progress"></div>
+                <div className = "new-project-box-progress">
+                    <div style = {{marginLeft: "50%", marginTop: "25%"}}>
+                        <Steps current={stage} vertical style={stepsStyle}>
+                            <Steps.Item style = {eachStepStyle}/>
+                            <Steps.Item style = {eachStepStyle}/>
+                            <Steps.Item style = {eachStepStyle}/>
+                            <Steps.Item style = {eachStepStyle}/>
+                        </Steps>
+                    </div>
+                </div>
             </div>
     )
 }
