@@ -2,7 +2,7 @@ import React from 'react'
 import "./chart.css"
 import { ComposedChart, Line, XAxis,YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer  } from 'recharts';
 
-export default function GlobalModelScoreGraph   ({title,data,dataKey,grid}) {
+export default function GlobalModelScoreGraph   ({title,model_score , data,dataKey,grid}) {
       
 
     return (
@@ -10,7 +10,7 @@ export default function GlobalModelScoreGraph   ({title,data,dataKey,grid}) {
             <div>
                 <h3 className="chartTitle">{title}</h3>
                 <ResponsiveContainer width="100%" aspect={4 / 1}>
-                    <ComposedChart data={data} >
+                    <ComposedChart data={data} syncId={2}>
                         <XAxis dataKey="month" stroke='#5550bd'/>
                         <YAxis />
                         <Line type="monotone" dataKey= {dataKey} storke="#4289E7"  strokeWidth={2}/>
@@ -30,7 +30,7 @@ export default function GlobalModelScoreGraph   ({title,data,dataKey,grid}) {
                         display : "inline-block"
                     }}><h1 style = {{
                         margin : "0em"
-                    }}>2.34</h1><p>+24.3%</p></div>
+                    }}>{model_score.curr/100}</h1><p>+24.3%</p></div>
                 </div>
 
                 
@@ -40,7 +40,7 @@ export default function GlobalModelScoreGraph   ({title,data,dataKey,grid}) {
                         display : "inline-block"
                     }}><h1 style = {{
                         margin : "0em"
-                    }}>1.34</h1><p>+13.3%</p></div>
+                    }}>{Math.round(model_score.avg)/100}</h1><p>+13.3%</p></div>
                 </div>
                 <div>
                     <p>Best Score</p>
@@ -48,7 +48,7 @@ export default function GlobalModelScoreGraph   ({title,data,dataKey,grid}) {
                         display : "inline-block"
                     }}><h1 style = {{
                         margin : "0em"
-                    }}>3.04</h1><p>+33.3%</p></div>
+                    }}>{model_score.max / 100}</h1><p>+33.3%</p></div>
                 </div>
             </div>
         </div>

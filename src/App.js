@@ -13,7 +13,6 @@ import KeySettings from './components/ProjectHomePage/KeySettings';
 import ModelSettings from './components/ProjectHomePage/ModelSettings';
 
 import GlobalModelAnalytics from './components/ProjectHomePage/GlobalModelAnalytics';
-import LocalModelAnalytics from './components/ProjectHomePage/localModelAnalytics';
 
 function App() {
   // const { currentUser } = useAuth();
@@ -45,11 +44,6 @@ function App() {
             <Route
               path="userAnalytics"
               element={<UserAnalytics />}
-            >
-            </Route>
-            <Route
-              path="localModelAnalytics"
-              element={<LocalModelAnalytics />}
             >
             </Route>
             <Route

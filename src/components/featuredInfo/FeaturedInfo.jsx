@@ -1,33 +1,32 @@
 import React from 'react'
 import "./featuredInfo.css"
 
-export default function FeaturedInfo() {
+export default function FeaturedInfo(props) {
+
+    
     return (
         <div className='featured'>
-            <div className='featuredItem'>
-                <span className="featuredTitle"> <i class="fas fa-angle-up"></i> <strong>Current Active Users</strong></span>
-                <div className="featuredMoneyContainer">
-                    <span className="featuredMoney">
-                        2548
-                    </span>
-                </div>
-            </div>
-            <div className='featuredItem'>
-                <span className="featuredTitle"> <strong>Current Active Users</strong></span>
-                <div className="featuredMoneyContainer">
-                    <span className="featuredMoney">
-                        2548
-                    </span>
-                </div>
-            </div>
-            <div className='featuredItem'>
-                <span className="featuredTitle"> <strong>Current Active Users</strong></span>
-                <div className="featuredMoneyContainer">
-                    <span className="featuredMoney">
-                        2548
-                    </span>
-                </div>
-            </div>
+
+            {
+                props.FeatureData.map( e =>{ 
+                    return (
+                    <div className='featuredItem'>
+                        <span className="featuredTitle"> <i class="fas fa-angle-up"></i> <strong>{e.title}</strong></span>
+                        <div className="featuredMoneyContainer">
+                            <span className="featuredMoney">
+                                {e.Value } &nbsp;
+                                {e.Percentage ? <p style = {{
+                                    color : e.Percentage >=0 ?"green" : "red", 
+                                    fontWeight : "bold"
+                                }}>({e.Percentage}%)</p>: null }
+                                
+                            </span>
+                        </div>
+                    </div>
+                    )
+                })
+            }
+            
         </div>
     )
 }

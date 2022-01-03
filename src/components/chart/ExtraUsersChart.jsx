@@ -22,7 +22,7 @@ export default function ExtraUsersChart({title,data,dataKey,grid}) {
         <div className='chart'>
             <h3 className="chartTitle">{title}</h3>
             <ResponsiveContainer width="100%" aspect={4 / 1}>
-                <ComposedChart data={extraUsers} >
+                <ComposedChart data={extraUsers} syncId={1}>
                     <XAxis dataKey="name" stroke='#5550bd'/>
                     <YAxis />
                     <Line type="monotype" dataKey= "extra" storke="#5550bd" />

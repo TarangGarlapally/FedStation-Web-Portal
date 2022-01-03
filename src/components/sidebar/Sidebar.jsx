@@ -2,9 +2,6 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./sidebar.css"
 import {
-    PermIdentity,
-    Timeline,
-    Equalizer,
     SettingsApplications,
     VpnKey,
     SettingsApplicationsOutlined
@@ -25,24 +22,16 @@ export default function Sidebar() {
                             () => {
                                 navigate("userAnalytics")
                             }
-                        }><PermIdentity className="sidebarIcon" />
-                            users
+                        }>
+                            Users Analytics
                         </li>
 
                         <li className="sidebarListItem" onClick={
                             () => {
                                 navigate("globalModelAnalytics")
                             }
-                        }><Equalizer className="sidebarIcon" />
-                            Global Model statistics
-                        </li>
-
-                        <li className="sidebarListItem" onClick={
-                            () => {
-                                navigate("localModelAnalytics")
-                            }
-                        }><Timeline className='sidebarIcon' />
-                            Local Model Analytics
+                        }>
+                            Global Model Analytics
                         </li>
                     </ul>
                 </div>
