@@ -26,7 +26,7 @@ export default function Home() {
     return (
         <div className="home-container">
             <div className='home-body'>
-                <div className='get-started'>
+                <div className='get-started' id='getstarted'>
                     <div className='get-started-left'>
                         <div className='get-started-head1'>FedStation</div>
                         <div className='get-started-head2'>A New way for Secure Machine Learning</div>

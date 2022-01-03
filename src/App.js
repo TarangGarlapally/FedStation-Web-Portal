@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import Console from './components/Console/Console';
 import Home from './components/Home/Home';
+import Docs from "./components/Docs/Docs.js";
 import NewProject from './components/NewProject/NewProject';
 import ProjectHomePage from './components/ProjectHomePage/ProjectHomePage';
 import PrivateRoute from './components/PrivateRoute';
@@ -21,8 +22,9 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
-          <Route path="*" element={localStorage.getItem("token") ? (<Navigate to={"/console"} />) : (<Navigate to={"/home"} />)} />
+
           <Route exact path="/home" element={<Home />} />
+          <Route exact path="/docs" element={<Docs />} />
           <Route path="/console" element={
             <PrivateRoute>
               <Console />
@@ -41,6 +43,7 @@ function App() {
             </PrivateRoute>
           }
           >
+            <Route exact path="" element={<Navigate to={"userAnalytics"} />} />
             <Route
               path="userAnalytics"
               element={<UserAnalytics />}
@@ -56,6 +59,7 @@ function App() {
             <Route path="keySettings" element={<KeySettings />}></Route>
             <Route path="modelSettings" element={<ModelSettings />}></Route>
           </Route>
+          <Route path="*" element={localStorage.getItem("token") ? (<Navigate to={"/console"} />) : (<Navigate to={"/home"} />)} />
         </Routes>
       </Router>
     </div>

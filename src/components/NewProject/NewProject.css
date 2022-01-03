@@ -4,9 +4,10 @@
   margin: 5%;
   height: 500px;
   width: 90%;
-  border-radius: 2%;
+  border-radius: 10px;
   -webkit-box-shadow: 0 0 20px rgb(148, 148, 148);
   box-shadow: 0 0 20px rgb(148, 148, 148);
+  margin-top: 8%;
 }
 
 .new-project-box-form {

@@ -3,6 +3,58 @@ import { useNavigate, Link } from "react-router-dom";
 import { getUserDetails } from "../../ApiCalls"
 import "./Console.css";
 import { useAuth } from '../../contexts/AuthContext';
+
+
+
+function RenderProjects({ projects }) {
+    const navigate = useNavigate();
+    console.log(projects)
+    //create cards as 3 in a row
+
+    const RenderProjectCard = ({ project }) => {
+        return (
+            <div className="project_card" onClick={() => { navigate("/projecthome", { state: { project: project } }) }}>
+                <div className="project-card-title">
+                    <h3>{project.projectName}</h3>
+                </div>
+                <div className="project-card-description">
+                    <p>{project.projectDescription}</p>
+                </div>
+            </div>
+        )
+    }
+
+
+    return (
+        <div className="dashboard_projects">
+            {projects.map((project, index) => {
+                if (index % 4 === 0) {
+                    return (
+                        <div className="dashboard_projects_row" key={project.id}>
+                            <RenderProjectCard project={project} />
+                            {projects[index + 1] ? <RenderProjectCard project={projects[index + 1]} /> : null}
+                            {projects[index + 2] ? <RenderProjectCard project={projects[index + 2]} /> : null}
+                            {projects[index + 3] ? <RenderProjectCard project={projects[index + 3]} /> : null}
+                        </div>
+                    )
+                }
+                else return <></>;
+            })}
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
 function Console() {
 
     const navigate = useNavigate();
@@ -29,6 +81,7 @@ function Console() {
     }
 
 
+
     return (
         <div className="dashboard">
             {userDetails ? (
@@ -36,20 +89,12 @@ function Console() {
                     <div className="dashboard_new_project">
                         <button onClick={newProject}>+ New Project</button>
                     </div>
-                    <div className="dashboard_project_overview">
+                    {/* <div className="dashboard_project_overview">
 
-                    </div>
-                    {userDetails.projectsList.length > 0 ? (<div className="dashboard_projects">
-                        <Link to="/projecthome/userAnalytics">
+                    </div> */}
+                    {userDetails.projectsList.length > 0 ? (<RenderProjects projects={userDetails.projectsList} />) : (null)}
 
-                            <div className="dashboard_project">
-                                <div className="dashboard_project_name">
-                                    <h3>{userDetails.projectsList[0].projectName}</h3>
-                                </div>
-                            </div>
-                        </Link>
-                    </div>) : (null)}
-                </div>) : (<div>Loading</div>)
+                </div>) : (<div className="loading">Loading</div>)
             }
         </div>
     );
