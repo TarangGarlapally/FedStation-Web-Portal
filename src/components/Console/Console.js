@@ -9,11 +9,10 @@ import { useAuth } from '../../contexts/AuthContext';
 function RenderProjects({ projects }) {
     const navigate = useNavigate();
     console.log(projects)
-    //create cards as 3 in a row
 
     const RenderProjectCard = ({ project }) => {
         return (
-            <div className="project_card" onClick={() => { navigate("/projecthome", { state: { project: project } }) }}>
+            <div className="project_card" onClick={() => { navigate("/projecthome/" + project.id) }}>
                 <div className="project-card-title">
                     <h3>{project.projectName}</h3>
                 </div>
@@ -30,7 +29,7 @@ function RenderProjects({ projects }) {
             {projects.map((project, index) => {
                 if (index % 4 === 0) {
                     return (
-                        <div className="dashboard_projects_row" key={project.id}>
+                        <div className="dashboard_projects_row" key={index}>
                             <RenderProjectCard project={project} />
                             {projects[index + 1] ? <RenderProjectCard project={projects[index + 1]} /> : null}
                             {projects[index + 2] ? <RenderProjectCard project={projects[index + 2]} /> : null}
@@ -38,7 +37,6 @@ function RenderProjects({ projects }) {
                         </div>
                     )
                 }
-                else return <></>;
             })}
         </div>
     )

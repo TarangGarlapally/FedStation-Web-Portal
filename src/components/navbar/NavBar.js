@@ -85,7 +85,7 @@ export default function NavBar() {
             </div>
             <Modal
                 isOpen={modalIsOpen}
-                onRequestClose={() => setIsOpen(false)}
+                // onRequestClose={() => setIsOpen(false)}
                 contentLabel="Example Modal"
                 style={{
                     overlay: {
@@ -108,7 +108,7 @@ export default function NavBar() {
                         inset: "unset",
                         background: 'white',
                         width: "30%",
-                        height: "20%",
+                        height: "25%",
                         padding: "25px",
                         overflow: 'none',
                         WebkitOverflowScrolling: 'touch',
@@ -123,12 +123,16 @@ export default function NavBar() {
             >
                 <div className='modal-header'>
                     <div className='modal-title'>Organisation Name</div>
-                    <div className='modal-close-button'><Close onClick={() => setIsOpen(false)} /></div>
+                    {/* <div className='modal-close-button'><Close onClick={() => setIsOpen(false)} /></div> */}
                 </div>
                 <div className='modal-body'>
                     <form onSubmit={handleSubmit}>
                         <input className='org-input' type="text" onChange={(e) => { setOrgName(e.target.value) }} value={orgName} spellCheck="false" autoComplete='false' autoFocus="true" />
-                        <button className='org-submit-button' type="submit">Continue</button>
+                        <div className='modal-buttons'>
+                            <button className='org-submit-button' type="submit">Continue</button>
+                            <button className='org-submit-button' type="submit">Skip</button>
+                        </div>
+
                     </form>
                 </div>
             </Modal>

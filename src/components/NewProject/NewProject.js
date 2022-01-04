@@ -19,13 +19,13 @@ function processAndCreateProject(projectObj, userId) {
     }
     console.log(project.startAtTime, project.triggerEvery)
     console.log(project)
-    createProject(project)
-        .then(res => {
-            console.log(res)
-        })
-        .catch(err => {
-            console.log(err)
-        })
+    // createProject(project)
+    //     .then(res => {
+    //         console.log(res)
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
 }
 
 
@@ -65,8 +65,8 @@ export default function NewProject(props) {
         // setProjectObj({ ...projectObj, startAtTime: parseInt(startTime.toString()) })
         // setProjectObj({ ...projectObj, triggerEvery: triggerEvery })
         // console.log(startTime, triggerEvery)
-        processAndCreateProject({ ...projectObj, startAtTime: parseInt(startTime.toString()),triggerEvery: triggerEvery }, state.user.email.split("@")[0]);
-        navigate("/projecthome", { state: { projectId: projectId } });
+        processAndCreateProject({ ...projectObj, startAtTime: parseInt(startTime.toString()), triggerEvery: triggerEvery }, state.user.email.split("@")[0]);
+        navigate("/projecthome/" + projectId);
     }
 
 
