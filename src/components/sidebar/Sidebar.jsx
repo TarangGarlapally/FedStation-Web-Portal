@@ -5,8 +5,11 @@ import {
     SettingsApplications,
     VpnKey,
     SettingsApplicationsOutlined
-} from "@material-ui/icons";
 
+    
+} from "@material-ui/icons";
+import PersonIcon from '@material-ui/icons/Person';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
 
 
 export default function Sidebar({ project }) {
@@ -24,6 +27,7 @@ export default function Sidebar({ project }) {
                                 navigate("userAnalytics")
                             }
                         }>
+                            <PersonIcon className = "sidebarIcon"/>
                             Users Analytics
                         </li>
 
@@ -32,6 +36,7 @@ export default function Sidebar({ project }) {
                                 navigate("globalModelAnalytics")
                             }
                         }>
+                            <EqualizerIcon className  = "sidebarIcon" />
                             Global Model Analytics
                         </li>
                     </ul>

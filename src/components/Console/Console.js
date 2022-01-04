@@ -58,10 +58,13 @@ function Console() {
     const navigate = useNavigate();
 
     const { currentUser } = useAuth();
-    const [userDetails, setUserDetails] = useState();
+    const [userDetails, setUserDetails] = useState(null);
 
     useEffect(() => {
         const userId = currentUser ? currentUser.email.split("@")[0] : null;
+
+
+        console.log(userId)
         if (userId) {
             getUserDetails(userId)
                 .then(res => {

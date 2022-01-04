@@ -35,6 +35,7 @@ export default function ProjectHomePage() {
         getProjectDetails(params.id)
             .then(resp => {
                 setPD(resp.data)
+                console.log(resp)
             })
             .catch(err => console.log(err))
 
