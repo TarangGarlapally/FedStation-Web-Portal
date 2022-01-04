@@ -30,7 +30,7 @@ export default function GlobalModelScoreGraph   ({title,model_score , data,dataK
                         display : "inline-block"
                     }}><h1 style = {{
                         margin : "0em"
-                    }}>{model_score.curr/100}</h1><p>+24.3%</p></div>
+                    }}>{Math.round(model_score.curr)/100}</h1><p>+24.3%</p></div>
                 </div>
 
                 
@@ -48,7 +48,7 @@ export default function GlobalModelScoreGraph   ({title,model_score , data,dataK
                         display : "inline-block"
                     }}><h1 style = {{
                         margin : "0em"
-                    }}>{model_score.max / 100}</h1><p>+33.3%</p></div>
+                    }}>{Math.round(model_score.max) / 100}</h1><p>+33.3%</p></div>
                 </div>
             </div>
         </div>
