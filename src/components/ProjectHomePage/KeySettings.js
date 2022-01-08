@@ -1,19 +1,25 @@
 import React,{useState,useEffect} from 'react'
-import { Axios } from 'axios'
+import axios  from 'axios';
+
 import {CopyToClipboard} from 'react-copy-to-clipboard'
+import { useParams } from 'react-router-dom';
 import {FileCopyOutlined,AssignmentOutlined} from '@material-ui/icons'
 import "./keySettings.css"
 
 export default function KeySettings() {
     const[inputValue,setInputValue]=useState("");
     const[isCopied,setIsCopied]=useState(false);
+    const[disabled,setDisabled]=useState(false);
     
+    const params = useParams();
 
     useEffect(()=>{
+        console.log(params)
         async function getProjectKey(){
-            const data= await fetch("https://fedstation.herokuapp.com/getProject/sdfsdf")
+            const data= await fetch("https://fedstation.herokuapp.com/getProject/"+params.id)
             .then(res=>res.json())
             .then((data)=>{
+                // console.log(data);
                 setInputValue(data.projectKey)
             });
         }
@@ -22,15 +28,44 @@ export default function KeySettings() {
 
     
 
-    // const disableKey=()=>{
-    //     const data= await fetch("https://fedstation.herokuapp.com/updateStatus/sdfsdf/isKeyDisabled/")
-    //     .then(res=>res.json())
-    //     .then((data)=>{
-    //         if(data.isKeyDisabled!=true){
+    async function disableKey(){
+        if(disabled==false){
+            try{
+                const res=await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId="+params.id+"&field=isKeyDisabled&value=true")
+                
+                console.log(res)
+            }catch(e){
+                console.log(e)
+            }
+            
+            setDisabled(true)
+           
+        }
+        else{
+            try{
+                const res=await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId="+params.id+"&field=isKeyDisabled&value=false",{value:true})
+                
+                console.log(res)
+            }catch(e){
+                console.log(e)
+            }
+            
+            setDisabled(false)
+        }
+        
+    }
 
-    //         }
-    //     })
-    // }
+    async function regenerateKey(){
+        const res=await axios.patch("http://fedstation.herokuapp.com/updateKey/"+params.id)
+        console.log(res)
+        
+        const data= await fetch("https://fedstation.herokuapp.com/getProject/"+params.id)
+            .then(res=>res.json())
+            .then((data)=>{
+                // console.log(data);
+                setInputValue(data.projectKey)
+            });
+    }
 
 
     return (
@@ -45,7 +80,7 @@ export default function KeySettings() {
                 <div className="keySettingContainer">
                     
                     <strong>Regenerate the secret key</strong>
-                    <button className='buttons'>ReGenerate</button>
+                    <button type="button" className='buttons' onClick={regenerateKey}>ReGenerate</button>
                 </div>
             </div>
             <h3>Disable Key</h3>
@@ -55,7 +90,7 @@ export default function KeySettings() {
                     <strong>Disable the secret key</strong>
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
                    
-                    <button className='buttons'>Disable</button>
+                    <button type="button" className='buttons' onClick={disableKey}>{disabled ? "Enable" : "Disable" }</button>
                 </div>
             </div>
         </div>

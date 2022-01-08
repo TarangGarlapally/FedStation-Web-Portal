@@ -1,14 +1,20 @@
+import { PanoramaSharp } from '@material-ui/icons';
+import axios from 'axios';
 import React,{useState,useEffect} from 'react'
+import { useParams } from 'react-router-dom';
 import "./projectSetting.css"
 
 export default function ProjectSettings() {
 
 const[details,setDetails]=useState({});
 const[user,setUser]=useState({});
+const[disabled,setDisabled]=useState(false);
+
+const params = useParams();
 
     useEffect(()=>{
         async function getProjectDetails(){
-            const data= await fetch("https://fedstation.herokuapp.com/getProject/sdfsdf")
+            const data= await fetch("https://fedstation.herokuapp.com/getProject/"+params.id)
             .then(res=>res.json())
             .then((data)=>{
                 setDetails(data);
@@ -18,6 +24,20 @@ const[user,setUser]=useState({});
         getProjectDetails();
         
     },[]);
+
+    async function deleteProject(){
+        if(disabled==false){
+            const res= await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId="+params.id+"&field=isProjectDisabled&value=true");
+            setDisabled(true)
+
+        }
+        else{
+            const res= await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId="+params.id+"&field=isProjectDisabled&value=false");
+            setDisabled(false)
+        }
+        
+                
+    }
     
     return (
         
@@ -46,14 +66,14 @@ const[user,setUser]=useState({});
             <div className='projectSettingItems' style={{border:"2px solid #E7411B"}}>
                 <div className="projectSettingContainer">
                     <div>
-                        <strong style={{display:"block"}}>Delete this project</strong>
+                        <strong style={{display:"block"}}>Disable this project</strong>
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
                     </div>
                     
-                    <button className='delete'>Disable</button>
+                    <button type="button" className='delete' onClick={deleteProject}>{disabled ? "Enable" : "Disable" }</button>
                 </div>
             </div>
-            <h3>Delete Project</h3>
+            {/* <h3>Delete Project</h3>
             <div className='projectSettingItems' style={{border:"2px solid #E7411B"}}>
                 <div className="projectSettingContainer">
                     <div>
@@ -61,9 +81,9 @@ const[user,setUser]=useState({});
                         <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span>
                     </div>
                     
-                    <button className='delete'>Delete</button>
+                    <button className='delete' onClick={deleteProject}>Delete</button>
                 </div>
-            </div>
+            </div> */}
             
         </div>
     )
