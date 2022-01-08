@@ -1,29 +1,30 @@
-import { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import Console from './components/Console/Console';
 import Home from './components/Home/Home';
+import Docs from "./components/Docs/Docs.js";
 import NewProject from './components/NewProject/NewProject';
 import ProjectHomePage from './components/ProjectHomePage/ProjectHomePage';
-import { useAuth } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import NavBar from './components/navbar/NavBar';
 import UserAnalytics from './components/ProjectHomePage/UserAnalytics';
-import GlobalStatistics from './components/ProjectHomePage/GlobalStatistics';
+
 import ProjectSettings from './components/ProjectHomePage/ProjectSettings';
 import KeySettings from './components/ProjectHomePage/KeySettings';
 import ModelSettings from './components/ProjectHomePage/ModelSettings';
 
-
+import GlobalModelAnalytics from './components/ProjectHomePage/GlobalModelAnalytics';
 
 function App() {
-  const { currentUser } = useAuth();
-  const [loggedIn, setLoggedIn] = useState(false);
+  // const { currentUser } = useAuth();
   return (
     <div className="app">
       <Router>
+        <NavBar />
         <Routes>
-          <Route path="*" element={localStorage.getItem("token") ? (<Navigate to={"/console"} />) : (<Navigate to={"/home"} />)} />
+
           <Route exact path="/home" element={<Home />} />
+          <Route exact path="/docs" element={<Docs />} />
           <Route path="/console" element={
             <PrivateRoute>
               <Console />
@@ -38,17 +39,27 @@ function App() {
           />
           <Route path="/projecthome" element={
             <PrivateRoute>
-              <ProjectHomePage/>
+              <ProjectHomePage />
             </PrivateRoute>
           }
           >
-            <Route path="/projecthome" element = {<UserAnalytics />}></Route>
-            <Route path="userAnalytics" element = {<UserAnalytics />}></Route>
-            <Route path="GlobalStatistics" element={<GlobalStatistics/>}></Route>
-            <Route path="projectSettings" element={<ProjectSettings/>}></Route>
-            <Route path="keySettings" element={<KeySettings/>}></Route>
-            <Route path="modelSettings" element={<ModelSettings/>}></Route>
+            <Route exact path="" element={<Navigate to={"userAnalytics"} />} />
+            <Route
+              path="userAnalytics"
+              element={<UserAnalytics />}
+            >
+            </Route>
+            <Route
+              path="globalModelAnalytics"
+              element={<GlobalModelAnalytics />}
+            >
+            </Route>
+
+            <Route path="projectSettings" element={<ProjectSettings />}></Route>
+            <Route path="keySettings" element={<KeySettings />}></Route>
+            <Route path="modelSettings" element={<ModelSettings />}></Route>
           </Route>
+          <Route path="*" element={localStorage.getItem("token") ? (<Navigate to={"/console"} />) : (<Navigate to={"/home"} />)} />
         </Routes>
       </Router>
     </div>

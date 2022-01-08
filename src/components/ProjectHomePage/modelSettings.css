@@ -1,49 +1,70 @@
-.modelSetting{
-    width: 100%;
+.modelSetting {
+  width: 80%;
+  margin-left: 18%;
+  margin-top: 1.5%;
 }
-.modelSettingItems{
-    flex: 1;
-    margin: 0px 20px;
-    padding: 30px;
-    border: 1px solid #0A0000;
-    border-radius: 10px;
-    background-color: #2b6777;
-    color: #ffffff;
-    
+.modelSettingItems {
+  flex: 1;
+  margin: 0px 20px;
+  padding: 30px;
+  border: 1px solid #0a0000;
+  border-radius: 10px;
+  background-color: #2b6777;
+  color: #ffffff;
 }
-.modelSettingContainer{
-    display: flex;
-    align-items: center;
-    justify-content:space-between ;
+.modelDetails{
+  display: flex;
+  align-items: center;
+  /* justify-content: space-evenly; */
+}
+.title{
+  margin-left: 260px;
+}
+.value{
+  margin-left: 270px;
+}
+.editable{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.edit{
+  margin-left: 150px;
+  background: transparent;
+  border: none transparent;
+}
+.modelSettingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.deleteModel {
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 15px;
+  /* height: 15px; */
+  line-height: 15px;
+  color: #dd380d;
+  /* font-family: Open Sans; */
+  width: 150px;
+  font-size: 20px;
+  font-weight: 100;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border: solid #dd380d 2px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
 }
 
-.deleteModel{
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 15px;
-    /* height: 15px; */
-    line-height: 15px;
-    color: #DD380D;
-    /* font-family: Open Sans; */
-    width: 150px;
-    font-size: 20px;
-    font-weight: 100;
-    padding: 20px;
-    background-color: #F2F2F2;
-    border: solid #DD380D 2px;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-    text-align: center;
- }
- 
- .deleteModel:hover {
-    color:#ffffff;
-    background: #E7411B;
-    border: solid #DD380D 1px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
-    text-decoration: none;
- }
+.deleteModel:hover {
+  color: #ffffff;
+  background: #e7411b;
+  border: solid #dd380d 1px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-decoration: none;
+}

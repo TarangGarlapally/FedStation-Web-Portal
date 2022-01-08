@@ -1,74 +1,63 @@
-.keySettings{
-    width: 80%;
+.keySettings {
+  width: 80%;
+  margin-left: 18%;
+  margin-top: 1.5%;
 }
-
-.keyvalue{
-    margin-left: 20px;
-    width: 300px;
-    height:30px;
-    border-radius: 10px;
-    font-size: 18px;
+.keySettingItems {
+  flex: 1;
+  margin: 0px 20px;
+  padding: 30px;
+  border: 1px solid #0a0000;
+  border-radius: 10px;
+  background-color: #52ab98;
+  color: #ffffff;
 }
-.copy{
-    position:relative;
-    color: dimgray;
-    border: 1px solid #0000;
-    right: 33px;
-    top: 7px;
-    cursor: pointer;
-    background: transparent;
-    border: none transparent;
-}
-.copy:hover{
-    color: rgb(70, 70, 196);
-}
-.cpybtn{
-    border: none transparent;
-    outline: 0;
-}
-
-.keySettingItems{
-    flex: 1;
-    margin: 0px 20px;
-    padding: 30px;
-    border: 1px solid #0A0000;
-    border-radius: 10px;
-    background-color: #2b6777;
-    color: #ffffff;
-    
-}
-.keySettingContainer{
+.keySettingContainer {
     display: flex;
     align-items: center;
-    justify-content:space-between ;
+    justify-content: space-between;
+}
+.buttons{
+    -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 15px;
+  /* height: 15px; */
+  line-height: 15px;
+  color: black;
+  /* font-family: Open Sans; */
+  width: 150px;
+  font-size: 20px;
+  font-weight: 100;
+  padding: 20px;
+  background-color: #f2f2f2;
+  /* border: solid black 2px; */
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+.buttons:hover{
+    color: #ffffff;
+  background: #e7411b;
+  border: solid #dd380d 1px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-decoration: none;
+}
+.keyvalue{
+    margin-left: 20px;
+    width: 270px;
+    height: 35px;
+}
+button{
+    /* position: absolute; */
+    /* margin-right: 20px;
+    top: 10px; */
+    background: transparent;
+    border: none transparent;
 
 }
-.regenerate {
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 15px;
-    /* height: 15px; */
-    line-height: 15px;
-    color: black;
-    /* font-family: Open Sans; */
-    width: 150px;
-    font-size: 20px;
-    font-weight: 100;
-    padding: 20px;
-    background-color: #F2F2F2;
-    border: solid #0000 2px;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-    text-align: center;
- }
- 
- .regenerate:hover {
-    color:#ffffff;
-    background: #06745c;
-    border: solid #06745c 1px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
-    text-decoration: none;
- }
+button:hover{
+    color: blue;
+}

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, setPersistence, GoogleAuthProvider, signInWithEmailAndPassword, browserLocalPersistence, signOut } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, signOut, getAdditionalUserInfo } from "firebase/auth";
 
 // import { getFirestore, collection, addDoc, getDocs, query, where } from "firebase/firestore"
 const firebaseConfig = {
@@ -20,14 +20,14 @@ const auth = getAuth();
 
 const googleProvider = new GoogleAuthProvider();
 
-const signInWithGoogle = async (option) => {
+const signInWithGoogle = async () => {
     try {
         const result = await signInWithPopup(auth, googleProvider);
         const credential = GoogleAuthProvider.credentialFromResult(result);
 
-        const token = credential.accessToken;
-
         const user = result.user;
+
+        const token = credential.accessToken;
 
         localStorage.setItem("token", token);
 
@@ -39,7 +39,12 @@ const signInWithGoogle = async (option) => {
             projectsCount: 0,
         }
 
-        return userData;
+        const isNewUser = getAdditionalUserInfo(result).isNewUser
+
+        return { userData, isNewUser: isNewUser };
+
+
+
 
 
 

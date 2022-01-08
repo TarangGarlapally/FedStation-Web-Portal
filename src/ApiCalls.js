@@ -5,13 +5,21 @@ const createUser = (user) => {
 }
 
 const getUserDetails = async (userId) => {
+    return axios.get('https://fedstation.herokuapp.com/userDetails?userId=' + userId)
+}
 
-    return axios.get('http://fedstation.herokuapp.com/userDetails?userId=' + userId)
 
+const createProject = (project) => {
+    return axios.post('https://fedstation.herokuapp.com/createProject', project)
+}
+
+const checkProjectIdExists = (projectId) => {
+    return axios.get('https://fedstation.herokuapp.com/projectIdExists?projectId=' + projectId)
 }
 
 export {
     createUser,
-    getUserDetails
-
+    getUserDetails,
+    createProject,
+    checkProjectIdExists
 };

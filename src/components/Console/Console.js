@@ -1,31 +1,72 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
 import { getUserDetails } from "../../ApiCalls"
 import "./Console.css";
 import { useAuth } from '../../contexts/AuthContext';
-import { logout } from "../../firebase";
-function Console() {
 
-    const location = useLocation();
+
+
+function RenderProjects({ projects }) {
+    const navigate = useNavigate();
+    console.log(projects)
+    //create cards as 3 in a row
+
+    const RenderProjectCard = ({ project }) => {
+        return (
+            <div className="project_card" onClick={() => { navigate("/projecthome", { state: { project: project } }) }}>
+                <div className="project-card-title">
+                    <h3>{project.projectName}</h3>
+                </div>
+                <div className="project-card-description">
+                    <p>{project.projectDescription}</p>
+                </div>
+            </div>
+        )
+    }
+
+
+    return (
+        <div className="dashboard_projects">
+            {projects.map((project, index) => {
+                if (index % 4 === 0) {
+                    return (
+                        <div className="dashboard_projects_row" key={project.id}>
+                            <RenderProjectCard project={project} />
+                            {projects[index + 1] ? <RenderProjectCard project={projects[index + 1]} /> : null}
+                            {projects[index + 2] ? <RenderProjectCard project={projects[index + 2]} /> : null}
+                            {projects[index + 3] ? <RenderProjectCard project={projects[index + 3]} /> : null}
+                        </div>
+                    )
+                }
+                else return <></>;
+            })}
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function Console() {
 
     const navigate = useNavigate();
 
     const { currentUser } = useAuth();
-    const [userDetails, setUserDetails] = useState(currentUser);
-    const userId = currentUser ? currentUser.id : null;
-
-    const Logout = () => {
-        logout()
-            .then(() => {
-                localStorage.removeItem("token");
-                navigate("/home")
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    }
+    const [userDetails, setUserDetails] = useState(null);
 
     useEffect(() => {
+        const userId = currentUser ? currentUser.email.split("@")[0] : null;
+
+
+        console.log(userId)
         if (userId) {
             getUserDetails(userId)
                 .then(res => {
@@ -35,27 +76,29 @@ function Console() {
                     console.log(err)
                 })
         }
-    }, []);
+    }, [currentUser]);
 
     const newProject = () => {
+        // console.log(userDetails)
         navigate("/newproject", { state: { user: userDetails } })
     }
 
 
+
     return (
         <div className="dashboard">
-            <div className="dashboard_nav"><button onClick={Logout}>Logout</button></div>
-            <div className="dashboard_content">
-                <div className="dashboard_new_project">
-                    <button onClick={newProject}>+ New Project</button>
-                </div>
-                <div className="dashboard_project_overview">
+            {userDetails ? (
+                <div className="dashboard_content">
+                    <div className="dashboard_new_project">
+                        <button onClick={newProject}>+ New Project</button>
+                    </div>
+                    {/* <div className="dashboard_project_overview">
 
-                </div>
-                <div className="dashboard_projects">
+                    </div> */}
+                    {userDetails.projectsList.length > 0 ? (<RenderProjects projects={userDetails.projectsList} />) : (null)}
 
-                </div>
-            </div>
+                </div>) : (<div className="loading">Loading</div>)
+            }
         </div>
     );
 }
