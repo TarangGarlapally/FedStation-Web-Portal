@@ -12,6 +12,27 @@
   background-color: #2b6777;
   color: #ffffff;
 }
+.modelDetails{
+  display: flex;
+  align-items: center;
+  /* justify-content: space-evenly; */
+}
+.title{
+  margin-left: 260px;
+}
+.value{
+  margin-left: 270px;
+}
+.editable{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.edit{
+  margin-left: 150px;
+  background: transparent;
+  border: none transparent;
+}
 .modelSettingContainer {
   display: flex;
   align-items: center;

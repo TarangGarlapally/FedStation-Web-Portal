@@ -12,3 +12,52 @@
   background-color: #52ab98;
   color: #ffffff;
 }
+.keySettingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.buttons{
+    -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 15px;
+  /* height: 15px; */
+  line-height: 15px;
+  color: black;
+  /* font-family: Open Sans; */
+  width: 150px;
+  font-size: 20px;
+  font-weight: 100;
+  padding: 20px;
+  background-color: #f2f2f2;
+  /* border: solid black 2px; */
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+.buttons:hover{
+    color: #ffffff;
+  background: #e7411b;
+  border: solid #dd380d 1px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-decoration: none;
+}
+.keyvalue{
+    margin-left: 20px;
+    width: 270px;
+    height: 35px;
+}
+button{
+    /* position: absolute; */
+    /* margin-right: 20px;
+    top: 10px; */
+    background: transparent;
+    border: none transparent;
+
+}
+button:hover{
+    color: blue;
+}
