@@ -40,7 +40,7 @@ export default function GlobalModelScoreGraph   ({title,model_score , data,dataK
                         display : "inline-block"
                     }}><h1 style = {{
                         margin : "0em"
-                    }}>{Math.round(model_score.avg)/100}</h1><p>+13.3%</p></div>
+                    }}>{(Math.round(model_score.avg)/100).toFixed(2)}</h1><p>+13.3%</p></div>
                 </div>
                 <div>
                     <p>Best Score</p>

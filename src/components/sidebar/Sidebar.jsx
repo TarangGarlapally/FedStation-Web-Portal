@@ -12,13 +12,14 @@ import PersonIcon from '@material-ui/icons/Person';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 
 
-export default function Sidebar() {
+export default function Sidebar({ project }) {
 
     var navigate = useNavigate();
     return (
         <div className='sidebar'>
             <div className="sidebarWrapper">
                 <div className="sidebarMenu">
+                    <h4 style={{ wordWrap: "word-break", width: "100%", height: "fit-content" }}>{project.projectName}</h4>
                     <h3 className="sidebarTitle">Analytics</h3>
                     <ul className="sidebarList">
                         <li className="sidebarListItem" onClick={

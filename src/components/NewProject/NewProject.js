@@ -6,7 +6,7 @@ import "./NewProject.css"
 import 'rsuite/dist/rsuite.min.css';
 
 function processAndCreateProject(projectObj, userId) {
-    const project = {
+    return {
         id: projectObj.projectId,
         maxUsersSize: projectObj.userSize,
         modelType: projectObj.projectType,
@@ -17,15 +17,6 @@ function processAndCreateProject(projectObj, userId) {
         noOfCols: projectObj.noOfCols,
         userId: userId
     }
-    console.log(project.startAtTime, project.triggerEvery)
-    console.log(project)
-    createProject(project)
-        .then(res => {
-            console.log(res)
-        })
-        .catch(err => {
-            console.log(err)
-        })
 }
 
 
@@ -65,8 +56,16 @@ export default function NewProject(props) {
         // setProjectObj({ ...projectObj, startAtTime: parseInt(startTime.toString()) })
         // setProjectObj({ ...projectObj, triggerEvery: triggerEvery })
         // console.log(startTime, triggerEvery)
-        processAndCreateProject({ ...projectObj, startAtTime: parseInt(startTime.toString()),triggerEvery: triggerEvery }, state.user.email.split("@")[0]);
-        navigate("/projecthome", { state: { projectId: projectId } });
+        const project = processAndCreateProject({ ...projectObj, startAtTime: parseInt(startTime.toString()), triggerEvery: triggerEvery},state.user.email.split("@")[0]);
+        createProject(project)
+            .then(res => {
+                console.log(res)
+                navigate("/projecthome/" + projectId);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
     }
 
 

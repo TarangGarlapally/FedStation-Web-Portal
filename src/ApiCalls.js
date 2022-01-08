@@ -17,9 +17,14 @@ const checkProjectIdExists = (projectId) => {
     return axios.get('https://fedstation.herokuapp.com/projectIdExists?projectId=' + projectId)
 }
 
+const getProjectDetails = (projectId) => {
+    return axios.get("http://fedstation.herokuapp.com/getProject/" + projectId)
+}
+
 export {
     createUser,
     getUserDetails,
     createProject,
-    checkProjectIdExists
+    checkProjectIdExists,
+    getProjectDetails
 };

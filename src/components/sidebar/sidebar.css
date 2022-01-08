@@ -4,13 +4,16 @@
     /* height: calc(100vh - 50px); */
     background-color: #06745c;
     position: fixed;
+    width:16%;
 }
 .sidebarWrapper{
     padding: 20px;
     color: white;
+    width: 100%;
 }
 .sidebarMenu{
     margin-bottom: 10px;
+    width: 100%;
 }
 .sidebarTitle{
     font-size: 15px;

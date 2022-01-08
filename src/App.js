@@ -37,7 +37,7 @@ function App() {
             </PrivateRoute>
           }
           />
-          <Route path="/projecthome" element={
+          <Route path="/projecthome/:id" element={
             <PrivateRoute>
               <ProjectHomePage />
             </PrivateRoute>
