@@ -47,26 +47,26 @@ const params = useParams();
             <div className='projectSettingItems'>
                     <div className='projectDetails'>
                         <div>
-                        <br/><h6>Project Name</h6><br/>
-                            <h6>Project ID</h6><br/>
-                            <h6>Project Description</h6><br/>
-                            <h6>Owner</h6><br/>
+                        <br/><h4>Project Name</h4><br/>
+                            <h4>Project ID</h4><br/>
+                            <h4>Project Description</h4><br/>
+                            <h4>Owner</h4><br/>
                         </div>
                         <div>
-                        <br/><h6>{details.projectName}</h6><br/>
-                            <h6>{details.id}</h6><br/>
-                            <h6>{details.projectDescription}</h6><br/>
-                            <h6>{user.id}</h6><br/>
+                        <br/><h4>{details.projectName}</h4><br/>
+                            <h4>{details.id}</h4><br/>
+                            <h4>{details.projectDescription}</h4><br/>
+                            <h4>{user.id}</h4><br/>
                         </div>
                     </div>
                     
                 
             </div>
             <h3>Disable Project</h3>
-            <div className='projectSettingItems' style={{border:"2px solid #E7411B"}}>
+            <div className='projectSettingItems' style={{border:"2px solid "}}>
                 <div className="projectSettingContainer">
                     <div>
-                        <strong style={{display:"block"}}>Disable this project</strong>
+                        <strong style={{display:"block",fontSize:"17px"}}>Disable this project</strong>
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
                     </div>
                     

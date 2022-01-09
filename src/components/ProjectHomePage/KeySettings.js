@@ -79,7 +79,7 @@ export default function KeySettings() {
             <div className='keySettingItems'>
                 <div className="keySettingContainer">
                     
-                    <strong>Regenerate the secret key</strong>
+                    <strong style={{fontSize:"17px"}}>Regenerate the secret key</strong>
                     <button type="button" className='buttons' onClick={regenerateKey}>ReGenerate</button>
                 </div>
             </div>
@@ -87,7 +87,7 @@ export default function KeySettings() {
             <div className='keySettingItems'>
                 <div className="keySettingContainer">
                     
-                    <strong>Disable the secret key</strong>
+                    <strong style={{fontSize:"17px"}}>Disable the secret key</strong>
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
                    
                     <button type="button" className='buttons' onClick={disableKey}>{disabled ? "Enable" : "Disable" }</button>

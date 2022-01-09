@@ -30,10 +30,13 @@
   align-items: center;
   justify-content: space-between;
 }
+/* background: transparent;
+  border: none transparent; */
 .edit{
   margin-left: 150px;
-  background: transparent;
-  border: none transparent;
+  border-radius: 15px;
+  background: white;
+  color: black;
 }
 .modelSettingContainer {
   display: flex;
@@ -83,7 +86,7 @@
   /* justify-content: space-evenly; */
 }
 .editFeild{
-  margin-left: 200px;
+  
   color:black;
   
 }
@@ -123,4 +126,7 @@
   -moz-border-radius: 20px;
   border-radius: 20px;
   text-decoration: none;
+}
+.editErrMsg{
+  color: #dd380d;
 }
