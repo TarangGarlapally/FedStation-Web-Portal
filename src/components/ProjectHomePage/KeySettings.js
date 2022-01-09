@@ -73,7 +73,7 @@ export default function KeySettings() {
             <h3>Copy Secret Key</h3>
             <input className='keyvalue' type='text' value={inputValue}/>
             <CopyToClipboard onCopy={()=>setIsCopied(true)} className="copy" text={inputValue}>
-                <button type="button" aria-label='copy to clipboard button' className='cpybutton'>{isCopied ? <AssignmentOutlined/> : <FileCopyOutlined/> }</button>
+                <button type="button" aria-label='copy to clipboard button' className='copy'>{isCopied ? <AssignmentOutlined/> : <FileCopyOutlined/> }</button>
             </CopyToClipboard>
             <h3>Regenerate key</h3>
             <div className='keySettingItems'>

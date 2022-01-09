@@ -50,14 +50,16 @@
     width: 270px;
     height: 35px;
 }
-button{
-    /* position: absolute; */
-    /* margin-right: 20px;
-    top: 10px; */
+
+.copy:hover{
+    color: blue;
+}
+.copy{
+    position: relative; 
+    right: 33px;
+    top: 7px;
+    font-size: 18px;
     background: transparent;
     border: none transparent;
-
-}
-button:hover{
-    color: blue;
+    color: black;
 }
