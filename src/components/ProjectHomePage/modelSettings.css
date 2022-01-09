@@ -2,6 +2,7 @@
   width: 80%;
   margin-left: 18%;
   margin-top: 1.5%;
+  font-size: 20px;
 }
 .modelSettingItems {
   flex: 1;
@@ -19,9 +20,13 @@
 }
 .title{
   margin-left: 260px;
+  font-size: 20px;
 }
 .value{
   margin-left: 270px;
+}
+h6{
+  font-size: large;
 }
 .editable{
   display: flex;
@@ -62,6 +67,60 @@
 .deleteModel:hover {
   color: #ffffff;
   background: #e7411b;
+  border: solid #dd380d 1px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-decoration: none;
+}
+.modelSettingItems1{
+  flex: 1;
+  /* display: flex; */
+  margin: 0px 20px;
+  padding: 30px;
+  border: 1px solid #0a0000;
+  border-radius: 10px;
+  background-color: #2b6777;
+  color: #ffffff;
+  align-items: center;
+  /* justify-content: space-evenly; */
+}
+.editFeild{
+  margin-left: 200px;
+  color:black;
+  
+}
+.btn1,.btn2{
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 15px;
+  /* height: 15px; */
+  line-height: 15px;
+  color: #dd380d;
+  /* font-family: Open Sans; */
+  width: 150px;
+  font-size: 20px;
+  font-weight: 100;
+  padding: 20px;
+  background-color: #f2f2f2;
+  /* border: solid #dd380d 2px; */
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+.btn1:hover{
+  color: #ffffff;
+  background:#06745c;
+  border: solid #06745c 1px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-decoration: none;
+}
+.btn2:hover{
+  color: #ffffff;
+  background:#dd380d;
   border: solid #dd380d 1px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
