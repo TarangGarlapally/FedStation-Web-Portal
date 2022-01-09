@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import axios  from 'axios';
-import {Modal,Button} from 'react-bootstrap'
 import "./modelSettings.css"
 
 
@@ -74,27 +73,29 @@ export default function ModelSettings() {
             <div className='modelSettingItems'>
                     <div className='modelDetails'>
                         <div className='title'>
-                        <br/><h6>Model</h6><br/>
-                            <h6>Aggregation type</h6><br/>
-                            <div><h6>Max Users size </h6><br/></div>
-                            <h6>Start at time  </h6><br/>
-                            {details.recieveAt ? <h6>Recieve at time</h6> : <br/>}
-                            {/* <h6>Recieve at time  </h6><br/> */}
-                            <div><h6>Trigger Every</h6><br/></div>
+                        <br/><h4>Model</h4><br/>
+                            <h4>Aggregation type</h4><br/>
+                            <div><h4>Max Users size </h4><br/></div>
+                            <h4>Start at time  </h4><br/>
+                            {details.recieveAt ? <div><h4>Recieve at time</h4><br/></div> : <span></span>}
+                            {/* <h4>Recieve at time  </h4><br/> */}
+                            <div><h4>Trigger Every</h4><br/></div>
                         </div>
                         <div className='value'>
-                        <br/><h6>{model.model}</h6><br/>
-                            <h6>{model.aggregationType}</h6><br/>
+                        <br/><h4>{model.model}</h4><br/>
+                            <h4>{model.aggregationType}</h4><br/>
                             <div className='editable'>
-                                <h6>{maxUser}</h6>
+                                <h4>{maxUser}</h4>
                                 <button className='edit' type='button' onClick={()=>{setClose(true)}}>edit</button>
                             </div><br/>
-                            <h6>{details.startAtTime}</h6><br/>
-                            {details.recieveAt ? <h6>{details.recieveAt}</h6> : <br/>}
+                            <h4>{details.startAtTime}</h4><br/>
+                            {details.recieveAt ?<div>
+                                <h4>{details.recieveAt}</h4><br/>
+                            </div>  : <span></span>}
                             
-                            {/* <h6>{details.recieveAt}hi</h6><br/> */}
+                            {/* <h4>{details.recieveAt}hi</h4><br/> */}
                             <div className='editable'>
-                                <h6>{trigger}</h6>
+                                <h4>{trigger}</h4>
                                 <button className='edit' type="button" onClick={()=>{setCloseTrigger(true)}}>edit</button>
                             </div><br/>
                         </div>
