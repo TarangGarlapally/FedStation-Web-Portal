@@ -48,9 +48,9 @@
 .delete:hover {
   color: #ffffff;
   background: #e7411b;
-  border: solid #dd380d 1px;
+  /* border: solid #dd380d 1px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
-  border-radius: 20px;
+  border-radius: 20px; */
   text-decoration: none;
 }
