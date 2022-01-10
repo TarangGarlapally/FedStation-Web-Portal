@@ -37,7 +37,6 @@
   display: flex;
   align-self: flex-start;
   margin-left: 1%;
-  
 }
 .dashboard_new_project button {
   background-color: #2b6777;
@@ -84,6 +83,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   flex-direction: column;
   background-color: #06745c;
   color: #ffffff;
