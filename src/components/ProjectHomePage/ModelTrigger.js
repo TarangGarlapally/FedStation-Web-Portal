@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import "./modelTrigger.css";
+import "./modal.css";
 
-export default function ModelTrigger({ setOpenModal }) {
+export default function ModelTrigger({ setOpenModal,setTrigger }) {
 
     const [details, setDetails] = useState([]);
     const [maxUser, setMaxUser] = useState('');
-    const [trigger, setTrigger] = useState('')
     const [model, setModel] = useState([]);
     const [input, setInput] = useState("")
     const [type, setType] = useState('')
@@ -30,20 +29,27 @@ export default function ModelTrigger({ setOpenModal }) {
             document.getElementById("editErr").innerText = "";
             document.getElementById("editErr").hidden = true;
 
-            const res = axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
+            axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
+            .then(res => {
+                setTrigger(input)
+                setOpenModal(false)
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
 
-            const data = await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
-                .then(res => res.json())
-                .then((data) => {
-                    setDetails(data);
-                    setModel(data.modelType)
-                    setMaxUser(data.maxUsersSize)
-                    setTrigger(data.triggerEvery)
-                });
-            window.location.reload();
-            console.log()
-            //setClose(false)
+            // const data = await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
+            //     .then(res => res.json())
+            //     .then((data) => {
+            //         console.log(data)
+            //         setDetails(data);
+            //         setModel(data.modelType)
+            //         setMaxUser(data.maxUsersSize)
+            //         setTrigger(data.triggerEvery)
+            //     });
+            // window.location.reload();
+            
         }
 
     }
@@ -51,7 +57,7 @@ export default function ModelTrigger({ setOpenModal }) {
     return (
         <div className="modalBackground">
             <div className="modalContainer">
-                <div className="titleCloseBtn">
+                {/* <div className="titleCloseBtn">
                     <button
                         onClick={() => {
                             setOpenModal(false);
@@ -59,22 +65,22 @@ export default function ModelTrigger({ setOpenModal }) {
                     >
                         X
                     </button>
-                </div>
+                </div> */}
                 <div className="titles">
-                    <h1>Edit Trigger Every</h1>
+                    <h2>Edit Trigger Every</h2>
                 </div>
                 <div className="body">
                     <div className=''>
                         <div>
-                            
-                            <input id='editField' className='editFeild' type="number" required value={input} onChange={(e) => {
+
+                            <input id='editField' className='editField' type="number" style={{ textAlign: "center", border: "none" }} required value={input} placeholder={'Month/s'} onChange={(e) => {
                                 if (e.target.value === "" || (/[0-9]/)) {
                                     setInput(e.target.value)
                                 }
                             }} />
 
                         </div>
-                        <p style={{marginTop:"20px"}} id="editErr" className='editErrMsg' hidden></p>
+                        <p style={{ marginTop: "20px" }} id="editErr" className='editErrMsg' hidden></p>
                     </div>
                 </div>
                 <div className="footer">
@@ -87,8 +93,8 @@ export default function ModelTrigger({ setOpenModal }) {
                         Cancel
                     </button>
                     <button type='button' className='btn1' style={{ marginRight: "10px" }} onClick={
-                                editTriggerEvery
-                            }>Edit</button>
+                        editTriggerEvery
+                    }>Edit</button>
                 </div>
             </div>
         </div>

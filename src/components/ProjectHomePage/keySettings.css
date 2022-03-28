@@ -13,12 +13,12 @@
   color: #ffffff;
 }
 .keySettingContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.buttons{
-    -webkit-border-radius: 20px;
+.buttons {
+  -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 15px;
   /* height: 15px; */
@@ -36,30 +36,34 @@
   cursor: pointer;
   text-align: center;
 }
-.buttons:hover{
-    color: #ffffff;
+.buttons:hover {
+  color: #ffffff;
   background: #e7411b;
-  border: solid #dd380d 1px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
+  /* border: solid #dd380d 1px; */
+  /* -webkit-border-radius: 20px;
+  -moz-border-radius: 20px; */
+  /* border-radius: 20px; */
   text-decoration: none;
 }
-.keyvalue{
-    margin-left: 20px;
-    width: 270px;
-    height: 35px;
+.keyvalue {
+  margin-left: 20px;
+  width: 270px;
+  height: 35px;
+  border: none;
+  margin-bottom: 2%;
+  margin-top: 1%;
+  font-size: 1.3em;
 }
 
-.copy:hover{
-    color: blue;
+.copy:hover {
+  color: blue;
 }
-.copy{
-    position: relative; 
-    right: 33px;
-    top: 7px;
-    font-size: 18px;
-    background: transparent;
-    border: none transparent;
-    color: black;
+.copy {
+  position: relative;
+  right: 33px;
+  top: 7px;
+  font-size: 18px;
+  background: transparent;
+  border: none transparent;
+  color: black;
 }

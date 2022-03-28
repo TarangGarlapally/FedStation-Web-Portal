@@ -3,9 +3,8 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./modal.css";
 
-export default function Modal({ setOpenModal }) {
+export default function Modal({ setOpenModal,setMaxUser }) {
     const [details, setDetails] = useState([]);
-    const [maxUser, setMaxUser] = useState('');
     const [trigger, setTrigger] = useState('')
     const [model, setModel] = useState([]);
     const [input, setInput] = useState("")
@@ -26,28 +25,34 @@ export default function Modal({ setOpenModal }) {
             document.getElementById("editErr").innerText = "";
             document.getElementById("editErr").hidden = true;
 
-            const res = axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
-            console.log(res)
+            axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
+            .then(res => {
+                setMaxUser(type)
+                setOpenModal(false)
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
-            const data = await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
-                .then(res => res.json())
-                .then((data) => {
-                    setDetails(data);
-                    setModel(data.modelType)
-                    setMaxUser(data.maxUsersSize)
-                    setTrigger(data.triggerEvery)
-                });
-            window.location.reload();
+            // const data = await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
+            //     .then(res => res.json())
+            //     .then((data) => {
+            //         setDetails(data);
+            //         setModel(data.modelType)
+            //         setMaxUser(data.maxUsersSize)
+            //         setTrigger(data.triggerEvery)
+            //     });
+            // window.location.reload();
             console.log(details)
         }
 
-        setClose(false)
+        setOpenModal(false)
     }
 
     return (
         <div className="modalBackground">
             <div className="modalContainer">
-                <div className="titleCloseBtn">
+                {/* <div className="titleCloseBtn">
                     <button
                         onClick={() => {
                             setOpenModal(false);
@@ -55,27 +60,27 @@ export default function Modal({ setOpenModal }) {
                     >
                         X
                     </button>
-                </div>
+                </div> */}
                 <div className="titles">
-                    <h1>Edit Max User Size</h1>
+                    <h2>Edit Max User Size</h2>
                 </div>
                 <div className="body">
                     <span className=''>
                         <div>
-                            <select id='selectField' className='editFeild' value={type} onChange={(e) => {
+                            <select id='selectField' className='editField' value={type} onChange={(e) => {
                                 let index = e.nativeEvent.target.selectedIndex;
                                 let label = e.nativeEvent.target[index].text;
                                 let value = e.target.value;
                                 setType(value)
                                 setLabel(label)
-                            }} style={{ 'width': 'px' }}>
-                                <option value='0'>Select Any</option>
+                            }} style={{ 'width': 'fit-content',height:"fit-content",padding:"10px",border:"none",fontSize:"1.5rem" }}>
+                                <option style={{padding:"10px"}} value='0'>Choose</option>
                                 <option value='1'>0-50</option>
                                 <option value='2'>50-100</option>
                                 <option value='3'>100-150</option>
                             </select>
                         </div>
-                        <p style={{marginTop:"20px"}} id="editErr" className='editErrMsg' hidden></p>
+                        <p style={{ marginTop: "20px" }} id="editErr" className='editErrMsg' hidden={true}></p>
                     </span>
                 </div>
                 <div className="footer">

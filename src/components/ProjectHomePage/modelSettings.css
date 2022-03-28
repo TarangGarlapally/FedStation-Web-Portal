@@ -34,10 +34,18 @@
   border: none transparent; */
 .edit{
   margin-left: 150px;
-  border-radius: 15px;
+  border-radius: 5px;
   background: white;
   color: black;
+  width: fit-content;
 }
+
+.edit:hover{
+  background: #e7411b;
+  color: white;
+}
+
+
 .modelSettingContainer {
   display: flex;
   align-items: center;
@@ -101,7 +109,6 @@
   width: 150px;
   font-size: 20px;
   font-weight: 100;
-  padding: 20px;
   background-color: #f2f2f2;
   /* border: solid #dd380d 2px; */
   text-decoration: none;

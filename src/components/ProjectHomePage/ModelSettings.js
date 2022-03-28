@@ -38,7 +38,7 @@ export default function ModelSettings() {
 
     return (
         <div className='modelSetting'>
-            <h3>Basic Details</h3>
+            <h3>Model Settings</h3>
             
             <div className='modelSettingItems'>
                     <div className='modelDetails'>
@@ -55,7 +55,7 @@ export default function ModelSettings() {
                             <h4>{model.aggregationType}</h4><br/>
                             <div className='editable'>
                                 <h4>{maxUser}</h4>
-                                <button className='edit' type='button' onClick={() => setModalOpen(true)}>edit</button>
+                                <button className='edit' type='button' onClick={() => setModalOpen(true)}>Edit</button>
                             </div><br/>
                             <h4>{details.startAtTime}</h4><br/>
                             {details.recieveAt ?<div>
@@ -63,7 +63,7 @@ export default function ModelSettings() {
                             </div>  : <span></span>}
                             <div className='editable'>
                                 <h4>{trigger}</h4>
-                                <button className='edit' type='button' onClick={() => setModalTriggerEveryOpen(true)}>edit</button>
+                                <button className='edit' type='button' onClick={() => setModalTriggerEveryOpen(true)}>Edit</button>
                             </div><br/>
                         </div>
                     </div>
@@ -83,8 +83,8 @@ export default function ModelSettings() {
             </div> */}
             
 
-            {modalOpen && <Modal setOpenModal={setModalOpen} />}
-            {modalTriggerEveryOpen && <ModelTrigger setOpenModal={setModalTriggerEveryOpen} />}
+            {modalOpen && <Modal setOpenModal={setModalOpen} setMaxUser={setMaxUser} />}
+            {modalTriggerEveryOpen && <ModelTrigger setOpenModal={setModalTriggerEveryOpen} setTrigger={setTrigger} />}
         </div>
     )
 }
