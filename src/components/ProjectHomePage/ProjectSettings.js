@@ -84,7 +84,6 @@ const params = useParams();
                     <button className='delete' onClick={deleteProject}>Delete</button>
                 </div>
             </div> */}
-            
         </div>
     )
 }
