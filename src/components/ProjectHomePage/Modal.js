@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./modal.css";
 
 export default function Modal({ setOpenModal,setMaxUser }) {
     const [details, setDetails] = useState([]);
-    const [trigger, setTrigger] = useState('')
-    const [model, setModel] = useState([]);
-    const [input, setInput] = useState("")
     const [type, setType] = useState('')
     const [label, setLabel] = useState('')
-    const [close, setClose] = useState(false)
-    const [closeTrigger, setCloseTrigger] = useState(false)
 
     const params = useParams();
 

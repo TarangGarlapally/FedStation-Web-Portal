@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./modal.css";
 
 export default function ModelTrigger({ setOpenModal,setTrigger }) {
 
-    const [details, setDetails] = useState([]);
-    const [maxUser, setMaxUser] = useState('');
-    const [model, setModel] = useState([]);
     const [input, setInput] = useState("")
-    const [type, setType] = useState('')
-    const [label, setLabel] = useState('')
 
     const params = useParams();
 

@@ -15,8 +15,8 @@ export default function KeySettings() {
 
     useEffect(()=>{
         console.log(params)
-        async function getProjectKey(){
-            const data= await fetch("https://fedstation.herokuapp.com/getProject/"+params.id)
+        function getProjectKey(){
+            fetch("https://fedstation.herokuapp.com/getProject/"+params.id)
             .then(res=>res.json())
             .then((data)=>{
                 // console.log(data);
@@ -29,7 +29,7 @@ export default function KeySettings() {
     
 
     async function disableKey(){
-        if(disabled==false){
+        if(disabled===false){
             try{
                 const res=await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId="+params.id+"&field=isKeyDisabled&value=true")
                 
@@ -59,7 +59,7 @@ export default function KeySettings() {
         const res=await axios.patch("http://fedstation.herokuapp.com/updateKey/"+params.id)
         console.log(res)
         
-        const data= await fetch("https://fedstation.herokuapp.com/getProject/"+params.id)
+        fetch("https://fedstation.herokuapp.com/getProject/"+params.id)
             .then(res=>res.json())
             .then((data)=>{
                 // console.log(data);

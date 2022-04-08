@@ -28,8 +28,8 @@ export default function NewProject(props) {
     const [idstate, setIdstate] = useState(null);
     const [projectId, setProjectId] = useState("");
     const [projectObj, setProjectObj] = useState({});
-    const navigate = useNavigate();
-    const { state } = useLocation();
+    // const navigate = useNavigate();
+    // const { state } = useLocation();
 
     const hourDropdown = () => {
         var comp = "";
@@ -56,11 +56,11 @@ export default function NewProject(props) {
         // setProjectObj({ ...projectObj, startAtTime: parseInt(startTime.toString()) })
         // setProjectObj({ ...projectObj, triggerEvery: triggerEvery })
         // console.log(startTime, triggerEvery)
-        const project = processAndCreateProject({ ...projectObj, startAtTime: parseInt(startTime.toString()), triggerEvery: triggerEvery},state.user.email.split("@")[0]);
+        const project = processAndCreateProject({ ...projectObj, startAtTime: parseInt(startTime.toString()), triggerEvery: triggerEvery }, "yashuyashwanth05");
         createProject(project)
             .then(res => {
                 console.log(res)
-                navigate("/projecthome/" + projectId);
+                // navigate("/projecthome/" + projectId);
             })
             .catch(err => {
                 console.log(err)
@@ -88,28 +88,33 @@ export default function NewProject(props) {
         }
     }, [stage, idstate, startTime, projectId])
 
+    const [projectName, setProjectName] = useState("");
+    const [projectDesc, setProjectDesc] = useState("");
+    const [modelType, setModelType] = useState("");
+    const [userSize, setUserSize] = useState("");
+
 
     const stage1 = <div>
         <h2>Let's get started</h2>
         <h2 className="new-project-header1">Project Details</h2>
         <br />
         <label for="projectName" className="label">Project Name<span style={{ color: "red" }}>*</span></label><br />
-        <input type="text" id="projectName" maxLength={32} className="new-project-input" required></input>
+        <input type="text" id="projectName" maxLength={32} className="new-project-input" required value={projectName} onChange={(e) => setProjectName(e.target.value)}></input>
         <br /><br />
         <label for="projectDescription" className="label">Project Description</label><br />
-        <textarea maxLength={256} rows={6} id="projectDescription" className="new-project-input"></textarea>
+        <textarea maxLength={256} rows={6} id="projectDescription" className="new-project-input" value={projectDesc} onChange={(e) => setProjectDesc(e.target.value)}></textarea>
 
         <p id="errMsg1" className="errMsg" hidden></p>
         <p className="new-project-p-btn" onClick={() => {
-            if (document.getElementById("projectName").value === null || document.getElementById("projectName").value === "") {
-                document.getElementById("errMsg1").innerText = "Please fill all the required values!";
-                document.getElementById("errMsg1").hidden = false;
-            } else {
-                document.getElementById("errMsg1").innerText = "";
-                document.getElementById("errMsg1").hidden = true;
-                setProjectObj({ ...projectObj, projectName: document.getElementById("projectName").value, projectDescription: document.getElementById("projectDescription").value })
-                handleNext();
-            }
+            // if (document.getElementById("projectName").value === null || document.getElementById("projectName").value === "") {
+            //     document.getElementById("errMsg1").innerText = "Please fill all the required values!";
+            //     document.getElementById("errMsg1").hidden = false;
+            // } else {
+            //     document.getElementById("errMsg1").innerText = "";
+            //     document.getElementById("errMsg1").hidden = true;
+            //     setProjectObj({ ...projectObj, projectName: document.getElementById("projectName").value, projectDescription: document.getElementById("projectDescription").value })
+            handleNext();
+            // }
         }}>Next</p>
     </div>;
 
@@ -126,14 +131,15 @@ export default function NewProject(props) {
         </div><br />
         <p id="errMsg2" className="errMsg" hidden></p><br />
         <p className="new-project-p-btn" onClick={() => {
-            if (document.getElementById("projectId").value === null || document.getElementById("projectId").value === "") {
-                document.getElementById("errMsg2").innerText = "Please fill all the required values!";
-                document.getElementById("errMsg2").hidden = false;
-            } else {
-                checkProjectIdExists(document.getElementById("projectId").value).then(response => {
-                    setIdstate(response.data);
-                })
-            }
+            // if (document.getElementById("projectId").value === null || document.getElementById("projectId").value === "") {
+            //     document.getElementById("errMsg2").innerText = "Please fill all the required values!";
+            //     document.getElementById("errMsg2").hidden = false;
+            // } else {
+            //     checkProjectIdExists(document.getElementById("projectId").value).then(response => {
+            //         setIdstate(response.data);
+            //     })
+            // }
+            handleNext()
         }}>Next</p>
     </div>;
 
@@ -142,13 +148,13 @@ export default function NewProject(props) {
         <br />
         <div className="project-type">
             <label for="projectType" className="label">Model Type<span style={{ color: "red" }}>*</span></label><br />
-            <select id="projectType" name="projectType" className="new-project-input" required>
-                <option value={"testmodel"}>{"testmodel"}</option>
+            <select id="projectType" name="projectType" className="new-project-input" required value={modelType} onChange={(e) => setModelType(e.target.value)}>
+                <option value={modelType}>{"testmodel"}</option>
             </select>
             <p className="aggMethod">Aggregation method used: <b>{"method1"}</b></p>
             <label for="userSize" className="label">Expected Users' Size<span style={{ color: "red" }}>*</span></label><br />
-            <select id="userSize" name="userSize" className="new-project-input" required>
-                <option value={"1"}>{"0-50"}</option>
+            <select id="userSize" name="userSize" className="new-project-input" required value={userSize} onChange={(e) => setUserSize(e.target.value)}>
+                <option value={"0-50"}>{"0-50"}</option>
             </select>
             <br /><br />
             Number of dataset columns: <span style={{ color: "red" }}>*</span><input type="number" id="noOfCols" className="new-project-input noOfColumns" min={2} required onInput={(e) => {
@@ -159,17 +165,17 @@ export default function NewProject(props) {
         </div><br />
         <p id="errMsg3" className="errMsg" hidden></p>
         <p className="new-project-p-btn" onClick={() => {
-            if (document.getElementById("projectType").value === null || document.getElementById("projectType").value === ""
-                || document.getElementById("userSize").value === null || document.getElementById("userSize").value === ""
-                || document.getElementById("noOfCols").value === null || document.getElementById("noOfCols").value === "") {
-                document.getElementById("errMsg3").innerText = "Please fill all the required values!";
-                document.getElementById("errMsg3").hidden = false;
-            } else {
-                document.getElementById("errMsg3").innerText = "";
-                document.getElementById("errMsg3").hidden = true;
-                setProjectObj({ ...projectObj, projectType: document.getElementById("projectType").value, userSize: parseInt(document.getElementById("userSize").value), noOfCols: document.getElementById("noOfCols").value })
-                handleNext();
-            }
+            // if (document.getElementById("projectType").value === null || document.getElementById("projectType").value === ""
+            //     || document.getElementById("userSize").value === null || document.getElementById("userSize").value === ""
+            //     || document.getElementById("noOfCols").value === null || document.getElementById("noOfCols").value === "") {
+            //     document.getElementById("errMsg3").innerText = "Please fill all the required values!";
+            //     document.getElementById("errMsg3").hidden = false;
+            // } else {
+            //     document.getElementById("errMsg3").innerText = "";
+            //     document.getElementById("errMsg3").hidden = true;
+            //     setProjectObj({ ...projectObj, projectType: document.getElementById("projectType").value, userSize: parseInt(document.getElementById("userSize").value), noOfCols: document.getElementById("noOfCols").value })
+            handleNext();
+            // }
         }}>Next</p>
     </div>;
 
@@ -190,7 +196,7 @@ export default function NewProject(props) {
             <p className="aggMethod">75% of above duration is used for model reception and 25% for aggregation </p>
 
             <br /><br />
-            Trigger once every &nbsp; <select id="triggerEvery" name="triggerEvery" className="new-project-input smallInput" required onChange={(e) => { setTriggerEvery(parseInt(e.target.value)) }}>
+            Trigger once every &nbsp; <select id="triggerEvery" name="triggerEvery" className="new-project-input smallInput" required value={triggerEvery} onChange={(e) => { setTriggerEvery(parseInt(e.target.value)) }}>
                 {triggerEveryDropdown()}
             </select> &nbsp; months
         </div>

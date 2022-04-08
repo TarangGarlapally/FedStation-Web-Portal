@@ -26,9 +26,9 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/docs" element={<Docs />} />
           <Route path="/console" element={
-            <PrivateRoute>
-              <Console />
-            </PrivateRoute>
+            // <PrivateRoute>
+            <Console />
+            // </PrivateRoute>
           }
           />
           <Route path="/newproject" element={
