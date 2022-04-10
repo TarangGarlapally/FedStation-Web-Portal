@@ -14,10 +14,13 @@ function RenderProjects({ projects }) {
         return (
             <div className="project_card" onClick={() => { navigate("/projecthome/" + project.id) }}>
                 <div className="project-card-title">
-                    <h3>{project.projectName}</h3>
+                    <h3 style={{marginTop:"10px",marginLeft:"15px",color:"black"}}>{project.projectName}</h3>
                 </div>
                 <div className="project-card-description">
-                    <p>{project.projectDescription}</p>
+                    <p style={{marginTop:"0px",marginLeft:"15px",color:"gray"}}>{project.modelType.model}</p>
+                </div>
+                <div>
+                    <p style={{color:"grey",marginTop:"100px",marginLeft:"15px"}}>Model Performance</p>
                 </div>
             </div>
         )
@@ -85,10 +88,12 @@ function Console() {
 
     return (
         <div className="dashboard">
+            <div className="rightTri"></div>
+            <div className="leftTri"></div>
             {userDetails ? (
                 <div className="dashboard_content">
                     <div className="dashboard_new_project">
-                        <button onClick={newProject}>+ New Project</button>
+                        <button style={{color:"black"}} onClick={newProject}>+ New Project</button>
                     </div>
                     {/* <div className="dashboard_project_overview">
 

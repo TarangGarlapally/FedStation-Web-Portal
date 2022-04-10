@@ -2,28 +2,40 @@
   width: 80%;
   margin-left: 18%;
   margin-top: 1.5%;
+  font-size: 15px;
   /* display: flex;
     justify-content: space-around; */
 }
 .projectSettingItems {
   flex: 1;
-  margin: 0px 20px;
+  /* margin: 0px 20px;
   padding: 30px;
   border: 1px solid #0a0000;
   border-radius: 10px;
   background-color: #2b6777;
-  color: #ffffff;
+  color: #ffffff; */
 }
 .projectDetails{
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
 }
 
 .projectSettingContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.save{
+  margin-left: 20px;
+  border-radius: 5px;
+  background: #2b6777;
+  color: #ffffff;
+  width: fit-content;
+}
+.save:hover{
+  background: #e7411b;
+  color: white;
 }
 .delete {
   -webkit-border-radius: 20px;
@@ -38,7 +50,7 @@
   font-weight: 100;
   padding: 20px;
   background-color: #f2f2f2;
-  border: solid #2b6777 2px;
+  /* border: solid #2b6777 2px; */
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
