@@ -8,6 +8,7 @@ export default function ProjectSettings() {
 
     const [details, setDetails] = useState({});
     const [user, setUser] = useState({});
+    const [description,setDescription]=useState('');
     const [disabled, setDisabled] = useState(false);
 
     const params = useParams();
@@ -19,6 +20,7 @@ export default function ProjectSettings() {
                 .then((data) => {
                     setDetails(data);
                     setUser(data.user)
+                    setDescription(data.projectDescription)
                     console.log(data)
                 });
         }
@@ -26,7 +28,7 @@ export default function ProjectSettings() {
 
     }, []);
 
-    async function deleteProject() {
+    async function disableProject() {
         if (disabled == false) {
             const res = await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=true");
             setDisabled(true)
@@ -39,39 +41,86 @@ export default function ProjectSettings() {
 
 
     }
+    async function handleChanges(){
+        axios.patch("http://fedstation.herokuapp.com/updateDescription?projectId=" + params.id + "&description="+ description)
+
+        await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
+                .then(res => res.json())
+                .then((data) => {
+                    setDetails(data);
+                    setUser(data.user);
+                    setDescription(description)
+                });
+        
+
+    }
 
     return (
 
         <div className='projectSetting'>
-            <h3>Basic Details</h3>
+            <h4>General</h4>
+            {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
+            <hr/>
 
             <div className='projectSettingItems'>
-                <div className='projectDetails'>
-                    <div>
-                        <br /><h4>Project Name</h4><br />
-                        <h4>Project ID</h4><br />
-                        <h4>Project Description</h4><br />
-                        <h4>Owner</h4><br />
+                {/* <div className='projectDetails'>
+                    <div style={{marginLeft:"20px"}}>
+                        <p>Project Name</p><br />
+                        <p>Project ID</p><br />
+                        
+                        <p>Owner</p><br />
+                        <p>Project Description</p><br />
                     </div>
-                    <div>
-                        <br /><h4>{details.projectName}</h4><br />
-                        <h4>{details.id}</h4><br />
-                        <h4>{details.projectDescription}</h4><br />
-                        <h4>{user.fname + " " + user.lname}</h4><br />
+                    <div style={{marginLeft:"400px"}}>
+                        <br /><p>{details.projectName}</p><br />
+                        <p>{details.id}</p><br />
+                         */}
+
+                        {/* <p>{details.projectDescription}</p><br /> */}
+                        {/* <p>{user.fname + " " + user.lname}</p><br /><br/><br/>
+                        <div>
+                        <textarea style={{width:"200px",height:"80px"}}  value={description} onChange={(e)=>{
+                            setDescription(e.target.value)
+                        }} /> 
+                        <input type="button" className='edit' value="submit" onClick={handleChanges}/>
+                        </div><br />
                     </div>
+                </div> */}
+                <div style={{display:"flex",alignItems:"center"}}>
+                    <p style={{marginLeft:"20px"}}>Project Name</p>
+                    <p style={{marginLeft:"440px"}}>{details.projectName}</p>
                 </div>
 
+                <div style={{display:"flex",alignItems:"center",marginTop:"20px"}}>
+                    <p style={{marginLeft:"20px"}}>Project ID</p>
+                    <p style={{marginLeft:"465px"}}>{details.id}</p>
+                </div>
 
+                <div style={{display:"flex",alignItems:"center",marginTop:"20px"}}>
+                    <p style={{marginLeft:"20px"}}>Owner</p>
+                    <p style={{marginLeft:"488px"}}>{user.fname + " " + user.lname}</p>
+                </div>
+
+                <div style={{display:"flex",alignItems:"",marginTop:"20px"}}>
+                    <p style={{marginLeft:"20px",marginTop:"20px"}}>Project Description</p>
+                    <textarea style={{width:"200px",height:"80px",marginLeft:"407px",borderRadius:"5px"}}  value={description} onChange={(e)=>{
+                            setDescription(e.target.value)
+                        }} /> 
+                    <div style={{marginTop:"50px",marginRight:"20px"}}><input type="button" className='save' value="Save" style={{marginRight:"40px"}} onClick={handleChanges}/></div>
+                </div>
+                
             </div>
-            <h3>Disable Project</h3>
-            <div className='projectSettingItems' style={{ border: "2px solid " }}>
+            <h4>Disable Project</h4>
+            {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
+            <hr/>
+            <div className='projectSettingItems'>
                 <div className="projectSettingContainer">
                     <div>
-                        <strong style={{ display: "block", fontSize: "17px" }}>Disable this project</strong>
+                        <strong style={{  fontSize: "15px" ,color:"#e7411b"}}>Disable this project</strong>
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
                     </div>
 
-                    <button type="button" className='delete' onClick={deleteProject}>{disabled ? "Enable" : "Disable"}</button>
+                    <button type="button" className='delete' onClick={disableProject}>{disabled ? "Enable" : "Disable"}</button>
                 </div>
             </div>
             {/* <h3>Delete Project</h3>

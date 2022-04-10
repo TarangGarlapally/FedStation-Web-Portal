@@ -71,23 +71,27 @@ export default function KeySettings() {
     return (
         <div className='keySettings'>
             <h3>Copy Secret Key</h3>
+            <hr/>
             <input className='keyvalue' type='text' value={inputValue} readOnly={true}/>
             <CopyToClipboard onCopy={()=>setIsCopied(true)} className="copy" text={inputValue}>
                 <button type="button" aria-label='copy to clipboard button' className='copy'>{isCopied ? <AssignmentOutlined/> : <FileCopyOutlined/> }</button>
             </CopyToClipboard>
+            <br/>
             <h3>Regenerate key</h3>
+            <hr/>
             <div className='keySettingItems'>
                 <div className="keySettingContainer">
                     
-                    <strong style={{fontSize:"17px"}}>Regenerate the secret key</strong>
+                    <strong style={{fontSize:"15px"}}>Regenerate the secret key</strong>
                     <button type="button" className='buttons' onClick={regenerateKey}>ReGenerate</button>
                 </div>
             </div>
             <h3>Disable Key</h3>
+            <hr/>
             <div className='keySettingItems'>
                 <div className="keySettingContainer">
                     
-                    <strong style={{fontSize:"17px"}}>Disable the secret key</strong>
+                    <strong style={{fontSize:"15px", color:"#e7411b"}}>Disable the secret key</strong>
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
                    
                     <button type="button" className='buttons' onClick={disableKey}>{disabled ? "Enable" : "Disable" }</button>

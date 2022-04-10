@@ -4,6 +4,7 @@ import "./Home.css"
 import Logo from "../../assets/Get_Started.png"
 import { BsLinkedin } from "react-icons/bs"
 import { FaFacebookSquare, FaGithubSquare } from "react-icons/fa"
+import { useNavigate, Link } from "react-router-dom"
 
 import useCaseLogo from "../../assets/dummy_usecase.jpg"
 
@@ -13,7 +14,7 @@ import useCaseLogo from "../../assets/dummy_usecase.jpg"
 
 export default function Home() {
     // const { currentUser } = useAuth()
-
+    const navigate = useNavigate()
 
 
 
@@ -32,9 +33,10 @@ export default function Home() {
                         <div className='get-started-head2'>A New way for Secure Machine Learning</div>
                         <div className='get-started-tag'>Built to support all your Machine Learning needs <br /> in mobile or web applications</div>
                         <div className='get-started-buttons'>
-                            <button className='get-started-button'>Get Started</button>
-                            <button className='try-demo-button'>Watch Demo</button>
-                            <button className='docs-button'>Docs</button>
+                            <button className='get-started-button' onClick={() => navigate("/console")}>Get Started</button>
+                            {/* <Link to="/watch-demo" className='try-demo-button'>Watch Demo</Link> */}
+                            <button className='try-demo-button' onClick={()=>navigate("/watch-demo")}>Watch Demo</button>
+                            <button className='docs-button' onClick={() => navigate("/docs")}>Docs</button>
                         </div>
                     </div>
                     <div className='get-started-right'>

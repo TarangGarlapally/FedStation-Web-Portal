@@ -2,16 +2,16 @@
   width: 80%;
   margin-left: 18%;
   margin-top: 1.5%;
-  font-size: 20px;
+  font-size: 15px;
 }
 .modelSettingItems {
   flex: 1;
-  margin: 0px 20px;
+  /* margin: 0px 20px;
   padding: 30px;
   border: 1px solid #0a0000;
   border-radius: 10px;
   background-color: #2b6777;
-  color: #ffffff;
+  color: #ffffff; */
 }
 .modelDetails{
   display: flex;
@@ -19,11 +19,12 @@
   /* justify-content: space-evenly; */
 }
 .title{
-  margin-left: 260px;
-  font-size: 20px;
+  margin-left: 20px;
+  /* font-size: 20px; */
+  /* text-size-adjust: 10px; */
 }
 .value{
-  margin-left: 270px;
+  margin-left: 400px;
 }
 .editable{
   display: flex;
@@ -35,8 +36,8 @@
 .edit{
   margin-left: 150px;
   border-radius: 5px;
-  background: white;
-  color: black;
+  background: #2b6777;
+  color: #ffffff;
   width: fit-content;
 }
 
@@ -47,19 +48,19 @@
 
 
 .modelSettingContainer {
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; */
 }
 
 .deleteModel {
-  -webkit-border-radius: 20px;
+  /* -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 15px;
-  /* height: 15px; */
+  height: 15px;
   line-height: 15px;
   color: #dd380d;
-  /* font-family: Open Sans; */
+  font-family: Open Sans;
   width: 150px;
   font-size: 20px;
   font-weight: 100;
@@ -69,7 +70,7 @@
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
-  text-align: center;
+  text-align: center; */
 }
 
 .deleteModel:hover {

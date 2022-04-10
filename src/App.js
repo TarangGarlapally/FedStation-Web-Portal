@@ -8,12 +8,13 @@ import ProjectHomePage from './components/ProjectHomePage/ProjectHomePage';
 import PrivateRoute from './components/PrivateRoute';
 import NavBar from './components/navbar/NavBar';
 import UserAnalytics from './components/ProjectHomePage/UserAnalytics';
-
+import React from 'react';
 import ProjectSettings from './components/ProjectHomePage/ProjectSettings';
 import KeySettings from './components/ProjectHomePage/KeySettings';
 import ModelSettings from './components/ProjectHomePage/ModelSettings';
 
 import GlobalModelAnalytics from './components/ProjectHomePage/GlobalModelAnalytics';
+import Watchdemo from './components/watch-demo/Watchdemo';
 
 function App() {
   // const { currentUser } = useAuth();
@@ -29,6 +30,10 @@ function App() {
             <PrivateRoute>
               <Console />
             </PrivateRoute>
+          } 
+          />
+          <Route exact path="/watch-demo" element={
+            <Watchdemo />
           }
           />
           <Route path="/newproject" element={
