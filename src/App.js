@@ -32,10 +32,10 @@ function App() {
             </PrivateRoute>
           } 
           />
-          <Route exact path="/watch-demo" element={
+          {/* <Route exact path="/watch-demo" element={
             <Watchdemo />
           }
-          />
+          /> */}
           <Route path="/newproject" element={
             <PrivateRoute>
               <NewProject />

@@ -75,19 +75,19 @@ export default function GlobalModelAnalytics() {
                 
             </div>
 
-            <div className='shadow' style = {{
+            {/* <div className='shadow' style = {{
                 padding : "2em", 
                 margin : "1em", 
                 borderRadius : "1em"
-            }}>
+            }}> */}
                 {/* <h1 className='GlobalModeltitle'>OVERALL PERFORMANCE <h3 style={{color : "green"}}>(63.54%)</h3> </h1>
                 <hr/> */}
-                <div className='dwnGlbModel' style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                {/* <div className='dwnGlbModel' style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
                     <strong style={{fontSize:"20px"}}>Download Global Model</strong>
                     <button type='button' className='buttons'>Download</button>
                 </div>
                 
-            </div>
+            </div> */}
             
         </div>
     )

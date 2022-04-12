@@ -32,6 +32,15 @@ export default function ModelSettings() {
                 setMaxUser(data.maxUsersSize)
                 setTrigger(data.triggerEvery)
                 setInput(data.triggerEvery)
+                if(data.maxUsersSize===1){
+                    setLabel("0-50")
+                }
+                else if(data.maxUsersSize===2){
+                    setLabel("50-100")
+                }
+                else{
+                    setLabel("100-150")
+                }
             });
         }
         getModelDetails();
@@ -56,9 +65,16 @@ export default function ModelSettings() {
             document.getElementById("editErr").hidden = true;
 
             axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
-        // .then(res=>{
-        //     setInput(input)
-        // })
+            // .then(res=>{
+            //     setInput(input)
+            // })
+
+            axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
+            .then(res => {
+                setMaxUser(type)
+                // setLabel(label)
+            })
+            console.log(label)
             await fetch("https://fedstation.herokuapp.com/getProject/"+params.id)
             .then(res=>res.json())
             .then((data)=>{
@@ -66,6 +82,8 @@ export default function ModelSettings() {
                 setModel(data.modelType)
                 setMaxUser(data.maxUsersSize)
                 setTrigger(input)})
+
+            alert("Changes Saved")
         }
         // if (document.getElementById("selectField").value === null || document.getElementById("selectField").value === "0") {
         //     document.getElementById("editErr").innerText = "Please fill all the required values!";
@@ -77,10 +95,7 @@ export default function ModelSettings() {
 
             
         // }
-        axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
-            .then(res => {
-                setMaxUser(type)
-            })
+        
         
     }
     
@@ -185,10 +200,10 @@ export default function ModelSettings() {
                                     setType(value)
                                     setLabel(label)
                                 }} style={{ width: 'fit-content',height:"fit-content",padding:"17px",border:"none",fontSize:"1.5rem",marginLeft:"415px"}}>
-                                    <option style={{padding:"10px"}} value={maxUser}>{maxUser}</option>
-                                    <option value='1'>0-50</option>
-                                    <option value='2'>50-100</option>
-                                    <option value='3'>100-150</option>
+                                    <option style={{padding:"10px"}} value={maxUser}>{label}</option>
+                                    <option value='1'>{"0-50"}</option>
+                                    <option value='2'>{"50-100"}</option>
+                                    <option value='3'>{"100-150"}</option>
                                 </select>
                 </div>    
             </div>

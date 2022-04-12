@@ -21,6 +21,7 @@ export default function KeySettings() {
             .then((data)=>{
                 // console.log(data);
                 setInputValue(data.projectKey)
+                setDisabled(data.isKeyDisabled)
             });
         }
         getProjectKey();
@@ -31,7 +32,7 @@ export default function KeySettings() {
     async function disableKey(){
         if(disabled==false){
             try{
-                const res=await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId="+params.id+"&field=isKeyDisabled&value=true")
+                const res=await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId="+params.id+"&field=isKeyDisabled&value="+true)
                 
                 console.log(res)
             }catch(e){
@@ -43,7 +44,7 @@ export default function KeySettings() {
         }
         else{
             try{
-                const res=await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId="+params.id+"&field=isKeyDisabled&value=false",{value:true})
+                const res=await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId="+params.id+"&field=isKeyDisabled&value="+false,{value:true})
                 
                 console.log(res)
             }catch(e){
@@ -82,8 +83,8 @@ export default function KeySettings() {
             <div className='keySettingItems'>
                 <div className="keySettingContainer">
                     
-                    <strong style={{fontSize:"15px"}}>Regenerate the secret key</strong>
-                    <button type="button" className='buttons' onClick={regenerateKey}>ReGenerate</button>
+                    <strong style={{fontSize:"15px",marginLeft:"20px"}}>Regenerate the secret key</strong>
+                    <button type="button" className='buttons' style={{marginLeft:"370px"}} onClick={regenerateKey}>ReGenerate</button>
                 </div>
             </div>
             <h3>Disable Key</h3>
@@ -91,10 +92,10 @@ export default function KeySettings() {
             <div className='keySettingItems'>
                 <div className="keySettingContainer">
                     
-                    <strong style={{fontSize:"15px", color:"#e7411b"}}>Disable the secret key</strong>
+                    <strong style={{fontSize:"15px", color:"#e7411b",marginLeft:"20px"}}>Disable the secret key</strong>
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
                    
-                    <button type="button" className='buttons' onClick={disableKey}>{disabled ? "Enable" : "Disable" }</button>
+                    <button type="button" className='buttons' style={{marginLeft:"400px"}} onClick={disableKey}>{disabled ? "Enable" : "Disable" }</button>
                 </div>
             </div>
         </div>
