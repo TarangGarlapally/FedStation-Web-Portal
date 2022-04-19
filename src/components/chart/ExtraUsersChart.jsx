@@ -18,11 +18,15 @@ export default function ExtraUsersChart({title,data,dataKey,grid}) {
         
     }
     var extraUsers  = getExtraUsers() ; 
+    // const extraUsers=[{
+    //     "month":k,
+    //     "value":k
+    // }]
     return (
         <div className='chart'>
             <h3 className="chartTitle">{title}</h3>
             <ResponsiveContainer width="100%" aspect={4 / 1}>
-                <ComposedChart data={extraUsers} syncId={1}>
+                <ComposedChart data={data} syncId={1}>
                     <XAxis dataKey="name" stroke='#5550bd'/>
                     <YAxis />
                     <Line type="monotype" dataKey= "extra" storke="#5550bd" />

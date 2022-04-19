@@ -18,7 +18,7 @@ export default function FeaturedInfo(props) {
                                     {e.Percentage ? <p style={{
                                         color: e.Percentage >= 0 ? "green" : "red",
                                         fontWeight: "bold"
-                                    }}>({e.Percentage}%)</p> : null}
+                                    }}>({e.Percentage})</p> : null}
 
                                 </span>
                             </div>

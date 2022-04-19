@@ -1,8 +1,8 @@
 import React  ,{useContext}  from 'react'
 import './ModelAnalytics.css'
 
-import FeaturedInfo from '../../components/featuredInfo/FeaturedInfo' ; 
-import {ModelScoredata } from '../../assets/dummydata' ; 
+//import FeaturedInfo from '../../components/featuredInfo/FeaturedInfo' ; 
+//import {ModelScoredata } from '../../assets/dummydata' ; 
 import GlobalModelScoreGraph from '../../components/chart/GlobalModelScoreGraph';
 import ModelStorageChart from '../chart/ModelStorageChart';
 import {MonthlyAnalyticsContext} from './ProjectHomePage' ; 
@@ -44,7 +44,7 @@ export default function GlobalModelAnalytics() {
 
 
         
-        if(monthly_analytics.length != 0){
+        if(monthly_analytics.length !== 0){
             model_score.avg /= monthly_analytics.length ;
             model_score.curr = monthly_analytics.at(-1).modelScore ;
             model_size  = monthly_analytics.at(-1).modelSize ;
@@ -56,7 +56,9 @@ export default function GlobalModelAnalytics() {
 
     const ModelMontlyData  = getModelData() ; 
     return (
+        
         <div  className='GlobalModelAnalytics'>
+            {/* Page Not Found */}
             <h1  className='GlobalModeltitle'>Global Model Analytics </h1> 
 
             <div className='ScoreCharts'>
@@ -74,7 +76,7 @@ export default function GlobalModelAnalytics() {
 
                 
             </div>
-
+            {/* not include below code*/}
             {/* <div className='shadow' style = {{
                 padding : "2em", 
                 margin : "1em", 
