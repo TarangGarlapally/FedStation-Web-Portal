@@ -4,7 +4,7 @@ import "./Home.css"
 import Logo from "../../assets/Get_Started.png"
 import { BsLinkedin } from "react-icons/bs"
 import { FaFacebookSquare, FaGithubSquare } from "react-icons/fa"
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import useCaseLogo from "../../assets/dummy_usecase.jpg"
 

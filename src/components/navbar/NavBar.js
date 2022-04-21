@@ -5,7 +5,7 @@ import { signInWithGoogle, logout } from "../../firebase"
 import Modal from 'react-modal';
 import { createUser } from "../../ApiCalls"
 import "./NavBar.css";
-import { Close } from '@material-ui/icons';
+//import { Close } from '@material-ui/icons';
 
 Modal.setAppElement('#root');
 

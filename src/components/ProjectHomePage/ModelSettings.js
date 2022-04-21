@@ -4,7 +4,7 @@ import axios  from 'axios';
 import "./modelSettings.css"
 import Modal from "../../components/ProjectHomePage/Modal";
 import ModelTrigger from '../../components/ProjectHomePage/ModelTrigger';
-import Table from 'react-bootstrap/Table'
+//import Table from 'react-bootstrap/Table'
 
 
 

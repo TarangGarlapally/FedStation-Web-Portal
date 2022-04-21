@@ -31,14 +31,14 @@ export default function Sidebar({ project }) {
                             Users Analytics
                         </li>
 
-                        <li className="sidebarListItem" onClick={
+                        {/* <li className="sidebarListItem" onClick={
                             () => {
                                 navigate("globalModelAnalytics")
                             }
                         }>
                             <EqualizerIcon className  = "sidebarIcon" />
                             Global Model Analytics
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
                 <div className="sidebarMenu">

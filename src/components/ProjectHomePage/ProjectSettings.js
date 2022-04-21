@@ -10,7 +10,7 @@ export default function ProjectSettings() {
     const [user, setUser] = useState({});
     const [description,setDescription]=useState('');
     const [disabled, setDisabled] = useState(false);
-
+    const [downUrl,setDownUrl]=useState({})
     const params = useParams();
 
     useEffect(() => {
@@ -25,6 +25,13 @@ export default function ProjectSettings() {
                     console.log(data)
                 });
         }
+        axios.get("http://127.0.0.1:8000/dowloadGlobalModelFromFirebase/k_k")
+        .then((data)=>{
+            setDownUrl(data.data)
+        })
+        .catch(e=>{
+            console.log(e)
+        })
         getProjectDetails();
         
     }, []);
@@ -65,6 +72,20 @@ export default function ProjectSettings() {
         
             alert("Changes Saved")
         }
+        
+    }
+    
+    async function downloadGlbMdl(){
+        
+        console.log(downUrl,"this is url") 
+       
+        var link = document.createElement("a");
+        
+        link.href = downUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
         
     }
 
@@ -160,7 +181,7 @@ export default function ProjectSettings() {
                         <strong style={{  fontSize: "15px" ,color:"#",marginLeft:"20px"}}>Download Global Model</strong>
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
                     </div>
-                    <button type='button' className='buttons' style={{marginLeft:"370px"}}>Download</button>
+                    <button type='button' className='buttons' style={{marginLeft:"370px"}} onClick={downloadGlbMdl}>Download</button>
                     
                 </div>
             </div>

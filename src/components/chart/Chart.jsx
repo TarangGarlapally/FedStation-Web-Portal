@@ -8,8 +8,8 @@ export default function Chart({ title, data, dataKey, grid }) {
     const usersLimit = 3000;
     const gradientOffset = () => {
         const dataMax = Math.max(...data.map((i) => i.ActiveUser));
-        console.log(...data.map((i) => i.ActiveUser))
-        console.log(usersLimit / dataMax)
+        //console.log(...data.map((i) => i.ActiveUser))
+        //console.log(usersLimit / dataMax)
         return 1 - (usersLimit / dataMax);
     };
 
