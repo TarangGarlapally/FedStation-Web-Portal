@@ -17,3 +17,13 @@
   margin-left: 225px;
   background-color: #f2f2f2;
 }
+
+.modelSetting hr{
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.keySettings hr{
+  margin-top: 5px;
+  margin-bottom: 15px;
+}

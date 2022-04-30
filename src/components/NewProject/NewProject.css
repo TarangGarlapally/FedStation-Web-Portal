@@ -67,6 +67,8 @@
 
 .aggMethod {
   color: rgb(128, 128, 128);
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 .smallInput {
@@ -77,6 +79,12 @@
   margin-top: -5px;
   color: red;
   font-size: small;
+}
+
+.noteMsg{
+  margin-top: 5px;
+  color: rgb(128, 128, 128);
+  font-weight: bold;
 }
 
 .project-type h4 {

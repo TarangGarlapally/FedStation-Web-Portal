@@ -10,6 +10,7 @@ const getUserDetails = async (userId) => {
 
 
 const createProject = (project) => {
+    console.log(project)
     return axios.post('https://fedstation.herokuapp.com/createProject', project)
 }
 
