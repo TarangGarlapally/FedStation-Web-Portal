@@ -56,7 +56,7 @@ export default function NewProject(props) {
         // setProjectObj({ ...projectObj, startAtTime: parseInt(startTime.toString()) })
         // setProjectObj({ ...projectObj, triggerEvery: triggerEvery })
         // console.log(startTime, triggerEvery)
-        const project = processAndCreateProject({ ...projectObj, startAtTime: parseInt(startTime.toString()), triggerEvery: triggerEvery},state.user.email.split("@")[0]);
+        const project = processAndCreateProject({ ...projectObj, startAtTime: parseInt(startTime.toString()), triggerEvery: triggerEvery }, state.user.email.split("@")[0]);
         createProject(project)
             .then(res => {
                 console.log(res)
@@ -137,27 +137,49 @@ export default function NewProject(props) {
         }}>Next</p>
     </div>;
 
+    const [aggMethod, setAggMethod] = useState("");
+    const [modelType, setModelType] = useState("");
+    const [splNote, setSplNote] = useState("");
+
+    useEffect(() => {
+        if (modelType === "") {
+            setAggMethod("");
+        }
+        else if (modelType === "ARIMA") {
+            setAggMethod("Output Averaging");
+            setSplNote("Note: Time Series Forecasting using ARIMA model is a special case in our application. Please refer the documentation on 'Prediction in Special Cases'")
+        }
+        else {
+            setAggMethod("Voting");
+            setSplNote("")
+        }
+    }, [modelType])
+
     const stage3 = <div>
         <h2 className="new-project-header1">Model Configuration</h2>
         <br />
         <div className="project-type">
             <label for="projectType" className="label">Model Type<span style={{ color: "red" }}>*</span></label><br />
-            <select id="projectType" name="projectType" className="new-project-input" required>
-                <option value={"testmodel"}>{"testmodel"}</option>
+            <select id="projectType" name="projectType" className="new-project-input" required onChange={(e) => setModelType(e.target.value)}>
+                <option value="" disabled selected>Select a Model Type</option>
+                <option value={"LinearRegression"}>{"Linear Regression"}</option>
+                <option value={"DecisionTreeClassifier"}>{"Decision Tree Clasifier"}</option>
+                <option value={"ARIMA"}>{"ARIMA"}</option>
             </select>
-            <p className="aggMethod">Aggregation method used: <b>{"method1"}</b></p>
+            <p className="aggMethod">Aggregation method used: <b>{aggMethod}</b></p>
             <label for="userSize" className="label">Expected Users' Size<span style={{ color: "red" }}>*</span></label><br />
             <select id="userSize" name="userSize" className="new-project-input" required>
                 <option value={"1"}>{"0-50"}</option>
             </select>
             <br /><br />
-            Number of dataset columns: <span style={{ color: "red" }}>*</span><input type="number" id="noOfCols" className="new-project-input noOfColumns" min={2} required onInput={(e) => {
-                if (e.target.value < 2) {
+            Number of dataset columns: <span style={{ color: "red" }}>*</span><input type="number" id="noOfCols" className="new-project-input noOfColumns" min={1} required onInput={(e) => {
+                if (e.target.value < 0) {
                     e.target.value = null;
                 }
             }}></input>
         </div><br />
         <p id="errMsg3" className="errMsg" hidden></p>
+        <p id="noteMsg" className="noteMsg">{splNote}</p>
         <p className="new-project-p-btn" onClick={() => {
             if (document.getElementById("projectType").value === null || document.getElementById("projectType").value === ""
                 || document.getElementById("userSize").value === null || document.getElementById("userSize").value === ""
@@ -165,10 +187,16 @@ export default function NewProject(props) {
                 document.getElementById("errMsg3").innerText = "Please fill all the required values!";
                 document.getElementById("errMsg3").hidden = false;
             } else {
-                document.getElementById("errMsg3").innerText = "";
-                document.getElementById("errMsg3").hidden = true;
-                setProjectObj({ ...projectObj, projectType: document.getElementById("projectType").value, userSize: parseInt(document.getElementById("userSize").value), noOfCols: document.getElementById("noOfCols").value })
-                handleNext();
+                if (document.getElementById("noOfCols").value < 1) {
+                    document.getElementById("errMsg3").innerText = "The Minimum value for number of columns is 1!";
+                    document.getElementById("errMsg3").hidden = false;
+                }
+                else {
+                    document.getElementById("errMsg3").innerText = "";
+                    document.getElementById("errMsg3").hidden = true;
+                    setProjectObj({ ...projectObj, projectType: document.getElementById("projectType").value, userSize: parseInt(document.getElementById("userSize").value), noOfCols: document.getElementById("noOfCols").value })
+                    handleNext();
+                }
             }
         }}>Next</p>
     </div>;
@@ -180,19 +208,21 @@ export default function NewProject(props) {
             <h3>Schedule</h3>
 
 
-            <h4 className="label" style={{ marginBottom: "-15px" }}>Model reception and aggregation duration</h4><br />
+            <h4 className="label" style={{ marginBottom: "-15px" }}>Model Reception {modelType !== "ARIMA" ? <>and aggregation duration</> : (<></>)}</h4><br />
             Start recieving at &nbsp; &nbsp; <select id="startAtTime" name="startAtTime" className="new-project-input smallInput" onChange={(e) => { setStartTime(parseInt(e.target.value)) }} value={startTime} required>
                 {hourDropdown()}
-            </select> &nbsp; &nbsp; and finish process by &nbsp; &nbsp; <select disabled id="endTime" name="endTime" className="new-project-input smallInput">
-                <option>{((startTime + 4) % 24 < 10 ? "0" + ((startTime + 4) % 24) : ((startTime + 4) % 24)) + ":00"}</option>
             </select>
+            &nbsp; &nbsp;
+            {/* <>and finish process by &nbsp; &nbsp;</> <select disabled id="endTime" name="endTime" className="new-project-input smallInput">
+                <option>{((startTime + 4) % 24 < 10 ? "0" + ((startTime + 4) % 24) : ((startTime + 4) % 24)) + ":00"}</option>
+            </select> */}
 
-            <p className="aggMethod">75% of above duration is used for model reception and 25% for aggregation </p>
+            {modelType !== "ARIMA" ? (<p className="aggMethod">Aggregation duration varies from model to model. </p>) : (<></>)}
 
-            <br /><br />
+            <br />
             Trigger once every &nbsp; <select id="triggerEvery" name="triggerEvery" className="new-project-input smallInput" required onChange={(e) => { setTriggerEvery(parseInt(e.target.value)) }}>
                 {triggerEveryDropdown()}
-            </select> &nbsp; months
+            </select> &nbsp; month/s
         </div>
         <p className="new-project-p-btn" onClick={() => {
 

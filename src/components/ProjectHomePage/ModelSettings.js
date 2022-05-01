@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import axios  from 'axios';
+import axios from 'axios';
 import "./modelSettings.css"
 import Modal from "../../components/ProjectHomePage/Modal";
 import ModelTrigger from '../../components/ProjectHomePage/ModelTrigger';
@@ -9,12 +9,12 @@ import ModelTrigger from '../../components/ProjectHomePage/ModelTrigger';
 
 
 export default function ModelSettings() {
-    
-    const[details,setDetails]=useState([]);
-    const[maxUser,setMaxUser]=useState('');
-    const[trigger,setTrigger]=useState('')
-    const[model,setModel]=useState([]);
-    const[input,setInput]=useState('')
+
+    const [details, setDetails] = useState([]);
+    const [maxUser, setMaxUser] = useState('');
+    const [trigger, setTrigger] = useState('')
+    const [model, setModel] = useState([]);
+    const [input, setInput] = useState('')
     const [type, setType] = useState('')
     const [label, setLabel] = useState('')
     const [modalOpen, setModalOpen] = useState(false);
@@ -22,45 +22,44 @@ export default function ModelSettings() {
 
     const params = useParams();
 
-    useEffect(()=>{
-        async function getModelDetails(){
-            const data= await fetch("https://fedstation.herokuapp.com/getProject/"+params.id)
-            .then(res=>res.json())
-            .then((data)=>{
-                setDetails(data);
-                setModel(data.modelType)
-                setMaxUser(data.maxUsersSize)
-                setTrigger(data.triggerEvery)
-                setInput(data.triggerEvery)
-                if(data.maxUsersSize===1){
-                    setLabel("0-50")
-                }
-                else if(data.maxUsersSize===2){
-                    setLabel("50-100")
-                }
-                else{
-                    setLabel("100-150")
-                }
-            });
+    useEffect(() => {
+        function getModelDetails() {
+            fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
+                .then(res => res.json())
+                .then((data) => {
+                    setDetails(data);
+                    setModel(data.modelType)
+                    setMaxUser(data.maxUsersSize)
+                    setTrigger(data.triggerEvery)
+                    setInput(data.triggerEvery)
+                    if (data.maxUsersSize === 1) {
+                        setLabel("0-50")
+                    }
+                    else if (data.maxUsersSize === 2) {
+                        setLabel("50-100")
+                    }
+                    else {
+                        setLabel("100-150")
+                    }
+                });
         }
         getModelDetails();
-        
-    },[]);
-    console.log(input)
 
-    async function handleChange(){
+    }, []);
+
+    async function handleChange() {
         console.log(document.getElementById("editField").value)
         if (document.getElementById("editField").value === null || document.getElementById("editField").value === "") {
             document.getElementById("editErr").innerText = "Please fill all the required values!";
             document.getElementById("editErr").hidden = false;
             console.log(document.getElementById("editField").value)
-            
+
         }
         else if (Number(document.getElementById("editField").value) < 1) {
             document.getElementById("editErr").innerText = "Please enter valid number!";
             document.getElementById("editErr").hidden = false;
         }
-        else{
+        else {
             document.getElementById("editErr").innerText = "";
             document.getElementById("editErr").hidden = true;
 
@@ -70,18 +69,19 @@ export default function ModelSettings() {
             // })
 
             axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
-            .then(res => {
-                setMaxUser(type)
-                // setLabel(label)
-            })
+                .then(res => {
+                    setMaxUser(type)
+                    // setLabel(label)
+                })
             console.log(label)
-            await fetch("https://fedstation.herokuapp.com/getProject/"+params.id)
-            .then(res=>res.json())
-            .then((data)=>{
-                setDetails(data);
-                setModel(data.modelType)
-                setMaxUser(data.maxUsersSize)
-                setTrigger(input)})
+            await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
+                .then(res => res.json())
+                .then((data) => {
+                    setDetails(data);
+                    setModel(data.modelType)
+                    setMaxUser(data.maxUsersSize)
+                    setTrigger(input)
+                })
 
             alert("Changes Saved")
         }
@@ -93,17 +93,33 @@ export default function ModelSettings() {
         //     document.getElementById("editErr").innerText = "";
         //     document.getElementById("editErr").hidden = true;
 
-            
+
         // }
-        
-        
+
+
     }
-    
+
+    const renderTime = (time) => {
+
+        if (time === 0) {
+            return "12:00 AM"
+        }
+        else if (time < 12) {
+            return time + ":00 AM"
+        }
+        else if (time === 12) {
+            return "12:00 PM"
+        }
+        else {
+            return (time - 12) + ":00 PM"
+        }
+    }
+
     return (
         <div className='modelSetting'>
             <h3>Model Settings</h3>
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
-            <hr/>
+            <hr />
             {/* <div className='modelSettingItems'>
                     <div className='modelDetails'>
                         <div className='title'>
@@ -123,15 +139,15 @@ export default function ModelSettings() {
                             {details.recieveAt ?<div>
                                 <p>{details.recieveAt}</p><br/>
                             </div>  : <span></span>} */}
-                            {/* <div className='editable'>
+            {/* <div className='editable'>
                                 <p>{maxUser}</p>
                                 <button className='edit' type='button' onClick={() => setModalOpen(true)}>Edit</button>
                             </div><br/> */}
-                            {/* <div className='editable'>
+            {/* <div className='editable'>
                                 <p>{trigger}</p>
                                 <button className='edit' type='button' onClick={() => setModalTriggerEveryOpen(true)}>Edit</button>
                             </div><br/> */}
-                            {/* <br/><div>
+            {/* <br/><div>
                                 <input type="number" id="editField" className='editField' value={input} style={{width:"50px"}} onChange={(e)=>{
                                     if(e.target.value===""||(/[0-9]/)){
                                         setInput(e.target.value) 
@@ -160,58 +176,60 @@ export default function ModelSettings() {
                     
             </div> */}
             <div className='modelSettingItems'>
-                <div style={{display:"flex",alignItems:"center"}}>
-                    <p style={{marginLeft:"20px"}}>Model</p>
-                    <p style={{marginLeft:"475px"}}>{model.model}</p>
-                </div>  
+                <div style={{ display: "flex", alignItems: "center", width: "50%", justifyContent: "space-between" }}>
+                    <p style={{ marginLeft: "20px" }}>Model</p>
+                    <p>{model.model}</p>
+                </div>
 
-                <div style={{display:"flex",alignItems:"center",marginTop:"30px"}}>
-                    <p style={{marginLeft:"20px"}}>Aggregation type</p>
-                    <p style={{marginLeft:"400px"}}>{model.aggregationType}</p>
-                </div>   
-                
-                <div style={{display:"flex",alignItems:"center",marginTop:"30px"}}>
-                    <p style={{marginLeft:"20px"}}>Start at time </p>
-                    <p style={{marginLeft:"447px"}}>{details.startAtTime}</p>
-                </div>   
-                
-                <div style={{display:"flex",alignItems:"center",marginTop:"20px"}}>
-                    {details.recieveAt ? <div><p style={{marginLeft:"20px"}}>Recieve at time</p></div> : <span></span>}
-                    {details.recieveAt ?<div>
-                                            <p style={{marginLeft:"450px"}}>{details.recieveAt}</p>
-                                        </div>  : <span></span>}
-                </div>  
+                {model.model !== "ARIMA" ? (<div style={{ display: "flex", alignItems: "center", marginTop: "30px", width: "50%", justifyContent: "space-between" }}>
+                    <p style={{ marginLeft: "20px" }}>Aggregation type</p>
+                    <p style={{ marginLeft: "400px" }}>{model.aggregationType}</p>
+                </div>) : (<></>)}
 
-                <div style={{display:"flex",alignItems:"center",marginTop:"20px"}}>
-                    <p style={{marginLeft:"20px"}}>Trigger Every</p>
-                    <input type="number" id="editField" className='editField' value={input} style={{width:"60px",marginLeft:"427px", padding:"0px 12px"}} onChange={(e)=>{
-                                    if(e.target.value===""||(/[0-9]/)){
-                                        setInput(e.target.value) 
-                                    }
-                                    }}/>
-                </div>   
+                <div style={{ display: "flex", alignItems: "center", marginTop: "30px", width: "50%", justifyContent: "space-between" }}>
+                    <p style={{ marginLeft: "20px" }}>Start at time </p>
+                    <p>
+                        {renderTime(parseInt(details.startAtTime))}
+                    </p>
+                </div>
 
-                <div style={{display:"flex",alignItems:"center",marginTop:"40px"}}>
-                    <p style={{marginLeft:"20px"}}>Max Users size</p>
+                {/* {model.model !== "ARIMA" ? (<div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+                    {details.recieveAt ? <div><p style={{ marginLeft: "20px" }}>Recieve at time</p></div> : <span></span>}
+                    {details.recieveAt ? <div>
+                        <p style={{ marginLeft: "450px" }}>{details.recieveAt}</p>
+                    </div> : <span></span>}
+                </div>) : (<></>)} */}
+
+                <div style={{ display: "flex", alignItems: "center", marginTop: "30px", width: "50%", justifyContent: "space-between" }}>
+                    <p style={{ marginLeft: "20px" }}>Trigger Every</p>
+                    <span style={{ display: "flex", width: "15%", height: "100%", justifyContent: "space-between", alignItems: "center" }}><input type="number" id="editField" className='editField' value={input} style={{ display: "flex", width: "45%", fontSize: "1rem", lineHeight: "1.2rem" }} onChange={(e) => {
+                        if (e.target.value === "" || (/[0-9]/)) {
+                            setInput(e.target.value)
+                        }
+                    }} /> months</span>
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center", marginTop: "30px", width: "50%", justifyContent: "space-between", height: "30px" }}>
+                    <p style={{ marginLeft: "20px" }}>Max Users size</p>
                     <select id='selectField' className='editField' value={type} onChange={(e) => {
-                                    let index = e.nativeEvent.target.selectedIndex;
-                                    let label = e.nativeEvent.target[index].text;
-                                    let value = e.target.value;
-                                    setType(value)
-                                    setLabel(label)
-                                }} style={{ width: 'fit-content',height:"fit-content",padding:"17px",border:"none",fontSize:"1.5rem",marginLeft:"415px"}}>
-                                    <option style={{padding:"10px"}} value={maxUser}>{label}</option>
-                                    <option value='1'>{"0-50"}</option>
-                                    <option value='2'>{"50-100"}</option>
-                                    <option value='3'>{"100-150"}</option>
-                                </select>
-                </div>    
+                        let index = e.nativeEvent.target.selectedIndex;
+                        let label = e.nativeEvent.target[index].text;
+                        let value = e.target.value;
+                        setType(value)
+                        setLabel(label)
+                    }} style={{ border: "none", fontSize: "1rem", height: "100%", width: "13%", cursor: "pointer" }}>
+                        <option style={{ padding: "10px" }} value={maxUser}>{label}</option>
+                        <option value='1'>{"0-50"}</option>
+                        <option value='2'>{"50-100"}</option>
+                        <option value='3'>{"100-150"}</option>
+                    </select>
+                </div>
             </div>
-            <div style={{marginTop:"40px"}}>
-                <p style={{ marginLeft:"40px"}} id="editErr" className='editErrMsg' hidden={true}></p>
-                <input className='edit' style={{marginLeft:"40px",marginTop:"0px"}} type="submit" value="Save" onClick={handleChange}/>
+            <div style={{ marginTop: "40px" }}>
+                <p style={{ marginLeft: "40px" }} id="editErr" className='editErrMsg' hidden={true}></p>
+                <input className='edit' style={{ marginLeft: "40px", marginTop: "0px" }} type="submit" value="Save" onClick={handleChange} />
             </div>
-            
+
             {/* <h3>Delete Model</h3>
             <div className='modelSettingItems' style={{border:"2px solid #E7411B"}}>
                 <div className="modelSettingContainer">
@@ -234,7 +252,7 @@ export default function ModelSettings() {
                                     }
 
             */}
-            
+
 
             {modalOpen && <Modal setOpenModal={setModalOpen} setMaxUser={setMaxUser} />}
             {modalTriggerEveryOpen && <ModelTrigger setOpenModal={setModalTriggerEveryOpen} setTrigger={setTrigger} />}

@@ -1,4 +1,5 @@
-import { PanoramaSharp } from '@material-ui/icons';
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { FileCopyOutlined, AssignmentOutlined } from '@material-ui/icons'
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
@@ -8,14 +9,17 @@ export default function ProjectSettings() {
 
     const [details, setDetails] = useState({});
     const [user, setUser] = useState({});
-    const [description,setDescription]=useState('');
+    const [description, setDescription] = useState('');
     const [disabled, setDisabled] = useState(false);
-    const [downUrl,setDownUrl]=useState({})
+    const [isCopied, setIsCopied] = useState(false);
+    const [apiPath, setApiPath] = useState(null);
+    const [modelType, setModelType] = useState(null);
+    const [downUrl, setDownUrl] = useState({})
     const params = useParams();
 
     useEffect(() => {
-        async function getProjectDetails() {
-            const data = await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
+        function getProjectDetails() {
+            fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
                 .then(res => res.json())
                 .then((data) => {
                     setDetails(data);
@@ -23,44 +27,48 @@ export default function ProjectSettings() {
                     setDescription(data.projectDescription)
                     setDisabled(data.isProjectDisabled)
                     console.log(data)
+                    setModelType(data.modelType.model)
+                    setApiPath("https://fedstation-ml-service.herokuapp.com/specialCaseTimeSeries/" + data.id + "/predict/")
                 });
         }
-        axios.get("http://127.0.0.1:8000/dowloadGlobalModelFromFirebase/k_k")
-        .then((data)=>{
-            setDownUrl(data.data)
-        })
-        .catch(e=>{
-            console.log(e)
-        })
         getProjectDetails();
-        
+        if (modelType !== 'ARIMA') {
+            axios.get("http://127.0.0.1:8000/dowloadGlobalModelFromFirebase/k_k")
+                .then((data) => {
+                    setDownUrl(data.data)
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        }
+
     }, []);
 
     async function disableProject() {
-        if (disabled == false) {
-            const res = await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value="+true);
+        if (disabled === false) {
+            await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + true);
             setDisabled(true)
 
         }
         else {
-            const res = await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value="+false);
+            await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + false);
             setDisabled(false)
         }
 
 
     }
-    async function handleChanges(){
+    async function handleChanges() {
         console.log(document.getElementById("editField").value)
         if (document.getElementById("editField").value === null || document.getElementById("editField").value === "") {
             document.getElementById("editErr").innerText = "Please fill all the required values!";
             document.getElementById("editErr").hidden = false;
             console.log(document.getElementById("editField").value)
-            
+
         }
-        else{
+        else {
             document.getElementById("editErr").innerText = "";
             document.getElementById("editErr").hidden = true;
-            axios.patch("http://fedstation.herokuapp.com/updateDescription?projectId=" + params.id + "&description="+ description)
+            axios.patch("http://fedstation.herokuapp.com/updateDescription?projectId=" + params.id + "&description=" + description)
 
             await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
                 .then(res => res.json())
@@ -69,32 +77,33 @@ export default function ProjectSettings() {
                     setUser(data.user);
                     setDescription(description)
                 });
-        
+
             alert("Changes Saved")
         }
-        
+
     }
-    
-    async function downloadGlbMdl(){
-        
-        console.log(downUrl,"this is url") 
-       
+
+    async function downloadGlbMdl() {
+
+        console.log(downUrl, "this is url")
+
         var link = document.createElement("a");
-        
+
         link.href = downUrl;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        
-        
+
+
     }
 
     return (
 
         <div className='projectSetting'>
-            <h4>General</h4>
+            <h3>Project Settings</h3>
+            <h5 style={{ marginTop: "10px" }}>General</h5>
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
-            <hr/>
+            <hr />
 
             <div className='projectSettingItems'>
                 {/* <div className='projectDetails'>
@@ -110,8 +119,8 @@ export default function ProjectSettings() {
                         <p>{details.id}</p><br />
                          */}
 
-                        {/* <p>{details.projectDescription}</p><br /> */}
-                        {/* <p>{user.fname + " " + user.lname}</p><br /><br/><br/>
+                {/* <p>{details.projectDescription}</p><br /> */}
+                {/* <p>{user.fname + " " + user.lname}</p><br /><br/><br/>
                         <div>
                         <textarea style={{width:"200px",height:"80px"}}  value={description} onChange={(e)=>{
                             setDescription(e.target.value)
@@ -120,45 +129,45 @@ export default function ProjectSettings() {
                         </div><br />
                     </div>
                 </div> */}
-                <div style={{display:"flex",alignItems:"center"}}>
-                    <p style={{marginLeft:"20px"}}>Project Name</p>
-                    <p style={{marginLeft:"440px"}}>{details.projectName}</p>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <p style={{ marginLeft: "20px" }}>Project Name</p>
+                    <p style={{ marginLeft: "440px" }}>{details.projectName}</p>
                 </div>
 
-                <div style={{display:"flex",alignItems:"center",marginTop:"20px"}}>
-                    <p style={{marginLeft:"20px"}}>Project ID</p>
-                    <p style={{marginLeft:"465px"}}>{details.id}</p>
+                <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+                    <p style={{ marginLeft: "20px" }}>Project ID</p>
+                    <p style={{ marginLeft: "465px" }}>{details.id}</p>
                 </div>
 
-                <div style={{display:"flex",alignItems:"center",marginTop:"20px"}}>
-                    <p style={{marginLeft:"20px"}}>Owner</p>
-                    <p style={{marginLeft:"488px"}}>{user.fname + " " + user.lname}</p>
+                <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+                    <p style={{ marginLeft: "20px" }}>Owner</p>
+                    <p style={{ marginLeft: "488px" }}>{user.fname + " " + user.lname}</p>
                 </div>
 
-                <div style={{display:"flex",alignItems:"",marginTop:"20px"}}>
-                    <p style={{marginLeft:"20px",marginTop:"20px"}}>Project Description</p>
-                    <textarea style={{width:"200px",height:"80px",marginLeft:"407px",borderRadius:"5px"}}  value={description} onChange={(e)=>{
-                            setDescription(e.target.value)
-                        }} /> 
-                    <div style={{marginTop:"50px",marginRight:"20px"}}>
-                        <p style={{ marginLeft:"0px"}} id="editErr" className='editErrMsg' hidden={true}></p>
-                        <input type="button" id='editField' className='save' value="Save" style={{marginRight:"40px"}} onClick={handleChanges}/>
+                <div style={{ display: "flex", marginTop: "20px" }}>
+                    <p style={{ marginLeft: "20px" }}>Project Description</p>
+                    <textarea style={{ width: "300px", height: "50px", marginLeft: "407px", borderRadius: "5px" }} value={description} onChange={(e) => {
+                        setDescription(e.target.value)
+                    }} />
+                    <div style={{ marginTop: "15px", marginRight: "20px" }}>
+                        <p style={{ marginLeft: "0px" }} id="editErr" className='editErrMsg' hidden={true}></p>
+                        <input type="button" id='editField' className='save' value="Save" style={{ marginRight: "40px" }} onClick={handleChanges} />
                         {/* <button id='editField' className='save' style={{marginRight:"40px"}} onClick={handleChanges}>Save</button> */}
                     </div>
                 </div>
-                
+
             </div>
-            <h4>Disable Project</h4>
+            <h5 style={{ marginTop: "20px" }}>Disable Project</h5>
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
-            <hr/>
+            <hr />
             <div className='projectSettingItems'>
                 <div className="projectSettingContainer">
                     <div>
-                        <strong style={{  fontSize: "15px" ,color:"#e7411b", marginLeft:"20px"}}>Disable this project</strong>
+                        <strong style={{ fontSize: "15px", color: "#e7411b", marginLeft: "20px" }}>Disable this project</strong>
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
                     </div>
 
-                    <button type="button" className='delete' style={{marginLeft:"400px"}} onClick={disableProject}>{disabled ? "Enable" : "Disable"}</button>
+                    <button type="button" className='delete' style={{ marginLeft: "400px" }} onClick={disableProject}>{disabled ? "Enable" : "Disable"}</button>
                 </div>
             </div>
             {/* <h3>Delete Project</h3>
@@ -172,19 +181,32 @@ export default function ProjectSettings() {
                     <button className='delete' onClick={deleteProject}>Delete</button>
                 </div>
             </div> */}
-            <h4>Global Model</h4>
+            <h5 style={{ marginTop: "20px" }}>{details && details.modelType && details.modelType.model !== "ARIMA" ? ('Global Model') : ('Predictions')}</h5>
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
-            <hr/>
-            <div className='projectSettingItems'>
+            <hr />
+            {modelType && modelType !== "ARIMA" && <div className='projectSettingItems'>
                 <div className="projectSettingContainer">
                     <div>
-                        <strong style={{  fontSize: "15px" ,color:"#",marginLeft:"20px"}}>Download Global Model</strong>
+                        <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Download Global Model</strong>
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
                     </div>
-                    <button type='button' className='buttons' style={{marginLeft:"370px"}} onClick={downloadGlbMdl}>Download</button>
-                    
+                    <button type='button' className='buttons' style={{ marginLeft: "370px" }} onClick={downloadGlbMdl}>Download</button>
+
                 </div>
-            </div>
+            </div>}
+
+            {modelType && modelType === "ARIMA" && <div className='projectSettingItems'>
+                <div className="projectSettingContainer">
+                    <div>
+                        <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Copy the API End Point for Predictions</strong>
+                        <span style={{ fontSize: "14px", display: "block", marginLeft: "20px" }}>Please refer to docs on usage of the endpoint</span>
+                    </div>
+                    <CopyToClipboard style={{ marginLeft: "370px" }} onCopy={() => setIsCopied(true)} className="copy" text={apiPath}>
+                        <button type="button" aria-label='copy to clipboard button' className='copy'>{isCopied ? <AssignmentOutlined /> : <FileCopyOutlined />}</button>
+                    </CopyToClipboard>
+
+                </div>
+            </div>}
         </div>
     )
 }
