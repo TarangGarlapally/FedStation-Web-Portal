@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import Sidebar from "../sidebar/Sidebar";
-import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { getProjectDetails } from "../../ApiCalls"
 
 import './ProjectHomePage.css';
