@@ -23,7 +23,7 @@ const getProjectDetails = (projectId) => {
 }
 
 const getPublishedModels = () => {
-    return axios.get("http://fedstation.herokuapp.com/publishedModels")
+    return axios.get("http://fedstation.herokuapp.com/getMarketplaceModels")
 }
 
 export {
