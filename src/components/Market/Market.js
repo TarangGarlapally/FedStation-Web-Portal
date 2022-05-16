@@ -3,6 +3,8 @@ import "./Market.css"
 import Modal from 'react-modal';
 import { Close } from '@material-ui/icons';
 import {getPublishedModels} from '../../ApiCalls'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { FileCopyOutlined, AssignmentOutlined } from '@material-ui/icons'
 
 const customStyles = {
     overlay: {
@@ -51,7 +53,9 @@ export default function Market() {
     const [filteredModels, setFilteredModels] = useState([])
     const [search, setSearch] = useState("")
     const [modalIsOpen, setIsOpen] = useState(false)
-    const [selectedModel, setSelectedModel] = useState({})
+    const [isCopied, setIsCopied] = useState(false);
+    const [apiPath, setApiPath] = useState(null);
+    const [selectedModel, setSelectedModel] = useState(null)
 
 
 
@@ -130,11 +134,15 @@ export default function Market() {
         return filteredModels.map((model) => {
             return (
                 <tr key={model.id}>
-                    <td className="published-model-name">{model.name}</td>
-                    <td className="published-model-creator">{model.createdBy}</td>
-                    <td className="published-model-model">{model.modelType}</td>
+                    <td className="published-model-name">{model.marketplaceItemName}</td>
+                    <td className="published-model-creator">{model.user.fname + " " + model.user.lname + (model.user.org !== "" ? ", " + model.user.org : "")}</td>
+                    <td className="published-model-model">{model.modelType.model}</td>
                     <td className="published-model-details">
-                        <button onClick={() => { setSelectedModel(model); setIsOpen(true) }}>Details</button>
+                        <button onClick={() => { 
+                            setSelectedModel(model); 
+                            setIsOpen(true);
+                            setApiPath("https://fedstation-ml-service.herokuapp.com/specialCaseTimeSeries/" + selectedModel.id + "/predict/") 
+                            }}>Details</button>
                     </td>
                 </tr>
             )
@@ -185,7 +193,7 @@ export default function Market() {
                             </tbody>
                         </table>
                     </div>)}
-                    <Modal
+                    {selectedModel != null && <Modal
                         isOpen={modalIsOpen}
                         onRequestClose={() => setIsOpen(false)}
                         style={customStyles}
@@ -194,7 +202,7 @@ export default function Market() {
                         <div className='publish-model'>
                             <div className='publish-model-header'>
                                 <div className='publish-model-header-left'>
-                                    {selectedModel.name}
+                                    {selectedModel.marketplaceItemName}
                                 </div>
                                 <div className='publish-model-header-right'>
                                     <Close onClick={() => setIsOpen(false)} className="close-logo" />
@@ -206,7 +214,7 @@ export default function Market() {
                                         Description
                                     </div>
                                     <div className='publish-model-body-description-content'>
-                                        {selectedModel.description}
+                                        {selectedModel.marketplaceItemDescription}
                                     </div>
                                 </div>
                                 <div className='publish-model-body-other'>
@@ -214,7 +222,7 @@ export default function Market() {
                                         DEVELOPED BY:
                                     </div>
                                     <div className='publish-model-body-other-content'>
-                                        {selectedModel.createdBy}
+                                        {selectedModel.user.fname + " " + selectedModel.user.lname + (selectedModel.user.org !== "" ? ", "+selectedModel.user.org : "")}
                                     </div>
                                 </div>
                                 <div className='publish-model-body-other'>
@@ -222,7 +230,7 @@ export default function Market() {
                                         MODEL TYPE:
                                     </div>
                                     <div className='publish-model-body-other-content'>
-                                        {selectedModel.modelType}
+                                        {selectedModel.modelType.model}
                                     </div>
                                 </div>
                                 <div className='publish-model-body-other'>
@@ -230,15 +238,19 @@ export default function Market() {
                                         CONTACT:
                                     </div>
                                     <div className='publish-model-body-other-content'>
-                                        {selectedModel.contact}
+                                        {selectedModel.marketplaceItemContact}
                                     </div>
                                 </div>
                             </div>
                             <div className='publish-model-footer'>
-                                <button className='publish-model-footer-btn'>Download Model</button>
+                               {selectedModel.modelType.aggregationType !== null ? (<button className='publish-model-footer-btn'>Download Model</button>) : (
+                                    <CopyToClipboard style={{ marginLeft: "370px" }} onCopy={() => setIsCopied(true)} className="copy" text={apiPath}>
+                                        <button type="button" aria-label='copy to clipboard button' className='copy'>{isCopied ? <AssignmentOutlined /> : <FileCopyOutlined />}</button>
+                                    </CopyToClipboard>
+                               )}
                             </div>
                         </div>
-                    </Modal>
+                    </Modal>}
                 </div>
             </div>
         </div>
