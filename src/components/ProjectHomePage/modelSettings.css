@@ -70,6 +70,25 @@
   color: #ffffff;
   background:green;
 }
+.disableBtn{
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 10px;
+  /* height: 15px; */
+  line-height: 15px;
+  color: green;
+  /* font-family: Open Sans; */
+  width: fit-content;
+  font-size: 20px;
+  font-weight: 100;
+  padding: 10px;
+  background-color: #F6F8FA;
+  border: solid silver 1px; 
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;  
+}
 
 .modelSettingContainer {
   /* display: flex;

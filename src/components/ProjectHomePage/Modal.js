@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./modal.css";
 
-export default function Modal({ setOpenModal,model }) {
+export default function Modal({ setOpenModal,model,setPublished }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState('')
     const [contact, setContact] = useState("");
     // const [model, setModel] = useState([]);
     const[note,setNote]=useState("")
+    const[placeholder,setPlaceholder]=useState("")
 
     const params = useParams();
 
@@ -17,9 +18,11 @@ export default function Modal({ setOpenModal,model }) {
             // console.log(model.aggregationType)
             if(model.aggregationType=="Voting"){
                 setNote("Your freshly generated model will be readily published")
+                setPlaceholder("Write the description of your model")
             }
             else if(model.aggregationType==null){
                 setNote("Your API link will be avialable to be copied")
+                setPlaceholder("Write the description of your model and Please also describe API usage")
             }
         
         
@@ -73,17 +76,27 @@ export default function Modal({ setOpenModal,model }) {
         }
         const input=JSON.stringify(value)
         if(title && description && contact){
-            document.getElementById("editErr").innerText = "";
-            document.getElementById("editErr").hidden = true;
+            if(contact.length>10){
+                document.getElementById("editErr1").innerText = "contact number should be 10 digits !";
+                document.getElementById("editErr1").hidden = false;
+            }
+            else{
+                document.getElementById("editErr").innerText = "";
+                document.getElementById("editErr").hidden = true;
             //console.log(value)
-            axios.patch("http://fedstation.herokuapp.com/publishToMarketplace",input)
-            .then(response=>{
-                console.log(response)
-            })
-            .catch(error=>{
-                console.log(error)
-            })
-            setOpenModal(false)
+                axios.post("http://fedstation.herokuapp.com/publishToMarketplace",value)
+                    .then(response=>{
+                        setPublished(true)
+                        console.log(response)
+                    })
+                    .catch(error=>{
+                        console.log(error)
+                })
+                setOpenModal(false)
+            }
+            
+            
+            
         }
         else{
             document.getElementById("editErr1").innerText = "Please fill all the required values !";
@@ -116,15 +129,18 @@ export default function Modal({ setOpenModal,model }) {
                     }}/>
                     
                     <h5 style={{marginTop:"15px"}}>Description</h5>
-                    <h7>Write the description of your model</h7>
-                    <textarea style={{marginTop:"5px",height:"120px",width:"300px"}} id='descr' onChange={(e)=>{
+                    {/* <h7>Write the description of your model</h7> */}
+                    <textarea style={{marginTop:"5px",height:"120px",width:"300px"}} placeholder={placeholder} id='descr' onChange={(e)=>{
                         setDescription(e.target.value)
                     }}/>
                    
                     <h5 style={{marginTop:"15px"}}>Contact</h5>
                     <h7>mention your contact address so that user can contact you</h7>
-                    <input type="text" style={{marginTop:"5px",height:"43px",width:"300px"}} id='contact' onChange={(e)=>{
-                        setContact(e.target.value)
+                    <input type="number" style={{marginTop:"5px",height:"43px",width:"300px"}} id='contact' onChange={(e)=>{
+                        if(e.target.value===""||(/[0-9]/)){
+                            setContact(e.target.value)
+                        }
+                        
                     }}/>
                     
                     <p style={{ marginTop: "5px" }}>Note : {note}</p>

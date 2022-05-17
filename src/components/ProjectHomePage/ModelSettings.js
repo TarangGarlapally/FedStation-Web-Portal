@@ -17,6 +17,7 @@ export default function ModelSettings() {
     const [input, setInput] = useState('')
     const [type, setType] = useState('')
     const [label, setLabel] = useState('')
+    const[published,setPublished]=useState()
     const [modalOpen, setModalOpen] = useState(false);
     const [modalTriggerEveryOpen, setModalTriggerEveryOpen] = useState(false);
 
@@ -32,6 +33,8 @@ export default function ModelSettings() {
                     setMaxUser(data.maxUsersSize)
                     setTrigger(data.triggerEvery)
                     setInput(data.triggerEvery)
+                    setPublished(data.isPublished)
+                    
                     if (data.maxUsersSize === 1) {
                         setLabel("0-50")
                     }
@@ -44,10 +47,10 @@ export default function ModelSettings() {
                 });
         }
         getModelDetails();
-        //console.log(note)
-
+        
     }, []);
-
+    
+    //console.log(published)
     async function handleChange() {
         console.log(document.getElementById("editField").value)
         if (document.getElementById("editField").value === null || document.getElementById("editField").value === "") {
@@ -235,7 +238,8 @@ export default function ModelSettings() {
             <hr />
             <div>
                 <strong style={{ fontSize: "15px", marginLeft: "20px" }}>Publish model to market place by entering the details of the model</strong>
-                <button type="button" className='publishBtn' style={{ marginLeft: "370px" }} onClick={() => setModalOpen(true)}>Publish</button>
+                {published ?(<button type="button" className='disableBtn' disabled style={{ marginLeft: "200px" }} >Already Published</button>):(<button type="button" className='publishBtn' style={{ marginLeft: "200px" }} onClick={() => setModalOpen(true)}>Publish</button>)}
+                
             </div>
             {/* <h3>Delete Model</h3>
             <div className='modelSettingItems' style={{border:"2px solid #E7411B"}}>
@@ -261,7 +265,7 @@ export default function ModelSettings() {
             */}
 
 
-            {modalOpen && <Modal setOpenModal={setModalOpen} model={model} />}
+            {modalOpen && <Modal setOpenModal={setModalOpen} model={model} setPublished={setPublished}/>}
             {modalTriggerEveryOpen && <ModelTrigger setOpenModal={setModalTriggerEveryOpen} setTrigger={setTrigger} />}
         </div>
     )
