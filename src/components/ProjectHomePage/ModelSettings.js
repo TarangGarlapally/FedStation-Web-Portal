@@ -182,7 +182,7 @@ export default function ModelSettings() {
                     <p>{model.model}</p>
                 </div>
 
-                {model.model !== "ARIMA" ? (<div style={{ display: "flex", alignItems: "center", marginTop: "30px", width: "50%", justifyContent: "space-between" }}>
+                {model.aggregationType !== null ? (<div style={{ display: "flex", alignItems: "center", marginTop: "30px", width: "50%", justifyContent: "space-between" }}>
                     <p style={{ marginLeft: "20px" }}>Aggregation type</p>
                     <p style={{ marginLeft: "400px" }}>{model.aggregationType}</p>
                 </div>) : (<></>)}
@@ -194,7 +194,7 @@ export default function ModelSettings() {
                     </p>
                 </div>
 
-                {/* {model.model !== "ARIMA" ? (<div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+                {/* {model.aggregationType !== null ? (<div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
                     {details.recieveAt ? <div><p style={{ marginLeft: "20px" }}>Recieve at time</p></div> : <span></span>}
                     {details.recieveAt ? <div>
                         <p style={{ marginLeft: "450px" }}>{details.recieveAt}</p>
