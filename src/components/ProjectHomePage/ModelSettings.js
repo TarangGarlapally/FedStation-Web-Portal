@@ -17,6 +17,7 @@ export default function ModelSettings() {
     const [input, setInput] = useState('')
     const [type, setType] = useState('')
     const [label, setLabel] = useState('')
+    const[published,setPublished]=useState()
     const [modalOpen, setModalOpen] = useState(false);
     const [modalTriggerEveryOpen, setModalTriggerEveryOpen] = useState(false);
 
@@ -32,6 +33,8 @@ export default function ModelSettings() {
                     setMaxUser(data.maxUsersSize)
                     setTrigger(data.triggerEvery)
                     setInput(data.triggerEvery)
+                    setPublished(data.isPublished)
+                    
                     if (data.maxUsersSize === 1) {
                         setLabel("0-50")
                     }
@@ -44,9 +47,10 @@ export default function ModelSettings() {
                 });
         }
         getModelDetails();
-
+        
     }, []);
-
+    
+    //console.log(published)
     async function handleChange() {
         console.log(document.getElementById("editField").value)
         if (document.getElementById("editField").value === null || document.getElementById("editField").value === "") {
@@ -181,7 +185,7 @@ export default function ModelSettings() {
                     <p>{model.model}</p>
                 </div>
 
-                {model.model !== "ARIMA" ? (<div style={{ display: "flex", alignItems: "center", marginTop: "30px", width: "50%", justifyContent: "space-between" }}>
+                {model.aggregationType !== null ? (<div style={{ display: "flex", alignItems: "center", marginTop: "30px", width: "50%", justifyContent: "space-between" }}>
                     <p style={{ marginLeft: "20px" }}>Aggregation type</p>
                     <p style={{ marginLeft: "400px" }}>{model.aggregationType}</p>
                 </div>) : (<></>)}
@@ -193,7 +197,7 @@ export default function ModelSettings() {
                     </p>
                 </div>
 
-                {/* {model.model !== "ARIMA" ? (<div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+                {/* {model.aggregationType !== null ? (<div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
                     {details.recieveAt ? <div><p style={{ marginLeft: "20px" }}>Recieve at time</p></div> : <span></span>}
                     {details.recieveAt ? <div>
                         <p style={{ marginLeft: "450px" }}>{details.recieveAt}</p>
@@ -229,7 +233,14 @@ export default function ModelSettings() {
                 <p style={{ marginLeft: "40px" }} id="editErr" className='editErrMsg' hidden={true}></p>
                 <input className='edit' style={{ marginLeft: "40px", marginTop: "0px" }} type="submit" value="Save" onClick={handleChange} />
             </div>
-
+            <br/><br/>
+            <h3>Publish Model</h3>
+            <hr />
+            <div>
+                <strong style={{ fontSize: "15px", marginLeft: "20px" }}>Publish model to market place by entering the details of the model</strong>
+                {published ?(<button type="button" className='disableBtn' disabled style={{ marginLeft: "200px" }} >Already Published</button>):(<button type="button" className='publishBtn' style={{ marginLeft: "200px" }} onClick={() => setModalOpen(true)}>Publish</button>)}
+                
+            </div>
             {/* <h3>Delete Model</h3>
             <div className='modelSettingItems' style={{border:"2px solid #E7411B"}}>
                 <div className="modelSettingContainer">
@@ -254,7 +265,7 @@ export default function ModelSettings() {
             */}
 
 
-            {modalOpen && <Modal setOpenModal={setModalOpen} setMaxUser={setMaxUser} />}
+            {modalOpen && <Modal setOpenModal={setModalOpen} model={model} setPublished={setPublished}/>}
             {modalTriggerEveryOpen && <ModelTrigger setOpenModal={setModalTriggerEveryOpen} setTrigger={setTrigger} />}
         </div>
     )

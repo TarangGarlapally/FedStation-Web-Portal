@@ -1,0 +1,276 @@
+.market-container {
+  width: 100vw;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6%;
+  overflow-y: auto;
+}
+
+.market-body{
+  width: 97%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 3%;
+}
+
+
+.market-body-header{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.market-body-header-title{
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.market-body-header-subtitle{
+  font-size:1rem;
+}
+
+.market-body-content{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.market-body-content-search {
+  width: 20%;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #dfe1e6;
+  border-radius: 3px;
+  transition: background-color 0.2s ease-in-out 0s,
+              border-color 0.2s ease-in-out 0s;
+}
+
+.market-body-content-search:hover {
+    background-color: #ebecf0;
+}
+
+.market-body-content-search:focus-within {
+    background-color: white;
+    border-color: #4c9aff;
+}
+
+.market-body-content-search input {
+    width: 90%;
+    outline: 0;
+    border: 0;
+    background-color: transparent;
+}
+
+.market-body-content-list{
+  width: 95%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.published-model-container{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #dfe1e6;
+}
+
+.published-model-name{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.published-model-creator{
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.publsihed-model-model{
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.published-model-details{
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.published-model-details button{
+  width:50%;
+  height: 30px;
+  background-color: #2b6777;
+  color: #ffffff;
+  border-radius: 3px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.projects-list-full-table {
+  margin-top: 1%;
+}
+
+.table{
+  width: 100%;
+}
+
+.thead-project-name {
+  width: 35%;
+}
+
+.thead-project-owner {
+  width: 25%;
+}
+
+.thead-project-model {
+  width: 30%;
+}
+
+.table-project-thead {
+  border-bottom: 2px solid #dfe1e6 !important;
+  font-size: 1rem;
+}
+
+.table-project-tbody {
+  font-size: 0.9rem;
+}
+
+.table-project-tbody tr {
+  border-bottom: 1px solid #dfe1e6 !important;
+  height: 40px;
+}
+
+.table-project-tbody tr:hover {
+  background-color: #f7f7f7;
+}
+
+.publish-model{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.publish-model-header{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.publish-model-header-left{
+  width: 50%;
+  height: 100%;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.publish-model-header-right{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-logo{
+  width: 30px !important;
+  height: 30px !important;
+  margin-right: 10px;
+}
+
+.close-logo:hover{
+  cursor: pointer;
+}
+
+.publish-model-body{
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.publish-model-body-description{
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.publish-model-body-description-title{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    border-radius: 100px;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: rgb(155, 155, 155);
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+}
+
+.publish-model-body-description-content{
+  font-size: 0.9rem;
+  overflow-x: auto;
+}
+
+.publish-model-body-other{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.publish-model-body-other-title{
+  font-size: 0.7rem;
+  font-weight: bold;
+  width: 15%;
+  margin-right: 2%;
+}
+
+.publish-model-body-other-content{
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.publish-model-footer{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.publish-model-footer-btn{
+  width: 20%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background-color: #2b6777;
+  color: #ffffff;
+}

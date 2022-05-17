@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import logo from "../../assets/dummy_logo.jpg"
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate, Link, NavLink } from "react-router-dom"
 import { signInWithGoogle, logout } from "../../firebase"
 import Modal from 'react-modal';
 import { createUser } from "../../ApiCalls"
@@ -67,9 +67,10 @@ export default function NavBar() {
                     {/* <a href="https://www.vectorstock.com/royalty-free-vector/f-letter-logo-icon-mark-vector-23741090">Vector image by VectorStock / buqancreative</a> */}
                 </div>
                 <button className="nav-button-normal">Fed Station</button>
-                <Link to="/home" className='nav-button'>Home</Link>
+                <NavLink to="/home" className={({ isActive }) => (isActive ? 'nav-button nav-button-active' : 'nav-button')}>Home</NavLink>
                 <a href="/home#usecases" className='nav-button'>Use Cases</a>
-                <Link to="/docs" className='nav-button'>Docs</Link>
+                <NavLink to="/market" className={({ isActive }) => (isActive ? 'nav-button nav-button-active' : 'nav-button')}>Market</NavLink>
+                <NavLink to="/docs" className={({ isActive }) => (isActive ? 'nav-button nav-button-active' : 'nav-button')}>Docs</NavLink>
             </div>
             <div className="home-nav-right">
                 {!localStorage.getItem("token") ? (

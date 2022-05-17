@@ -22,10 +22,15 @@ const getProjectDetails = (projectId) => {
     return axios.get("http://fedstation.herokuapp.com/getProject/" + projectId)
 }
 
+const getPublishedModels = () => {
+    return axios.get("http://fedstation.herokuapp.com/getMarketplaceModels")
+}
+
 export {
     createUser,
     getUserDetails,
     createProject,
     checkProjectIdExists,
-    getProjectDetails
+    getProjectDetails,
+    getPublishedModels
 };

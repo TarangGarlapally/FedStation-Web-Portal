@@ -27,15 +27,15 @@ export default function ProjectSettings() {
                     setDescription(data.projectDescription)
                     setDisabled(data.isProjectDisabled)
                     console.log(data)
-                    setModelType(data.modelType.model)
+                    setModelType(data.modelType.aggregationType === null ? "Special" : "Normal")
                     setApiPath("https://fedstation-ml-service.herokuapp.com/specialCaseTimeSeries/" + data.id + "/predict/")
                 });
         }
         getProjectDetails();
-        if (modelType !== 'ARIMA') {
-            axios.get("http://127.0.0.1:8000/dowloadGlobalModelFromFirebase/k_k")
+        if (modelType !== 'Special') {
+            axios.get("https://fedstation-ml-service.herokuapp.com/dowloadGlobalModelURL/"+params.id)
                 .then((data) => {
-                    setDownUrl(data.data)
+                    setDownUrl(data.data.response)
                 })
                 .catch(e => {
                     console.log(e)
@@ -85,7 +85,7 @@ export default function ProjectSettings() {
 
     async function downloadGlbMdl() {
 
-        console.log(downUrl, "this is url")
+        //console.log(downUrl, "this is url")
 
         var link = document.createElement("a");
 
@@ -181,10 +181,10 @@ export default function ProjectSettings() {
                     <button className='delete' onClick={deleteProject}>Delete</button>
                 </div>
             </div> */}
-            <h5 style={{ marginTop: "20px" }}>{details && details.modelType && details.modelType.model !== "ARIMA" ? ('Global Model') : ('Predictions')}</h5>
+            <h5 style={{ marginTop: "20px" }}>{modelType && modelType !== "Special" ? ('Global Model') : ('Predictions')}</h5>
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
             <hr />
-            {modelType && modelType !== "ARIMA" && <div className='projectSettingItems'>
+            {modelType && modelType !== "Special" && <div className='projectSettingItems'>
                 <div className="projectSettingContainer">
                     <div>
                         <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Download Global Model</strong>
@@ -195,7 +195,7 @@ export default function ProjectSettings() {
                 </div>
             </div>}
 
-            {modelType && modelType === "ARIMA" && <div className='projectSettingItems'>
+            {modelType && modelType === "Special" && <div className='projectSettingItems'>
                 <div className="projectSettingContainer">
                     <div>
                         <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Copy the API End Point for Predictions</strong>

@@ -12,9 +12,10 @@ import React from 'react';
 import ProjectSettings from './components/ProjectHomePage/ProjectSettings';
 import KeySettings from './components/ProjectHomePage/KeySettings';
 import ModelSettings from './components/ProjectHomePage/ModelSettings';
+import Market from './components/Market/Market';
 
 import GlobalModelAnalytics from './components/ProjectHomePage/GlobalModelAnalytics';
-import Watchdemo from './components/watch-demo/Watchdemo';
+// import Watchdemo from './components/watch-demo/Watchdemo';
 
 function App() {
   // const { currentUser } = useAuth();
@@ -25,6 +26,7 @@ function App() {
         <Routes>
 
           <Route exact path="/home" element={<Home />} />
+          <Route exact path="/market" element={<Market />} />
           <Route exact path="/docs" element={<Docs />} />
           <Route path="/console" element={
             <PrivateRoute>

@@ -3,7 +3,7 @@
   height: 100%;
   background-color: rgba(255, 255, 255, 0.75);
   position: fixed;
-  top: 0;
+  top: 40px;
   left: 0;
   display: flex;
   justify-content: center;
@@ -11,16 +11,16 @@
 }
 
 .modalContainer {
-  width: 500px;
-  height: 250px;
+  width: 400px;
+  height:730px;
   border-radius: 10px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 25px;
+  /* align-items: center;
+  justify-content: center; */
+  padding: 25px 25px 0px 25px;
 }
 
 .editField:focus-visible{
@@ -29,8 +29,8 @@
 
 .modalContainer .titles {
   display: inline-block;
-  text-align: center;
-  margin-top: 10px;
+  text-align: left;
+  margin-top: px;
 }
 
 .titleCloseBtn {
@@ -46,25 +46,27 @@
 }
 
 .modalContainer .body {
-  height: 35%;
+  width: 100%;
+  height: 100%;
+  margin-left: 20px;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   text-align: center;
 }
 
 .modalContainer .footer {
-  height: 20%;
-  width: 70%;
+  height: fit-content;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .modalContainer .footer button {
-  width: 150px;
-  height: 100%;
+  width: 100px;
+  height: fit-content;
   margin: 10px;
   border: none;
   background-color: cornflowerblue;
