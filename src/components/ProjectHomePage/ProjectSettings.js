@@ -33,7 +33,7 @@ export default function ProjectSettings() {
         }
         getProjectDetails();
         if (modelType !== 'Special') {
-            axios.get("https://fedstation-ml-service.herokuapp.com/dowloadGlobalModelURL/k_k")
+            axios.get("https://fedstation-ml-service.herokuapp.com/dowloadGlobalModelURL/"+params.id)
                 .then((data) => {
                     setDownUrl(data.data.response)
                 })

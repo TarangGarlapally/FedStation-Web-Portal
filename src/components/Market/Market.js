@@ -5,6 +5,8 @@ import { Close } from '@material-ui/icons';
 import { getPublishedModels } from '../../ApiCalls'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { FileCopyOutlined, AssignmentOutlined } from '@material-ui/icons'
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const customStyles = {
     overlay: {
@@ -56,6 +58,8 @@ export default function Market() {
     const [isCopied, setIsCopied] = useState(false);
     const [apiPath, setApiPath] = useState(null);
     const [selectedModel, setSelectedModel] = useState(null)
+    const [downUrl, setDownUrl] = useState({})
+    const params = useParams();
 
 
 
@@ -69,6 +73,13 @@ export default function Market() {
             )
             .catch((err) => {
                 console.log(err)
+            })
+        axios.get("https://fedstation-ml-service.herokuapp.com/dowloadGlobalModelURL/"+params.id)
+            .then((data) => {
+                setDownUrl(data.data.response)
+            })
+            .catch(e => {
+                console.log(e)
             })
 
         // setPublishedModelsLoading(false)
@@ -134,7 +145,15 @@ export default function Market() {
         }
     }, [selectedModel])
 
+    async function downloadModel(){
+        var link = document.createElement("a");
 
+        link.href = downUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+    }
 
     const renderPublishedModels = () => {
         return filteredModels.map((model) => {
@@ -248,7 +267,7 @@ export default function Market() {
                                 </div>
                             </div>
                             <div className='publish-model-footer'>
-                                {selectedModel.modelType.aggregationType !== null ? (<button className='publish-model-footer-btn'>Download Model</button>) : (<>
+                                {selectedModel.modelType.aggregationType !== null ? (<button className='publish-model-footer-btn' onClick={downloadModel}>Download Model</button>) : (<>
                                     <div>
                                         <strong style={{ fontSize: "15px", color: "#" }}>Copy the API endpoint</strong>
                                         <span style={{ fontSize: "14px", display: "block" }}>Please refer to docs on usage of the endpoint</span>
