@@ -3,56 +3,99 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./modal.css";
 
-export default function Modal({ setOpenModal,setMaxUser }) {
-    const [details, setDetails] = useState([]);
-    const [trigger, setTrigger] = useState('')
-    const [model, setModel] = useState([]);
-    const [input, setInput] = useState("")
-    const [type, setType] = useState('')
-    const [label, setLabel] = useState('')
-    const [close, setClose] = useState(false)
-    const [closeTrigger, setCloseTrigger] = useState(false)
+export default function Modal({ setOpenModal,model }) {
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState('')
+    const [contact, setContact] = useState("");
+    // const [model, setModel] = useState([]);
+    const[note,setNote]=useState("")
 
     const params = useParams();
 
-    async function editMaxUser() {
+    useEffect(() => {
+            // console.log("incdjcjdcjjdc")
+            // console.log(model.aggregationType)
+            if(model.aggregationType=="Voting"){
+                setNote("Your freshly generated model will be readily published")
+            }
+            else if(model.aggregationType==null){
+                setNote("Your API link will be avialable to be copied")
+            }
+        
+        
+    }, []);
 
-        if (document.getElementById("selectField").value === null || document.getElementById("selectField").value === "0") {
-            document.getElementById("editErr").innerText = "Please fill all the required values!";
-            document.getElementById("editErr").hidden = false;
+    // setTitleErr("Title is required")
+    // setDescrErr("Description is required")
+    // setContactErr("Contact is required")
+
+    // async function editMaxUser() {
+
+    //     if (document.getElementById("selectField").value === null || document.getElementById("selectField").value === "0") {
+    //         document.getElementById("editErr").innerText = "Please fill all the required values!";
+    //         document.getElementById("editErr").hidden = false;
+    //     }
+    //     else {
+    //         document.getElementById("editErr").innerText = "";
+    //         document.getElementById("editErr").hidden = true;
+
+    //         axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
+    //         .then(res => {
+    //             setMaxUser(type)
+    //             setOpenModal(false)
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
+
+    //         // const data = await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
+    //         //     .then(res => res.json())
+    //         //     .then((data) => {
+    //         //         setDetails(data);
+    //         //         setModel(data.modelType)
+    //         //         setMaxUser(data.maxUsersSize)
+    //         //         setTrigger(data.triggerEvery)
+    //         //     });
+    //         // window.location.reload();
+    //         // console.log(details)
+    //     }
+
+    //     setOpenModal(false)
+    // }
+
+    async function publish(){
+
+        const value={
+            contact:contact,
+            description:description,
+            name:title,
+            projectId:params.id
         }
-        else {
+        const input=JSON.stringify(value)
+        if(title && description && contact){
             document.getElementById("editErr").innerText = "";
             document.getElementById("editErr").hidden = true;
-
-            axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
-            .then(res => {
-                setMaxUser(type)
-                setOpenModal(false)
+            //console.log(value)
+            axios.patch("http://fedstation.herokuapp.com/publishToMarketplace",input)
+            .then(response=>{
+                console.log(response)
             })
-            .catch(err => {
-                console.log(err)
+            .catch(error=>{
+                console.log(error)
             })
-
-            // const data = await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
-            //     .then(res => res.json())
-            //     .then((data) => {
-            //         setDetails(data);
-            //         setModel(data.modelType)
-            //         setMaxUser(data.maxUsersSize)
-            //         setTrigger(data.triggerEvery)
-            //     });
-            // window.location.reload();
-            console.log(details)
+            setOpenModal(false)
         }
-
-        setOpenModal(false)
+        else{
+            document.getElementById("editErr1").innerText = "Please fill all the required values !";
+            document.getElementById("editErr1").hidden = false;
+            
+        }  
     }
 
     return (
         <div className="modalBackground">
             <div className="modalContainer">
-                {/* <div className="titleCloseBtn">
+                <div className="titleCloseBtn">
                     <button
                         onClick={() => {
                             setOpenModal(false);
@@ -60,29 +103,52 @@ export default function Modal({ setOpenModal,setMaxUser }) {
                     >
                         X
                     </button>
-                </div> */}
-                <div className="titles">
-                    <h2>Edit Max User Size</h2>
                 </div>
-                <div className="body">
+                <div className="titles">
+                    <h3>Publish Model</h3>
+                    <h7>This section enable user to upload models to market place </h7>
+                </div>
+                <div style={{marginTop:"10px"}}>
+                    <h5>Title</h5>
+                    <h7>Choose title carefully for your model</h7>
+                    <input type="text" id='title' style={{marginTop:"5px",height:"43px",width:"300px"}} onChange={(e)=>{
+                        setTitle(e.target.value)
+                    }}/>
+                    
+                    <h5 style={{marginTop:"15px"}}>Description</h5>
+                    <h7>Write the description of your model</h7>
+                    <textarea style={{marginTop:"5px",height:"120px",width:"300px"}} id='descr' onChange={(e)=>{
+                        setDescription(e.target.value)
+                    }}/>
+                   
+                    <h5 style={{marginTop:"15px"}}>Contact</h5>
+                    <h7>mention your contact address so that user can contact you</h7>
+                    <input type="text" style={{marginTop:"5px",height:"43px",width:"300px"}} id='contact' onChange={(e)=>{
+                        setContact(e.target.value)
+                    }}/>
+                    
+                    <p style={{ marginTop: "5px" }}>Note : {note}</p>
+                    <p style={{ marginTop: "20px" }} id="editErr1" className='editErrMsg' hidden={true}></p>
+                </div>
+                {/* <div className="body">
                     <span className=''>
-                        <div>
-                            <select id='selectField' className='editField' value={type} onChange={(e) => {
-                                let index = e.nativeEvent.target.selectedIndex;
-                                let label = e.nativeEvent.target[index].text;
-                                let value = e.target.value;
-                                setType(value)
-                                setLabel(label)
-                            }} style={{ 'width': 'fit-content',height:"fit-content",padding:"10px",border:"none",fontSize:"1.5rem" }}>
-                                <option style={{padding:"10px"}} value='0'>Choose</option>
-                                <option value='1'>0-50</option>
-                                <option value='2'>50-100</option>
-                                <option value='3'>100-150</option>
-                            </select>
+                        <div style={{display: "flex"}}> 
+                            <span>Title</span>
+                            <input type="text" style={{marginLeft:"175px",height:"43px",width:"250px"}}/>
+                        </div>
+                        <p style={{ marginTop: "20px" }} id="editErr" className='editErrMsg' hidden={true}></p>
+                        <div style={{marginTop:"50px" ,display: "flex", alignItems: "center",justifyContent:"space-between"}}>
+                            <span>Description</span>
+                            <textarea style={{height:"120px",width:"250px"}}/>
+                        </div>
+                        <p style={{ marginTop: "20px" }} id="editErr" className='editErrMsg' hidden={true}></p>
+                        <div style={{marginTop:"50px",display: "flex", alignItems: "center",justifyContent:"space-between"}}>
+                            <span>Contact</span>
+                            <input type="text" style={{height:"43px",width:"250px"}}/>
                         </div>
                         <p style={{ marginTop: "20px" }} id="editErr" className='editErrMsg' hidden={true}></p>
                     </span>
-                </div>
+                </div> */}
                 <div className="footer">
                     <button
                         onClick={() => {
@@ -92,7 +158,7 @@ export default function Modal({ setOpenModal,setMaxUser }) {
                     >
                         Cancel
                     </button>
-                    <button type='button' className='' style={{ marginRight: "10px" }} onClick={editMaxUser}>Edit</button>
+                    <button type='button' className='' style={{ marginRight: "0px" }} onClick={publish}>Publish</button>
                 </div>
             </div>
         </div>

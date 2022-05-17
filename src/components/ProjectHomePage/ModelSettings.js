@@ -44,6 +44,7 @@ export default function ModelSettings() {
                 });
         }
         getModelDetails();
+        //console.log(note)
 
     }, []);
 
@@ -229,7 +230,13 @@ export default function ModelSettings() {
                 <p style={{ marginLeft: "40px" }} id="editErr" className='editErrMsg' hidden={true}></p>
                 <input className='edit' style={{ marginLeft: "40px", marginTop: "0px" }} type="submit" value="Save" onClick={handleChange} />
             </div>
-
+            <br/><br/>
+            <h3>Publish Model</h3>
+            <hr />
+            <div>
+                <strong style={{ fontSize: "15px", marginLeft: "20px" }}>Publish model to market place by entering the details of the model</strong>
+                <button type="button" className='publishBtn' style={{ marginLeft: "370px" }} onClick={() => setModalOpen(true)}>Publish</button>
+            </div>
             {/* <h3>Delete Model</h3>
             <div className='modelSettingItems' style={{border:"2px solid #E7411B"}}>
                 <div className="modelSettingContainer">
@@ -254,7 +261,7 @@ export default function ModelSettings() {
             */}
 
 
-            {modalOpen && <Modal setOpenModal={setModalOpen} setMaxUser={setMaxUser} />}
+            {modalOpen && <Modal setOpenModal={setModalOpen} model={model} />}
             {modalTriggerEveryOpen && <ModelTrigger setOpenModal={setModalTriggerEveryOpen} setTrigger={setTrigger} />}
         </div>
     )
