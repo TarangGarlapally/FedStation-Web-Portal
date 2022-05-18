@@ -79,7 +79,7 @@ export default function NavBar() {
                     </>
                 ) : (
                     <>
-                        <button className="nav-button" onClick={() => navigate("/console")}>Console</button>
+                            <NavLink className={({ isActive }) => (isActive ? 'nav-button nav-button-active' : 'nav-button')} to="/console" >Console</NavLink>
                         <button className="nav-button" onClick={Logout}>Logout</button>
                     </>
                 )}
