@@ -33,9 +33,9 @@ export default function ProjectSettings() {
         }
         getProjectDetails();
         if (modelType !== 'Special') {
-            axios.get("http://127.0.0.1:8000/dowloadGlobalModelFromFirebase/k_k")
+            axios.get("https://fedstation-ml-service.herokuapp.com/dowloadGlobalModelURL/"+params.id)
                 .then((data) => {
-                    setDownUrl(data.data)
+                    setDownUrl(data.data.response)
                 })
                 .catch(e => {
                     console.log(e)
@@ -85,7 +85,7 @@ export default function ProjectSettings() {
 
     async function downloadGlbMdl() {
 
-        console.log(downUrl, "this is url")
+        //console.log(downUrl, "this is url")
 
         var link = document.createElement("a");
 
