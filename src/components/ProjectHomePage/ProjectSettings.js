@@ -105,7 +105,7 @@ export default function ProjectSettings() {
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
             <hr />
 
-            <div className='projectSettingItems'>
+            <div className='projectSettingItems' style={{height:"unset"}}>
                 {/* <div className='projectDetails'>
                     <div style={{marginLeft:"20px"}}>
                         <p>Project Name</p><br />
@@ -181,21 +181,23 @@ export default function ProjectSettings() {
                     <button className='delete' onClick={deleteProject}>Delete</button>
                 </div>
             </div> */}
-            <h5 style={{ marginTop: "20px" }}>{modelType && modelType !== "Special" ? ('Global Model') : ('Predictions')}</h5>
+            {/* <h5 style={{ marginTop: "20px" }}>{modelType && modelType !== "Special" ? ('Global Model') : ('Predictions')}</h5> */}
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
-            <hr />
-            {modelType && modelType !== "Special" && <div className='projectSettingItems'>
+            {/* <hr /> */}
+            {/* {
+                modelType && modelType !== "Special" && <div className='projectSettingItems'>
                 <div className="projectSettingContainer">
                     <div>
-                        <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Download Global Model</strong>
+                        <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Download Global Model</strong> */}
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
-                    </div>
+                    {/* </div>
                     <button type='button' className='buttons' style={{ marginLeft: "370px" }} onClick={downloadGlbMdl}>Download</button>
 
                 </div>
-            </div>}
+            </div>
+            } */}
 
-            {modelType && modelType === "Special" && <div className='projectSettingItems'>
+            {/* {modelType && modelType === "Special" && <div className='projectSettingItems'>
                 <div className="projectSettingContainer">
                     <div>
                         <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Copy the API End Point for Predictions</strong>
@@ -206,7 +208,7 @@ export default function ProjectSettings() {
                     </CopyToClipboard>
 
                 </div>
-            </div>}
+            </div>} */}
         </div>
     )
 }
