@@ -19,8 +19,8 @@ function RenderProjects({ projects }) {
                 <div className="project-card-description">
                     <p style={{marginTop:"0px",marginLeft:"15px",color:"gray"}}>{project.modelType.model}</p>
                 </div>
-                <div>
-                    <p style={{color:"grey",marginTop:"100px",marginLeft:"15px"}}>Model Performance</p>
+                <div className="project-card-footer">
+                    <p style={{color:"grey",marginLeft:"15px"}}>Model Performance</p>
                 </div>
             </div>
         )

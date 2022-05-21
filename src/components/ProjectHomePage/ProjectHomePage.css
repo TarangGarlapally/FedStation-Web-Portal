@@ -4,6 +4,8 @@
   position: absolute;
   margin-top: 4.7%;
   width: 100%;
+  height: 89.7%;
+  overflow-y: hidden;
 }
 
 .ProjectSideBar {
