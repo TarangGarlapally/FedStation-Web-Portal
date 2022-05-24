@@ -74,7 +74,7 @@ export default function Market() {
             .catch((err) => {
                 console.log(err)
             })
-        axios.get("https://fedstation-ml-service.herokuapp.com/dowloadGlobalModelURL/"+params.id)
+        axios.get("https://fedstation-ml-service.herokuapp.com/downloadGlobalModelURL/"+params.id)
             .then((data) => {
                 setDownUrl(data.data.response)
             })
