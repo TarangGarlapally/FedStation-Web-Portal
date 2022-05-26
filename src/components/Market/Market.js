@@ -74,57 +74,6 @@ export default function Market() {
             .catch((err) => {
                 console.log(err)
             })
-        axios.get("https://fedstation-ml-service.herokuapp.com/dowloadGlobalModelURL/"+params.id)
-            .then((data) => {
-                setDownUrl(data.data.response)
-            })
-            .catch(e => {
-                console.log(e)
-            })
-
-        // setPublishedModelsLoading(false)
-        // setPublishedModels([
-        //     {
-        //         id: 1,
-        //         name: "Chat Filtering",
-        //         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisi vel consectetur iaculis, nisl nisi consectetur nisi, eget consectetur nisi nisi vel nisi. Nullam euismod, nisi vel consectetur iaculis, nisl nisi consectetur nisi, eget consectetur nisi nisi vel nisi. Nullam euismod, nisi vel consectetur iaculis, nisl nisi consectetur nisi, eget consectetur nisi nisi vel nisi. Nullam euismod, nisi vel consectetur iaculis, nisl nisi consectetur nisi, eget consectetur nisi nisi vel nisi. Nullam euismod, nisi vel consectetur iaculis, nisl nisi consectetur nisi, eget consectetur nisi nisi vel nisi. Nullam euismod, nisi vel consectetur iaculis, nisl nisi consectetur nisi, eget consectetur nisi nisi vel nisi. Nullam euismod, nisi vel consectetur iaculis, nisl nisi consectetur nisi, eget consectetur nisi nisi vel nisi. Nullam euismod, nisi vel consectetur iaculis, nisl nisi consectetur nisi, eget consectetur nisi nisi vel nisi. Nullam euismod, nisi vel consectetur iaculis, nisl nisi consectetur nisi, eget consectetur nisi nisi vel nisi. Nullam euismod, nisi vel consectetur iaculis, nisl nisi consectetur nisi, eget consectetur nisi nisi vel nisi. Nullam euismod, nisi vel consectetur iaculis, nisl nisi consectetur nisi, eget consectetur nisi nisi vel",
-        //         contact: "abc@def.com",
-        //         createdBy: "ALLO, ALLOCOMPANY",
-        //         modelType: "Linear Regression"
-        //     },
-        //     {
-        //         id: 2,
-        //         name: "Expense Prediction",
-        //         description: "This is a model",
-        //         contact: "abc@def.com",
-        //         createdBy: "ALLO, ALLOCOMPANY",
-        //         modelType: "Linear Regression"
-        //     },
-        //     {
-        //         id: 3,
-        //         name: "Image Classification",
-        //         description: "This is a model",
-        //         contact: "abc@def.com",
-        //         createdBy: "ALLO, ALLOCOMPANY",
-        //         modelType: "Linear Regression"
-        //     }, {
-        //         id: 4,
-        //         name: "Dining Prediction",
-        //         description: "This is a model",
-        //         contact: "abc@def.com",
-        //         createdBy: "ALLO, ALLOCOMPANY",
-        //         modelType: "Linear Regression"
-        //     },
-        //     {
-        //         id: 5,
-        //         name: "Keyboard word Prediction",
-        //         description: "This is a model",
-        //         contact: "abc@def.com",
-        //         createdBy: "ALLO, ALLOCOMPANY",
-        //         modelType: "Linear Regression"
-        //     }
-        // ])
-
     }, [])
 
     useEffect(() => {
@@ -140,8 +89,15 @@ export default function Market() {
     }, [publishedModels, search])
 
     useEffect(() => {
-        if (selectedModel) {
-            setApiPath("https://fedstation-ml-service.herokuapp.com/specialCaseTimeSeries/" + selectedModel.id + "/predict/")
+        if(selectedModel){
+            axios.get("https://fedstation-ml-service.herokuapp.com/downloadGlobalModelURL/" + selectedModel.id)
+                .then((data) => {
+                    setDownUrl(data.data.response)
+                    console.log(downUrl)
+                })
+                .catch(e => {
+                    console.log(e)
+                })
         }
     }, [selectedModel])
 
