@@ -29,7 +29,7 @@ export default function ModelTrigger({ setOpenModal,setTrigger }) {
             document.getElementById("editErr").innerText = "";
             document.getElementById("editErr").hidden = true;
 
-            axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
+            axios.patch("https://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
             .then(res => {
                 setTrigger(input)
                 setOpenModal(false)

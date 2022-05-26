@@ -32,7 +32,7 @@ export default function KeySettings() {
     async function disableKey() {
         if (disabled === false) {
             try {
-                const res = await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isKeyDisabled&value=" + true)
+                const res = await axios.patch("https://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isKeyDisabled&value=" + true)
 
                 console.log(res)
             } catch (e) {
@@ -44,7 +44,7 @@ export default function KeySettings() {
         }
         else {
             try {
-                const res = await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isKeyDisabled&value=" + false, { value: true })
+                const res = await axios.patch("https://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isKeyDisabled&value=" + false, { value: true })
 
                 console.log(res)
             } catch (e) {
@@ -57,7 +57,7 @@ export default function KeySettings() {
     }
 
     async function regenerateKey() {
-        const res = await axios.patch("http://fedstation.herokuapp.com/updateKey/" + params.id)
+        const res = await axios.patch("https://fedstation.herokuapp.com/updateKey/" + params.id)
         console.log(res)
 
         fetch("https://fedstation.herokuapp.com/getProject/" + params.id)

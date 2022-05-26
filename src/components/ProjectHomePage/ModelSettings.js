@@ -89,12 +89,12 @@ export default function ModelSettings() {
             document.getElementById("editErr").innerText = "";
             document.getElementById("editErr").hidden = true;
 
-            axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
+            axios.patch("https://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
             // .then(res=>{
             //     setInput(input)
             // })
 
-            axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
+            axios.patch("https://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
                 .then(res => {
                     setMaxUser(type)
                     // setLabel(label)
@@ -309,7 +309,7 @@ export default function ModelSettings() {
             
                 (e)=>{
                                     setInput(e.target.value)
-                                    axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
+                                    axios.patch("https://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
                                     .then(res => {
                                         setInput(e.target.value)
                                     })

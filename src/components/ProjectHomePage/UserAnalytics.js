@@ -27,7 +27,7 @@ export default function UserAnalytics() {
     
     useEffect(()=>{
         async function getUserAnalytics(){
-            await fetch("http://fedstation.herokuapp.com/userAnalytics/"+params.id)
+            await fetch("https://fedstation.herokuapp.com/userAnalytics/"+params.id)
             .then(res=>res.json())
             .then((data)=>{
                 setCurrentAU(data.currentActiveUsers)

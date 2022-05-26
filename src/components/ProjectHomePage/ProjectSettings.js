@@ -46,12 +46,12 @@ export default function ProjectSettings() {
 
     async function disableProject() {
         if (disabled === false) {
-            await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + true);
+            await axios.patch("https://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + true);
             setDisabled(true)
 
         }
         else {
-            await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + false);
+            await axios.patch("https://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + false);
             setDisabled(false)
         }
 
@@ -68,7 +68,7 @@ export default function ProjectSettings() {
         else {
             document.getElementById("editErr").innerText = "";
             document.getElementById("editErr").hidden = true;
-            axios.patch("http://fedstation.herokuapp.com/updateDescription?projectId=" + params.id + "&description=" + description)
+            axios.patch("https://fedstation.herokuapp.com/updateDescription?projectId=" + params.id + "&description=" + description)
 
             await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
                 .then(res => res.json())
