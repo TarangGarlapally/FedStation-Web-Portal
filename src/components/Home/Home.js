@@ -35,7 +35,7 @@ export default function Home() {
                         <div className='get-started-head2'>A New way for Secure Machine Learning</div>
                         <div className='get-started-tag'>Built to support all your Machine Learning needs <br /> in mobile or web applications</div>
                         <div className='get-started-buttons'>
-                            <button className='get-started-button' onClick={() => navigate("/console")}>Get Started</button>
+                            <button className='get-started-button' onClick={() => navigate("/console")}>Go to Console</button>
                             {/* <Link to="/watch-demo" className='try-demo-button'>Watch Demo</Link> */}
                             {/* <button className='try-demo-button' onClick={()=>navigate("/watch-demo")}>Watch Demo</button> */}
                             <button className='docs-button' onClick={() => navigate("/docs")}>Docs</button>

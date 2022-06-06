@@ -109,7 +109,7 @@ export default function ModelSettings() {
                     setTrigger(input)
                 })
 
-            alert("Changes Saved")
+            // alert("Changes Saved")
         }
         // if (document.getElementById("selectField").value === null || document.getElementById("selectField").value === "0") {
         //     document.getElementById("editErr").innerText = "Please fill all the required values!";

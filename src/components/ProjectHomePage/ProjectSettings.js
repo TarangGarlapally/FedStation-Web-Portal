@@ -78,7 +78,7 @@ export default function ProjectSettings() {
                     setDescription(description)
                 });
 
-            alert("Changes Saved")
+            // alert("Changes Saved")
         }
 
     }
