@@ -97,7 +97,9 @@ export default function KeySettings() {
                     <strong style={{ fontSize: "15px", color: "#e7411b", marginLeft: "20px" }}>Disable the secret key</strong>
                     {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
 
-                    <button type="button" className='buttons' style={{ marginLeft: "400px" }} onClick={disableKey}>{disabled ? "Enable" : "Disable"}</button>
+                    {disabled?(<button type="button" className='publishBtn' style={{ marginLeft: "400px" }} onClick={disableKey}>Enable</button>):<button type="button" className='buttons' style={{ marginLeft: "400px" }} onClick={disableKey}>Disable</button>}
+
+                    {/* <button type="button" className='buttons' style={{ marginLeft: "400px" }} onClick={disableKey}>{disabled ? "Enable" : "Disable"}</button> */}
                 </div>
             </div>
         </div>
