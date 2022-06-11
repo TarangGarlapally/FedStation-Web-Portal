@@ -5,9 +5,10 @@ import { ComposedChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer
 export default function Chart({ title, data, dataKey, grid }) {
 
 
-    const usersLimit = 3000;
+    const usersLimit = Math.max(...data.map((i) => i.MaxUser));
     const gradientOffset = () => {
         const dataMax = Math.max(...data.map((i) => i.ActiveUser));
+        
         //console.log(...data.map((i) => i.ActiveUser))
         //console.log(usersLimit / dataMax)
         return 1 - (usersLimit / dataMax);

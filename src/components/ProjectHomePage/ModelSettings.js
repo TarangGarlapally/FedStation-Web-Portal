@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./modelSettings.css"
 import Modal from "../../components/ProjectHomePage/Modal";
 import ModelTrigger from '../../components/ProjectHomePage/ModelTrigger';
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { FileCopyOutlined, AssignmentOutlined } from '@material-ui/icons'
 //import Table from 'react-bootstrap/Table'
 
 
@@ -13,12 +15,20 @@ export default function ModelSettings() {
     const [details, setDetails] = useState([]);
     const [maxUser, setMaxUser] = useState('');
     const [trigger, setTrigger] = useState('')
+    const inputFile = useRef(null);
     const [model, setModel] = useState([]);
+    const [showUploadNote, setShowUploadNote] = useState(false);
     const [input, setInput] = useState('')
     const [type, setType] = useState('')
     const [label, setLabel] = useState('')
-    const[published,setPublished]=useState()
+    const [published, setPublished] = useState()
+    const [isCopied, setIsCopied] = useState(false);
+    const [isResultCopied, setIsResultCopied] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
+    const [apiPath, setApiPath] = useState(null);
+    const [resultApiPath, setResultApiPath] = useState(null);
+    const [modelType, setModelType] = useState(null);
+    const [downUrl, setDownUrl] = useState({})
     const [modalTriggerEveryOpen, setModalTriggerEveryOpen] = useState(false);
 
     const params = useParams();
@@ -29,12 +39,15 @@ export default function ModelSettings() {
                 .then(res => res.json())
                 .then((data) => {
                     setDetails(data);
+                    setModelType(data.modelType.aggregationType === null ? "Special" : "Normal")
                     setModel(data.modelType)
                     setMaxUser(data.maxUsersSize)
                     setTrigger(data.triggerEvery)
                     setInput(data.triggerEvery)
                     setPublished(data.isPublished)
-                    
+                    setApiPath("https://fedstation-ml-service.herokuapp.com/specialCaseTimeSeries/" + data.id + "/predict/")
+                    setResultApiPath("https://fedstation-ml-service.herokuapp.com/getModelResult/" + data.id)
+
                     if (data.maxUsersSize === 1) {
                         setLabel("0-50")
                     }
@@ -47,9 +60,18 @@ export default function ModelSettings() {
                 });
         }
         getModelDetails();
-        
+        if (modelType !== 'Special') {
+            axios.get("https://fedstation-ml-service.herokuapp.com/downloadGlobalModelURL/" + params.id)
+                .then((data) => {
+                    setDownUrl(data.data.response)
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        }
+
     }, []);
-    
+
     //console.log(published)
     async function handleChange() {
         console.log(document.getElementById("editField").value)
@@ -67,12 +89,12 @@ export default function ModelSettings() {
             document.getElementById("editErr").innerText = "";
             document.getElementById("editErr").hidden = true;
 
-            axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
+            axios.patch("https://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
             // .then(res=>{
             //     setInput(input)
             // })
 
-            axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
+            axios.patch("https://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
                 .then(res => {
                     setMaxUser(type)
                     // setLabel(label)
@@ -87,7 +109,7 @@ export default function ModelSettings() {
                     setTrigger(input)
                 })
 
-            alert("Changes Saved")
+            // alert("Changes Saved")
         }
         // if (document.getElementById("selectField").value === null || document.getElementById("selectField").value === "0") {
         //     document.getElementById("editErr").innerText = "Please fill all the required values!";
@@ -101,6 +123,38 @@ export default function ModelSettings() {
         // }
 
 
+    }
+
+    async function downloadGlbMdl() {
+
+        //console.log(downUrl, "this is url")
+
+        var link = document.createElement("a");
+
+        link.href = downUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    const clickFile = () => {
+        inputFile.current.click();
+    }
+
+    async function handleFile(e) {
+        var file = e.target.files[0];
+        var formData = new FormData();
+        console.log("handling file")
+        formData.append("file", file);
+        formData.append("id", details.id);
+        axios.post("https://fedstation-ml-service.herokuapp.com/uploadInputProcessFile", formData)
+            .then(res => {
+                console.log(res)
+                setShowUploadNote(true)
+            })
+            .catch(e => {
+                console.log(e)
+            })
     }
 
     const renderTime = (time) => {
@@ -121,7 +175,7 @@ export default function ModelSettings() {
 
     return (
         <div className='modelSetting'>
-            <h3>Model Settings</h3>
+            <h3 style={{ marginTop: "1%" }}>Model Settings</h3>
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
             <hr />
             {/* <div className='modelSettingItems'>
@@ -233,13 +287,13 @@ export default function ModelSettings() {
                 <p style={{ marginLeft: "40px" }} id="editErr" className='editErrMsg' hidden={true}></p>
                 <input className='edit' style={{ marginLeft: "40px", marginTop: "0px" }} type="submit" value="Save" onClick={handleChange} />
             </div>
-            <br/><br/>
+            <br /><br />
             <h3>Publish Model</h3>
             <hr />
-            <div>
-                <strong style={{ fontSize: "15px", marginLeft: "20px" }}>Publish model to market place by entering the details of the model</strong>
-                {published ?(<button type="button" className='disableBtn' disabled style={{ marginLeft: "200px" }} >Already Published</button>):(<button type="button" className='publishBtn' style={{ marginLeft: "200px" }} onClick={() => setModalOpen(true)}>Publish</button>)}
-                
+            <div style={{ width: "100%", display: "flex" }}>
+                <strong style={{ fontSize: "15px", marginLeft: "20px", width: "60%" }}>Publish model to market place by entering the details of the model</strong>
+                {published ? (<button type="button" className='disableBtn' disabled >Already Published</button>) : (<button type="button" className='publishBtn' onClick={() => setModalOpen(true)}>Publish</button>)}
+
             </div>
             {/* <h3>Delete Model</h3>
             <div className='modelSettingItems' style={{border:"2px solid #E7411B"}}>
@@ -255,7 +309,7 @@ export default function ModelSettings() {
             
                 (e)=>{
                                     setInput(e.target.value)
-                                    axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
+                                    axios.patch("https://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=triggerEvery&value=" + input)
                                     .then(res => {
                                         setInput(e.target.value)
                                     })
@@ -263,9 +317,65 @@ export default function ModelSettings() {
                                     }
 
             */}
+            <h3 style={{ marginTop: "20px" }}>{modelType && modelType !== "Special" ? ('Global Model') : ('Predictions')}</h3>
+            {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
+            <hr />
+            {modelType && modelType !== "Special" && <div className='projectSettingItems'>
+                <div className="projectSettingContainer">
+                    <div style={{ width: "60%" }}>
+                        <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Download Global Model</strong>
+                        {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
+                    </div>
+                    <button type='button' className='publishBtn' onClick={downloadGlbMdl}>Download</button>
+
+                </div>
+            </div>}
+
+            {modelType && modelType === "Special" && <div className='projectSettingItems'>
+                <div className="projectSettingContainer">
+                    <div style={{ width: "60%" }}>
+                        <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Copy the API End Point for Predictions</strong>
+                        <span style={{ fontSize: "14px", display: "block", marginLeft: "20px" }}>Please refer to docs on usage of the endpoint</span>
+                    </div>
+                    <div style={{ width: "20%", display: "flex", justifyContent: "center" }}>
+                        <CopyToClipboard onCopy={() => setIsCopied(true)} className="copy" style={{ position: "initial" }} text={apiPath}>
+                            <button type="button" aria-label='copy to clipboard button' className='copy'>{isCopied ? <AssignmentOutlined /> : <FileCopyOutlined />}</button>
+                        </CopyToClipboard>
+                    </div>
+
+                </div>
+            </div>}
+
+            <hr />
+
+            {modelType && modelType !== "Special" &&
+                <>
+                    <div className='projectSettingItems' style={{ height: "25%" }}>
+                        <div className="projectSettingContainer" style={{ height: "100%" }}>
+                            <div style={{ width: "60%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                                <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Access Global model using an API</strong>
+                                <br />
+                                <div style={{display:"flex",width:"100%",height:"45%",alignItems:"center"}}>
+                                    <button type='button' className='upload-input-pro-btn' style={{ marginLeft: "20px" }} onClick={clickFile}>Upload Input Processing File</button>
+                                    {showUploadNote && <span className='upload-note'>Successfully Uploaded. <br/> Uploading another file will overwrite the previous one.</span>}
+                                </div>
+                                <input type='file' className='upload-input-pro' style={{display:"none"}} ref={inputFile} onClick={(e)=>{e.target.value=''}} onChange={(e) => { handleFile(e); }} accept=".py" />
+                                <p style={{ fontSize: "14px", display: "block", marginLeft: "20px" }}>Note: In order to access this API, you need to upload an <b>Input Processing File</b>.</p>
+                                <span style={{ fontSize: "14px", display: "block", marginLeft: "20px" }}>Please refer to docs to know more about this method</span>
+                            </div>
+                            <div style={{ width: "15%", height: "100%", display: "flex", alignItems: "flex-start", justifyContent: "center" }}>
+                                <CopyToClipboard onCopy={() => setIsResultCopied(true)} className="copy" text={resultApiPath}>
+                                    <button type="button" aria-label='copy to clipboard button' className='copy'>{isResultCopied ? <AssignmentOutlined /> : <FileCopyOutlined />}</button>
+                                </CopyToClipboard>
+                            </div>
+
+                        </div>
+                    </div>
+                </>
+            }
 
 
-            {modalOpen && <Modal setOpenModal={setModalOpen} model={model} setPublished={setPublished}/>}
+            {modalOpen && <Modal setOpenModal={setModalOpen} model={model} setPublished={setPublished} />}
             {modalTriggerEveryOpen && <ModelTrigger setOpenModal={setModalTriggerEveryOpen} setTrigger={setTrigger} />}
         </div>
     )

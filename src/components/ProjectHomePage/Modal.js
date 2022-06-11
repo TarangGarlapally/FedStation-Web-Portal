@@ -42,7 +42,7 @@ export default function Modal({ setOpenModal,model,setPublished }) {
     //         document.getElementById("editErr").innerText = "";
     //         document.getElementById("editErr").hidden = true;
 
-    //         axios.patch("http://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
+    //         axios.patch("https://fedstation.herokuapp.com/updateTriggerOrSize/" + params.id + "?field=maxUsersSize&value=" + type)
     //         .then(res => {
     //             setMaxUser(type)
     //             setOpenModal(false)
@@ -81,7 +81,7 @@ export default function Modal({ setOpenModal,model,setPublished }) {
                 document.getElementById("editErr").innerText = "";
                 document.getElementById("editErr").hidden = true;
             //console.log(value)
-                axios.post("http://fedstation.herokuapp.com/publishToMarketplace",value)
+                axios.post("https://fedstation.herokuapp.com/publishToMarketplace",value)
                     .then(response=>{
                         setPublished(true)
                         console.log(response)

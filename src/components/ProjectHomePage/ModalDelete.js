@@ -9,13 +9,17 @@ export default function ModalDeleteOpen({setOpenModal}) {
 
     function deleteProject(){
       //const navigate = useNavigate();
-      if(axios.delete(`http://fedstation.herokuapp.com/deleteProject/`+params.id)){
-        navigate("/console")
-      }
-      // .then(res=>{
-      //   console.log("Deleted !!!",res)
-      // }).catch(err=>console.log(err))
-
+    //   if(axios.delete(`http://fedstation.herokuapp.com/deleteProject/`+params.id)){
+    //     navigate("/console")
+    //   }
+      axios.delete(`http://fedstation.herokuapp.com/deleteProject/`+params.id)
+      .then(res=>{
+        if(res.status==200){
+            navigate("/console")
+        }
+        // console.log(res.status)
+      }).catch(err=>console.log(err))
+      
       
     }
 

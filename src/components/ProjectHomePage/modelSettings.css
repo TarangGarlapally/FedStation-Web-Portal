@@ -1,9 +1,9 @@
 .modelSetting {
-  width: 80%;
+  width: 82%;
   margin-left: 18%;
-  margin-top: 1.5%;
   font-size: 15px;
-  
+  height: 100%;
+  overflow-y: auto;
 }
 .modelSettingItems {
   flex: 1;
@@ -53,7 +53,7 @@
   border-radius: 10px;
   /* height: 15px; */
   line-height: 15px;
-  color: green;
+  color: #06745c;
   /* font-family: Open Sans; */
   width: fit-content;
   font-size: 20px;
@@ -68,7 +68,7 @@
 }
 .publishBtn:hover{
   color: #ffffff;
-  background:green;
+  background:#06745c;
 }
 .disableBtn{
   -webkit-border-radius: 20px;
@@ -76,7 +76,7 @@
   border-radius: 10px;
   /* height: 15px; */
   line-height: 15px;
-  color: green;
+  color: #06745c;
   /* font-family: Open Sans; */
   width: fit-content;
   font-size: 20px;
@@ -180,4 +180,31 @@
 }
 .editErrMsg{
   color: #dd380d;
+}
+
+.upload-input-pro-btn{
+    border-radius: 10px;
+    height: 35px;
+    color: #ffffff;
+    width: -moz-fit-content;
+    width: 30%;
+    font-weight: 700;
+    background-color: #06745c;
+    border: solid silver 1px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+}
+
+.upload-input-pro-btn:hover{
+  color: #ffffff;
+  background:#045644;
+}
+
+.upload-note{
+  color: #06745c;
+  font-size: 14px;
+  font-weight: 100;
+  margin-left: 10px;
 }

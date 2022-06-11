@@ -14,7 +14,7 @@ export default function FeaturedInfo(props) {
                             <span className="featuredTitle"> <i className="fas fa-angle-up"></i> <strong>{e.title}</strong></span>
                             <div className="featuredMoneyContainer">
                                 <span className="featuredMoney">
-                                    {e.Value} &nbsp;
+                                    {(e.Value)} &nbsp;
                                     {e.Percentage ? <p style={{
                                         color: e.Percentage >= 0 ? "green" : "red",
                                         fontWeight: "bold"

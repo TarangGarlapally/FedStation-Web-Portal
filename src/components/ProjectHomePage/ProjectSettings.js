@@ -34,9 +34,9 @@ export default function ProjectSettings() {
                 });
         }
         getProjectDetails();
-        
+
         if (modelType !== 'Special') {
-            axios.get("https://fedstation-ml-service.herokuapp.com/dowloadGlobalModelURL/"+params.id)
+            axios.get("https://fedstation-ml-service.herokuapp.com/downloadGlobalModelURL/"+params.id)
                 .then((data) => {
                     setDownUrl(data.data.response)
                 })
@@ -49,12 +49,12 @@ export default function ProjectSettings() {
 
     async function disableProject() {
         if (disabled === false) {
-            await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + true);
+            await axios.patch("https://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + true);
             setDisabled(true)
 
         }
         else {
-            await axios.patch("http://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + false);
+            await axios.patch("https://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + false);
             setDisabled(false)
         }
 
@@ -71,7 +71,7 @@ export default function ProjectSettings() {
         else {
             document.getElementById("editErr").innerText = "";
             document.getElementById("editErr").hidden = true;
-            axios.patch("http://fedstation.herokuapp.com/updateDescription?projectId=" + params.id + "&description=" + description)
+            axios.patch("https://fedstation.herokuapp.com/updateDescription?projectId=" + params.id + "&description=" + description)
 
             await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
                 .then(res => res.json())
@@ -81,7 +81,7 @@ export default function ProjectSettings() {
                     setDescription(description)
                 });
 
-            alert("Changes Saved")
+            // alert("Changes Saved")
         }
 
     }
@@ -108,7 +108,7 @@ export default function ProjectSettings() {
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
             <hr />
 
-            <div className='projectSettingItems'>
+            <div className='projectSettingItems' style={{height:"unset"}}>
                 {/* <div className='projectDetails'>
                     <div style={{marginLeft:"20px"}}>
                         <p>Project Name</p><br />
@@ -185,22 +185,24 @@ export default function ProjectSettings() {
                     
                     <button type="button" className='delete' style={{ marginLeft: "125px" }} onClick={()=>setModalDeleteOpen(true)} >Delete</button>
                 </div>
-            </div>
-            <h5 style={{ marginTop: "20px" }}>{modelType && modelType !== "Special" ? ('Global Model') : ('Predictions')}</h5>
+            </div> 
+            {/* <h5 style={{ marginTop: "20px" }}>{modelType && modelType !== "Special" ? ('Global Model') : ('Predictions')}</h5> */}
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
-            <hr />
-            {modelType && modelType !== "Special" && <div className='projectSettingItems'>
+            {/* <hr /> */}
+            {/* {
+                modelType && modelType !== "Special" && <div className='projectSettingItems'>
                 <div className="projectSettingContainer">
                     <div>
-                        <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Download Global Model</strong>
+                        <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Download Global Model</strong> */}
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
-                    </div>
-                    <button type='button' className='publishBtn ' style={{ marginLeft: "370px" }} onClick={downloadGlbMdl}>Download</button>
+                    {/* </div>
+                    <button type='button' className='buttons' style={{ marginLeft: "370px" }} onClick={downloadGlbMdl}>Download</button>
 
                 </div>
-            </div>}
+            </div>
+            } */}
 
-            {modelType && modelType === "Special" && <div className='projectSettingItems'>
+            {/* {modelType && modelType === "Special" && <div className='projectSettingItems'>
                 <div className="projectSettingContainer">
                     <div>
                         <strong style={{ fontSize: "15px", color: "#", marginLeft: "20px" }}>Copy the API End Point for Predictions</strong>
@@ -211,9 +213,8 @@ export default function ProjectSettings() {
                     </CopyToClipboard>
 
                 </div>
-            </div>}
-
-            {modalDeleteOpen && <ModalDelete setOpenModal={setModalDeleteOpen}/>}
+            </div>} */}
+            {modalDeleteOpen&&<ModalDelete setOpenModal={setModalDeleteOpen}/>}
         </div>
     )
 }

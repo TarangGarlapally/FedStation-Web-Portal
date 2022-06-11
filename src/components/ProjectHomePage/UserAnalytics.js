@@ -19,6 +19,8 @@ export default function UserAnalytics() {
     const[monthlyAU,setMonthlyAU]=useState([])
     const[extraAU,setExtraAU]=useState([])
     const[maxAU,setMaxAU]=useState()
+    const[userMonthlyData,setUserMonthlyData]=useState([])
+    const[extraMonthlyData,setExtraMonthlyData]=useState([])
     const monthly_analytics   = useContext(MonthlyAnalyticsContext) ; 
     const params = useParams();
     console.log(monthly_analytics , "in User Analytics") ; 
@@ -27,19 +29,45 @@ export default function UserAnalytics() {
     
     useEffect(()=>{
         async function getUserAnalytics(){
-            await fetch("http://fedstation.herokuapp.com/userAnalytics/"+params.id)
+            await fetch("https://fedstation.herokuapp.com/userAnalytics/"+params.id)
             .then(res=>res.json())
             .then((data)=>{
+                //console.log(data)
                 setCurrentAU(data.currentActiveUsers)
                 setAverageAU(data.averageActiveUsers)
                 setMonthlyAU(data.monthlyActiveUsers)
                 setExtraAU(data.extraActiveUsers)
                 setMaxAU(data.maxActiveUsers)
+
+                console.log(monthlyAU)
             })
         }
         getUserAnalytics()
+        console.log()
     },[]);
-    //console.log(monthlyAU)
+    useEffect(() => {
+        setUserMonthlyData(monthlyAU.map((a)=>{
+            return {
+                "month":a.month,
+                "ActiveUser":a.value,
+                "MaxUser":maxAU
+            }
+        }))
+      
+      }, [monthlyAU,maxAU])
+
+      useEffect(() => {
+        setExtraMonthlyData(extraAU.map((a)=>{
+            return {
+                "month":a.month,
+                "ActiveUser":a.value,
+                //"maxUser":maxAU
+            }
+        }))
+      
+      }, [extraAU,maxAU])
+
+    console.log(userMonthlyData)
     function getUserData(){
         var userData  = (monthly_analytics.map(i => {
             AvgAC += i.userCount ; 
@@ -67,29 +95,29 @@ export default function UserAnalytics() {
             "title" : "Current Active Users",
             // "Value" : currentMonthAC , 
             // "Percentage" : Math.round(((currentMonthAC - lastMonthAC)/lastMonthAC )*100)  ,   
-            "Value":currentAU.value,
-            "Percentage":currentAU.change
+            "Value":parseFloat(currentAU.value).toFixed(2),
+            "Percentage":parseFloat(currentAU.change)
         },
         {
             "title" : "Average Active Users",
             // "Value" : AvgAC , 
             // "Percentage" : null ,   
-            "Value" : averageAU.value , 
-            "Percentage" : averageAU.change ,   
+            "Value" : parseFloat(averageAU.value).toFixed(2) , 
+            "Percentage" : parseFloat(averageAU.change) ,   
         }
     ]
-    const userMonthlyData=[
-        {
-            "month":monthlyAU.month,
-            "ActiveUser":monthlyAU.value,
+    // userMonthlyData=[
+    //     {
+    //         "month":monthlyAU.month,
+    //         "ActiveUser":monthlyAU.value,
             
-        }
-    ]
-    const extraMonthlyData=[{
-        "month":extraAU.month,
-        //"ActiveUser":extraAU.value,
-        "maxUser":maxAU
-    }]
+    //     }
+    // ]
+    // const extraMonthlyData=[{
+    //     "month":extraAU.month,
+    //     //"ActiveUser":extraAU.value,
+    //     "maxUser":maxAU
+    // }]
 
     return (
         <div  className='UserAnalytics'>

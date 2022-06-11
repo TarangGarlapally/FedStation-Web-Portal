@@ -8,6 +8,7 @@
 }
 .projectSettingItems {
   flex: 1;
+  height: 10%;
   /* margin: 0px 20px;
   padding: 30px;
   border: 1px solid #0a0000;
@@ -25,6 +26,8 @@
   display: flex;
   align-items: center;
   /* justify-content: left; */
+  width: 100%;
+  display: flex;
 }
 .save{
   margin-left: 20px;

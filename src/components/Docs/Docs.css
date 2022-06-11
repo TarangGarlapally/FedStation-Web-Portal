@@ -1,7 +1,125 @@
 .docs-container {
   width: 100vw;
-  height: 100vh;
+  height: 89.6vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  margin-top: 4.8%;
+}
+
+.docs-container-content{
+  width: 100%;
+  padding-left:3%;
+  height: fit-content;
+  overflow-y: scroll;
+}
+
+.docs-section{
+  width: 97%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin: 2% 3% 1% 0;
+}
+
+.docs-section-title{
+  font-family: Roboto, sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: black;
+}
+
+.docs-section-content{
+  width: 97%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  margin: 1% 0 0 0;
+}
+
+.docs-section-content-item{
+  width: 98%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 1% 0;
+  border-radius: 3px;
+}
+
+.docs-section-content-item-title{
+  font-family: Roboto, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: black;
+}
+
+.docs-section-content-item-content{
+  width: 98%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.docs-section-content-item-content-subtitle{
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: black;
+}
+
+.docs-section-content-item-content-subheading{
+  margin: 1% 0 1% 1%;
+  font-family: Roboto, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: black;
+  border-radius: 3px;
+  padding: 1% 1% 1% 1%;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+}
+
+.docs-section-content-item-content-additional{
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 3px;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  padding: 1%;
+  background-color: rgba(82, 171, 152,0.2);
+  margin: 0.5% 0 0.5% 2%;
+  color: #2b6777;
+}
+
+.list-item{
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: black;
+  margin: 0.5%;
+}
+
+.code-area{
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin: 1%;
+  background-color: #f5f5f5;
+  padding: 1%;
+  padding-right:5%;
+  border-radius: 3px;
+  font-family: Roboto mono, monospace;
+}
+
+.code-area-comments{
+  font-family: Roboto mono, monospace;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #188038;
+  margin: 0.5%;
+  margin-left:5%;
 }

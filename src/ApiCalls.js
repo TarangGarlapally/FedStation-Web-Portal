@@ -19,11 +19,11 @@ const checkProjectIdExists = (projectId) => {
 }
 
 const getProjectDetails = (projectId) => {
-    return axios.get("http://fedstation.herokuapp.com/getProject/" + projectId)
+    return axios.get("https://fedstation.herokuapp.com/getProject/" + projectId)
 }
 
 const getPublishedModels = () => {
-    return axios.get("http://fedstation.herokuapp.com/getMarketplaceModels")
+    return axios.get("https://fedstation.herokuapp.com/getMarketplaceModels")
 }
 
 export {
