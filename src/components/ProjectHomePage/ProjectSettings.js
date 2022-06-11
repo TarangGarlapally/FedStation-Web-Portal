@@ -2,6 +2,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { FileCopyOutlined, AssignmentOutlined } from '@material-ui/icons'
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 import "./projectSetting.css"
 import ModalDelete from "../../components/ProjectHomePage/ModalDelete"
@@ -51,11 +53,12 @@ export default function ProjectSettings() {
         if (disabled === false) {
             await axios.patch("https://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + true);
             setDisabled(true)
-
+            mytoast("Project Disabled", "warning")
         }
         else {
             await axios.patch("https://fedstation.herokuapp.com/updateStatus?projectId=" + params.id + "&field=isProjectDisabled&value=" + false);
             setDisabled(false)
+            mytoast("Project Enabled", "success")
         }
 
 
@@ -79,6 +82,7 @@ export default function ProjectSettings() {
                     setDetails(data);
                     setUser(data.user);
                     setDescription(description)
+                    mytoast("Successfully updated!", "success")
                 });
 
             // alert("Changes Saved")
@@ -100,9 +104,45 @@ export default function ProjectSettings() {
 
     }
 
+    const mytoast = (message,type) => {
+        if(type === "success"){
+            return toast.success(message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: 0,
+            });
+        }
+        else if(type === "warning"){
+            return toast.warn(message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: 0,
+            });
+        }
+    }
+
     return (
 
         <div className='projectSetting'>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable={false}
+                pauseOnHover
+            />
             <h3>Project Settings</h3>
             <h5 style={{ marginTop: "10px" }}>General</h5>
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}

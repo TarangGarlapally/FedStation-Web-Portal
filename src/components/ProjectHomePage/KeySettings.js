@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { FileCopyOutlined, AssignmentOutlined } from '@material-ui/icons'
 import "./keySettings.css"
 
@@ -40,6 +42,7 @@ export default function KeySettings() {
             }
 
             setDisabled(true)
+            mytoast("Secret Key Disabled", "warning")
 
         }
         else {
@@ -52,6 +55,7 @@ export default function KeySettings() {
             }
 
             setDisabled(false)
+            mytoast("Secret Key Enabled", "success")
         }
 
     }
@@ -59,6 +63,8 @@ export default function KeySettings() {
     async function regenerateKey() {
         const res = await axios.patch("https://fedstation.herokuapp.com/updateKey/" + params.id)
         console.log(res)
+
+        mytoast("Secret Key Regenerated", "success")
 
         fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
             .then(res => res.json())
@@ -68,9 +74,45 @@ export default function KeySettings() {
             });
     }
 
+    const mytoast = (message, type) => {
+        if (type === "success") {
+            return toast.success(message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: 0,
+            });
+        }
+        else if (type === "warning") {
+            return toast.warn(message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: 0,
+            });
+        }
+    }
+
 
     return (
         <div className='keySettings'>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable={false}
+                pauseOnHover
+            />
             <h3 style={{ marginBottom: "20px" }}>Key Settings</h3>
             {/* <div style={{ height: "2px", width: "13%", backgroundColor: "#e5e5ea", marginBottom: "15px" }} /> */}
             <h5>Copy Secret Key</h5>
