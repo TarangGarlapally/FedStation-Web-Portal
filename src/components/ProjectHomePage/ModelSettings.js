@@ -6,6 +6,8 @@ import Modal from "../../components/ProjectHomePage/Modal";
 import ModelTrigger from '../../components/ProjectHomePage/ModelTrigger';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { FileCopyOutlined, AssignmentOutlined } from '@material-ui/icons'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 //import Table from 'react-bootstrap/Table'
 
 
@@ -100,6 +102,7 @@ export default function ModelSettings() {
                     // setLabel(label)
                 })
             console.log(label)
+
             await fetch("https://fedstation.herokuapp.com/getProject/" + params.id)
                 .then(res => res.json())
                 .then((data) => {
@@ -110,6 +113,7 @@ export default function ModelSettings() {
                 })
 
             // alert("Changes Saved")
+            mytoast("Updated Model Settings","success")
         }
         // if (document.getElementById("selectField").value === null || document.getElementById("selectField").value === "0") {
         //     document.getElementById("editErr").innerText = "Please fill all the required values!";
@@ -173,8 +177,44 @@ export default function ModelSettings() {
         }
     }
 
+    const mytoast = (message, type) => {
+        if (type === "success") {
+            return toast.success(message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: 0,
+            });
+        }
+        else if (type === "warning") {
+            return toast.warn(message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: 0,
+            });
+        }
+    }
+
     return (
         <div className='modelSetting'>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable={false}
+                pauseOnHover
+            />
             <h3 style={{ marginTop: "1%" }}>Model Settings</h3>
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
             <hr />

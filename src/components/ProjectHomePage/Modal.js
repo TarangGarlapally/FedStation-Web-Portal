@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./modal.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Modal({ setOpenModal,model,setPublished }) {
     const [title, setTitle] = useState("");
@@ -90,6 +92,8 @@ export default function Modal({ setOpenModal,model,setPublished }) {
                         console.log(error)
                 })
                 setOpenModal(false)
+        
+            mytoast("Model Published", "success")
             
             
             
@@ -102,8 +106,44 @@ export default function Modal({ setOpenModal,model,setPublished }) {
         }  
     }
 
+    const mytoast = (message, type) => {
+        if (type === "success") {
+            return toast.success(message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: 0,
+            });
+        }
+        else if (type === "warning") {
+            return toast.warn(message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: 0,
+            });
+        }
+    }
+
     return (
         <div className="modalBackground">
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable={false}
+                pauseOnHover
+            />
             <div className="modalContainer">
                 <div className="titleCloseBtn">
                     <button
