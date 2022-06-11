@@ -27,7 +27,6 @@ function App() {
 
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/market" element={<Market />} />
-          <Route exact path="/docs" element={<Docs />} />
           <Route path="/console" element={
             <PrivateRoute>
               <Console />
@@ -65,6 +64,9 @@ function App() {
             <Route path="projectSettings" element={<ProjectSettings />}></Route>
             <Route path="keySettings" element={<KeySettings />}></Route>
             <Route path="modelSettings" element={<ModelSettings />}></Route>
+          </Route>
+          <Route exact path="/docs" element={<Docs />} >
+            
           </Route>
           <Route path="*" element={localStorage.getItem("token") ? (<Navigate to={"/console"} />) : (<Navigate to={"/home"} />)} />
         </Routes>

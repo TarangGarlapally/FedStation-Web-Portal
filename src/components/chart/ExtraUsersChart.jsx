@@ -7,9 +7,10 @@ export default function ExtraUsersChart({title,data,dataKey,grid}) {
 
     function getExtraUsers(){
         var arr  = [  ...data.map((i) =>{
+            console.log(i.ActiveUser,i.maxUser,(i.ActiveUser-i.maxUser))
             return {
-                "name" : i.name , 
-                "extra" : i.ActiveUser - i.MaxUser 
+                "name" : i.month , 
+                "extra" : i.ActiveUser
             } 
 
         } ) ] ; 
@@ -18,6 +19,7 @@ export default function ExtraUsersChart({title,data,dataKey,grid}) {
         
     }
     var extraUsers  = getExtraUsers() ; 
+    console.log(extraUsers)
     // const extraUsers=[{
     //     "month":k,
     //     "value":k

@@ -147,7 +147,7 @@ export default function NewProject(props) {
         }
         else if (modelType === "ARIMA") {
             setAggMethod("Output Averaging");
-            setSplNote("Note: Time Series Forecasting using ARIMA model is a special case in our application. Please refer the documentation on 'Prediction in Special Cases'")
+            setSplNote("")
         }
         else {
             setAggMethod("Voting");
