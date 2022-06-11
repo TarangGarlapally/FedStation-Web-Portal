@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import "./projectSetting.css"
+import ModalDelete from "../../components/ProjectHomePage/ModalDelete"
 
 export default function ProjectSettings() {
 
@@ -15,6 +16,7 @@ export default function ProjectSettings() {
     const [apiPath, setApiPath] = useState(null);
     const [modelType, setModelType] = useState(null);
     const [downUrl, setDownUrl] = useState({})
+    const [modalDeleteOpen, setModalDeleteOpen] = useState(false);
     const params = useParams();
 
     useEffect(() => {
@@ -32,6 +34,7 @@ export default function ProjectSettings() {
                 });
         }
         getProjectDetails();
+
         if (modelType !== 'Special') {
             axios.get("https://fedstation-ml-service.herokuapp.com/downloadGlobalModelURL/"+params.id)
                 .then((data) => {
@@ -166,21 +169,23 @@ export default function ProjectSettings() {
                         <strong style={{ fontSize: "15px", color: "#e7411b", marginLeft: "20px" }}>Disable this project</strong>
                         {/* <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span> */}
                     </div>
+                    {disabled?(<button type="button" className='publishBtn' style={{ marginLeft: "400px" }} onClick={disableProject}>Enable</button>):<button type="button" className='delete' style={{ marginLeft: "400px" }} onClick={disableProject}>Disable</button>}
 
-                    <button type="button" className='delete' style={{ marginLeft: "400px" }} onClick={disableProject}>{disabled ? "Enable" : "Disable"}</button>
+                    {/* <button type="button" className='delete' style={{ marginLeft: "400px" }} onClick={disableProject}>{disabled ? "Enable" : "Disable"}</button> */}
                 </div>
             </div>
-            {/* <h3>Delete Project</h3>
-            <div className='projectSettingItems' style={{border:"2px solid #E7411B"}}>
+            <h5 style={{ marginTop: "20px" }}>Delete Project</h5>
+            <hr />
+            <div className='projectSettingItems'>
                 <div className="projectSettingContainer">
                     <div>
-                        <strong style={{display:"block"}}>Delete this project</strong>
+                        <strong style={{ fontSize: "15px", color: "#e7411b", marginLeft: "20px" }}>Delete this project</strong>
                         <span style={{fontSize:"14px",display:"block"}}>Once you delete a Project, there is no going back. Please be certain.</span>
                     </div>
                     
-                    <button className='delete' onClick={deleteProject}>Delete</button>
+                    <button type="button" className='delete' style={{ marginLeft: "125px" }} onClick={()=>setModalDeleteOpen(true)} >Delete</button>
                 </div>
-            </div> */}
+            </div> 
             {/* <h5 style={{ marginTop: "20px" }}>{modelType && modelType !== "Special" ? ('Global Model') : ('Predictions')}</h5> */}
             {/* <hr style={{height:"1px",border:"none",color:"#333",backgroundColor:"#333"}}/> */}
             {/* <hr /> */}
@@ -209,6 +214,7 @@ export default function ProjectSettings() {
 
                 </div>
             </div>} */}
+            {modalDeleteOpen&&<ModalDelete setOpenModal={setModalDeleteOpen}/>}
         </div>
     )
 }

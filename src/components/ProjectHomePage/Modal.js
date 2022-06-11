@@ -76,11 +76,8 @@ export default function Modal({ setOpenModal,model,setPublished }) {
         }
         const input=JSON.stringify(value)
         if(title && description && contact){
-            if(contact.length>10){
-                document.getElementById("editErr1").innerText = "contact number should be 10 digits !";
-                document.getElementById("editErr1").hidden = false;
-            }
-            else{
+            
+            
                 document.getElementById("editErr").innerText = "";
                 document.getElementById("editErr").hidden = true;
             //console.log(value)
@@ -93,7 +90,7 @@ export default function Modal({ setOpenModal,model,setPublished }) {
                         console.log(error)
                 })
                 setOpenModal(false)
-            }
+            
             
             
             
@@ -136,11 +133,11 @@ export default function Modal({ setOpenModal,model,setPublished }) {
                    
                     <h5 style={{marginTop:"15px"}}>Contact</h5>
                     <h7>mention your contact address so that user can contact you</h7>
-                    <input type="number" style={{marginTop:"5px",height:"43px",width:"300px"}} id='contact' onChange={(e)=>{
-                        if(e.target.value===""||(/[0-9]/)){
-                            setContact(e.target.value)
-                        }
-                        
+                    <input type="text" style={{marginTop:"5px",height:"43px",width:"300px"}} id='contact' onChange={(e)=>{
+                        // if(e.target.value===""||(/[0-9]/)){
+                        //     
+                        // }
+                        setContact(e.target.value)
                     }}/>
                     
                     <p style={{ marginTop: "5px" }}>Note : {note}</p>
